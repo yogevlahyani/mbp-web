@@ -1,13 +1,18 @@
 import React, { useMemo } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
-import { Skeleton, Spacer } from "@chakra-ui/react";
+import {
+  Skeleton,
+  Spacer,
+} from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
 import { LoggedOutNav } from "./LoggedOutNav";
 import { LoggedInNav } from "./LoggedInNav";
+import { LanguageSelector } from "./LanguageSelector";
 
 export const NavBar = () => {
   const { user, isLoading } = useUser();
+
   const renderRightNav = useMemo(() => {
     if (isLoading) {
       return <Skeleton w={300} height={5} />;
@@ -29,6 +34,7 @@ export const NavBar = () => {
         color={["black", "primary.500", "primary.500", "primary.500"]}
       />
       <Spacer />
+      <LanguageSelector />
       {renderRightNav}
     </NavBarContainer>
   );

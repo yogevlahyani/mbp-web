@@ -1,3 +1,5 @@
+const nextTranslate = require('next-translate');
+
 module.exports = {
   reactStrictMode: true,
   async rewrites() {
@@ -22,4 +24,8 @@ module.exports = {
       ],
     }
   },
+  images: {
+    domains: ['unpkg.com'],
+  },
+  ...nextTranslate(),
 }
