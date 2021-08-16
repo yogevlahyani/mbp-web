@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
+import { useUser } from "@auth0/nextjs-auth0";
 import { Skeleton, Spacer } from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
 import { LoggedOutNav } from "./LoggedOutNav";
 import { LoggedInNav } from "./LoggedInNav";
-import { useUser } from "@auth0/nextjs-auth0";
 
 export const NavBar = () => {
   const { user, isLoading } = useUser();

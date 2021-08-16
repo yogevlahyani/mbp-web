@@ -21,7 +21,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 interface Props {
-  onFormSubmit: (email: string, password: string) => Promise<void>;
+  onFormSubmit: (email: string, password: string) => void | Promise<void>;
 }
 
 export const SignUpForm = ({ onFormSubmit }: Props) => {

@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
+import { UserProfile } from "@auth0/nextjs-auth0";
 import {
   Avatar,
   Box,
-  Button,
   Flex,
   Link,
   Menu,
@@ -14,8 +14,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import RouterLink from 'next/link';
-import { UserProfile } from "@auth0/nextjs-auth0";
+import RouterLink from "next/link";
 
 interface Props extends UserProfile {}
 
@@ -109,7 +108,7 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
             textTransform="uppercase"
             _hover={{ textDecoration: "none", color: "tomato" }}
             as={RouterLink}
-            href="/api/auth/logout"
+            href="/sign-out"
           >
             Sign out
           </Link>

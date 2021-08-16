@@ -15,7 +15,7 @@ export const LoggedOutNav = () => (
       textTransform="uppercase"
       _hover={{ textDecoration: "none", color: "tomato" }}
       mx={3}
-      href="/api/auth/login"
+      href="/sign-in"
     >
       Sign In
     </Link>
@@ -28,7 +28,7 @@ export const LoggedOutNav = () => (
       _hover={{ textDecoration: "none", color: "tomato", bg: "white" }}
       mx={3}
       size="sm"
-      href="sign-up"
+      href="/sign-up"
     >
       Sign Up
     </Button>

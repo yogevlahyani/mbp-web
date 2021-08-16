@@ -11,11 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { Logo } from "../NavBar/Logo";
 import { SignUpForm } from "./SignUpForm";
-import { useAuth } from "../../hooks/useAuth";
 
 export const SignUpComponent = () => {
-  const { signUp } = useAuth();
-
   return (
     <Flex align={"center"} justify={"center"}>
       <Stack spacing={8} mx={"auto"}>
@@ -33,7 +30,7 @@ export const SignUpComponent = () => {
           p={8}
         >
           <Stack spacing={5} w="100%">
-            <SignUpForm onFormSubmit={signUp} />
+            <SignUpForm onFormSubmit={() => console.log('SignUp')} />
             <Text textAlign="center" fontSize="xs">Already have an account? <Link letterSpacing={.5} href="/sign-in">Sign In</Link></Text>
           </Stack>
         </Box>
