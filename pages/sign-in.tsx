@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import { Box } from "@chakra-ui/react";
-import { getSession } from "next-auth/client";
 import { SignInComponent } from "../src/components/Authentication/SignInComponent";
 
 export default function SignIn() {
@@ -9,7 +8,7 @@ export default function SignIn() {
     <>
       <Head>
         <title>MyBodyPro | Sign In</title>
-        <meta name="description" content="Fitness Kit Sign In" />
+        <meta name="description" content="Sign In" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -21,18 +20,7 @@ export default function SignIn() {
 }
 
 export async function getServerSideProps(ctx: any) {
-  const session = await getSession(ctx);
-
-  if (session?.accessToken) {
-    const { res } = ctx;
-    res.statusCode = 302;
-    res.setHeader("Location", `/`);
-    return { props: {} };
-  }
-
   return {
-    props: {
-      session,
-    },
+    props: {},
   };
 }

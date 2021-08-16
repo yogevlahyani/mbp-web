@@ -10,7 +10,7 @@ export const Logo = (props: Props) => {
       <Link href="/" passHref>
         <a>
           <Text fontSize="lg" fontWeight="bold">
-            Fitness Kit
+            MyBodyPro
           </Text>
         </a>
       </Link>

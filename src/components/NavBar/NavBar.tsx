@@ -2,19 +2,19 @@ import React, { useMemo } from "react";
 import { Skeleton, Spacer } from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
-import { useAuth } from "../../hooks/useAuth";
 import { LoggedOutNav } from "./LoggedOutNav";
 import { LoggedInNav } from "./LoggedInNav";
+import { useUser } from "@auth0/nextjs-auth0";
 
 export const NavBar = () => {
-  const { user, sessionLoading, signOut } = useAuth();
+  const { user, isLoading } = useUser();
   const renderRightNav = useMemo(() => {
-    if (sessionLoading) {
+    if (isLoading) {
       return <Skeleton w={300} height={5} />;
     }
 
-    return !!user ? <LoggedInNav {...user} signOut={signOut} /> : <LoggedOutNav />;
-  }, [sessionLoading, user, signOut]);
+    return !!user ? <LoggedInNav {...user} /> : <LoggedOutNav />;
+  }, [isLoading, user]);
 
   return (
     <NavBarContainer

@@ -14,21 +14,20 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { UserInfo } from "../../services/fitnesskit.service";
+import RouterLink from 'next/link';
+import { UserProfile } from "@auth0/nextjs-auth0";
 
-interface Props extends UserInfo {
-  signOut: () => void;
-}
+interface Props extends UserProfile {}
 
-export const LoggedInNav = ({ username, photoUrl, signOut }: Props) => {
+export const LoggedInNav = ({ nickname, picture }: Props) => {
   const userRow = useMemo(
     () => (
       <Flex align="center">
-        <Avatar name={username} src={photoUrl} size="sm" />
-        <Text mx={3}>{username}</Text>
+        <Avatar name={nickname as string} src={picture as string} size="sm" />
+        <Text mx={3}>{nickname}</Text>
       </Flex>
     ),
-    [username, photoUrl]
+    [nickname, picture]
   );
 
   return (
@@ -109,7 +108,8 @@ export const LoggedInNav = ({ username, photoUrl, signOut }: Props) => {
             fontSize="smaller"
             textTransform="uppercase"
             _hover={{ textDecoration: "none", color: "tomato" }}
-            onClick={signOut}
+            as={RouterLink}
+            href="/api/auth/logout"
           >
             Sign out
           </Link>
