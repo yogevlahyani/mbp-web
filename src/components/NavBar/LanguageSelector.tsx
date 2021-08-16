@@ -17,7 +17,7 @@ export const LanguageSelector: React.FC<{}> = () => {
 
   return (
     <Box mx={5}>
-      <Menu autoSelect={false}>
+      <Menu autoSelect={false} isLazy id="languageSelector">
         <MenuButton position="relative" width={7} height={7}>
           <Image
             src={`https://unpkg.com/language-icons/icons/${lang}.svg`}

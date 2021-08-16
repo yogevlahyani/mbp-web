@@ -14,12 +14,17 @@ export const Language: React.FC<Props> = ({
   namespace = "common",
 }) => {
   const { t } = useTranslation(namespace);
-  const { reload, replace, pathname, asPath } = useRouter();
+  const { pathname, defaultLocale } = useRouter();
 
   const onClick = useCallback(async () => {
-    await replace(pathname, asPath, { locale: language });
-    reload();
-  }, [language, reload, replace, pathname, asPath]);
+    const path = [pathname];
+
+    if (language !== defaultLocale) {
+      path.unshift(language);
+    }
+
+    window.location.href = path.join('');
+  }, [language, pathname, defaultLocale]);
 
   return (
     <MenuItem onClick={onClick}>

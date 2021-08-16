@@ -13,7 +13,6 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import RouterLink from "next/link";
 
 interface Props extends UserProfile {}
@@ -31,7 +30,7 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
 
   return (
     <Menu>
-      <MenuButton as={Box} rightIcon={<ChevronDownIcon />}>
+      <MenuButton as={Box}>
         {userRow}
       </MenuButton>
       <MenuList>
