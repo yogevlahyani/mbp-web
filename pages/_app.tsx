@@ -28,7 +28,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
         >
           <NavBar />
 
-          <Container maxW="full" minH="max-content" p={10}>
+          <Container maxW="full" minH="max-content" py={10}>
             <Component {...pageProps} />
           </Container>
 
