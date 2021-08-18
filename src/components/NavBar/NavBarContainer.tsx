@@ -11,7 +11,6 @@ export const NavBarContainer = ({ children, ...props }: PropsWithChildren<Props>
         justify="space-between"
         wrap="wrap"
         w="100%"
-        mb={8}
         p={4}
         fontSize="small"
         {...props}

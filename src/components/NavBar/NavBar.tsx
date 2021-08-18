@@ -1,9 +1,6 @@
 import React, { useMemo } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
-import {
-  Skeleton,
-  Spacer,
-} from "@chakra-ui/react";
+import { Skeleton, Spacer } from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
 import { LoggedOutNav } from "./LoggedOutNav";
@@ -27,11 +24,11 @@ export const NavBar = () => {
       position="sticky"
       top={0}
       left={0}
-      boxShadow="0 4px 20px rgb(0 0 0 / 10%)"
+      background="transparent linear-gradient(180deg, #1A74E2 0%, #225EA8 100%) 0% 0% no-repeat padding-box"
+      color="white"
     >
       <Logo
         w="100px"
-        color={["black", "primary.500", "primary.500", "primary.500"]}
       />
       <Spacer />
       <LanguageSelector />
