@@ -1,21 +1,20 @@
-import React, { useMemo } from "react";
-import { getSession, useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import React from "react";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import {
   Avatar,
-  Box,
   Text,
   Container,
   Flex,
   Heading,
   Skeleton,
   SkeletonCircle,
-  Spacer,
   HStack,
   Button,
   AvatarBadge,
+  Tooltip,
 } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import { CalendarIcon, StarIcon } from "@chakra-ui/icons";
+import { CalendarIcon, CheckIcon, InfoIcon, StarIcon } from "@chakra-ui/icons";
 import { GetServerSidePropsContext } from "next";
 import { withApollo } from "../src/hoc/withApollo";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
@@ -38,7 +37,19 @@ export default function UserDashboard({ userPoints = 0 }: Props) {
             src={user?.picture!}
             width={150}
             size="full"
-          />
+          >
+            <Tooltip label="Hey, I'm here!" aria-label="A tooltip">
+              <AvatarBadge
+                AvatarBadge
+                boxSize="5.5em"
+                bg="blue.500"
+                right="2em"
+                bottom="2em"
+              >
+                <CheckIcon fontSize="2em" />
+              </AvatarBadge>
+            </Tooltip>
+          </Avatar>
         </SkeletonCircle>
         <Skeleton isLoaded={!isLoading}>
           <Heading as="h3" textStyle="h3" textAlign="center">
