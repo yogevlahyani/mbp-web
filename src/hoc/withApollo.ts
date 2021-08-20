@@ -30,14 +30,21 @@ export const withApollo =
   (callback: CallbackType) => async (ctx: GetServerSidePropsContext) => {
     const session = getSession(ctx.req, ctx.res);
 
-    const authLink = setContext((_, { headers }) => {
-      const accessToken = session?.idToken;
+    if (Math.floor(Date.now() / 1000) > session?.accessTokenExpiresAt!) {
+      return {
+        redirect: {
+          destination: "/auth/logout",
+        },
+      };
+    }
 
+    const authLink = setContext((_, { headers }) => {
       return {
         headers: {
           ...headers,
           "x-hasura-role": "user",
-          authorization: accessToken && `Bearer ${accessToken}`,
+          authorization:
+            session?.accessToken && `Bearer ${session?.accessToken}`,
         },
       };
     });
@@ -46,8 +53,6 @@ export const withApollo =
       link: authLink.concat(httpLink),
       cache: new InMemoryCache(),
     });
-
-    console.log("session", session);
 
     return callback(ctx, client);
   };

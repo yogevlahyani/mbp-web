@@ -40,7 +40,6 @@ export default function UserDashboard({ userPoints = 0 }: Props) {
           >
             <Tooltip label="Hey, I'm here!" aria-label="A tooltip">
               <AvatarBadge
-                AvatarBadge
                 boxSize="5.5em"
                 bg="blue.500"
                 right="2em"

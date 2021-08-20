@@ -13,7 +13,6 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import RouterLink from "next/link";
 
 interface Props extends UserProfile {}
 
@@ -30,9 +29,7 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
 
   return (
     <Menu>
-      <MenuButton as={Box}>
-        {userRow}
-      </MenuButton>
+      <MenuButton as={Box}>{userRow}</MenuButton>
       <MenuList>
         <MenuItem>{userRow}</MenuItem>
         <MenuDivider />
@@ -101,16 +98,14 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
           </MenuItem>
         </MenuGroup>
         <MenuDivider />
-        <MenuItem>
-          <Link
-            fontSize="smaller"
-            textTransform="uppercase"
-            _hover={{ textDecoration: "none", color: "tomato" }}
-            as={RouterLink}
-            href="/sign-out"
-          >
-            Sign out
-          </Link>
+        <MenuItem
+          as={Link}
+          href="/sign-out"
+          fontSize="smaller"
+          textTransform="uppercase"
+          _hover={{ textDecoration: "none", color: "tomato" }}
+        >
+          <a>Sign out</a>
         </MenuItem>
       </MenuList>
     </Menu>
