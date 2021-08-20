@@ -1,16 +1,17 @@
 import React from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { Box, ChakraProvider, Container, Flex } from "@chakra-ui/react";
+import { UserProvider } from "@auth0/nextjs-auth0";
+import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
 import { NavBar } from "../src/components/NavBar/NavBar";
 import "../styles/globals.css";
 import { Footer } from "../src/components/Footer/Footer";
-import { UserProvider } from "@auth0/nextjs-auth0";
+import theme from "../src/theme/theme";
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Head>
           <title>MyBodyPro | The most convenient way to work out</title>
           <meta
@@ -28,7 +29,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
         >
           <NavBar />
 
-          <Container maxW="full" minH="max-content" py={10}>
+          <Container maxW="full" minH="max-content" py={10} flex={1} flexGrow={1}>
             <Component {...pageProps} />
           </Container>
 

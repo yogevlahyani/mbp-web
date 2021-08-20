@@ -3,5 +3,7 @@
     "he": "עברית",
     "This is gonna be a killer home page!": "This is gonna be a killer home page!",
     "Sign In": "Sign In",
-    "Sign Up": "Sign Up"
+    "Sign Up": "Sign Up",
+    "Welcome Back": "Welcome Back, {{name}}",
+    "Points": "{{points}} Points"
 }

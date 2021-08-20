@@ -3,5 +3,7 @@
     "he": "עברית",
     "This is gonna be a killer home page!": "עמוד הבית המטורף של מיי בודי פרו!",
     "Sign In": "התחברות",
-    "Sign Up": "הרשמה"
+    "Sign Up": "הרשמה",
+    "Welcome Back": "ברוך שובך, {{name}}",
+    "Points": "{{points}} נקודות"
 }
