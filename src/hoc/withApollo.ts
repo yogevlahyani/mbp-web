@@ -36,6 +36,7 @@ export const withApollo =
       return {
         headers: {
           ...headers,
+          "x-hasura-role": "user",
           authorization: accessToken && `Bearer ${accessToken}`,
         },
       };
