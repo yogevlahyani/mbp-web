@@ -34,6 +34,7 @@ export const withApollo =
       return {
         redirect: {
           destination: "/auth/logout",
+          permanent: false,
         },
       };
     }
