@@ -31,7 +31,8 @@ export const NavBar = () => {
         w="100px"
       />
       <Spacer />
-      <LanguageSelector />
+      {/* TODO: Enable when multi language */}
+      {/* <LanguageSelector /> */}
       {renderRightNav}
     </NavBarContainer>
   );

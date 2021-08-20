@@ -54,7 +54,7 @@ export default function UserDashboard({ userPoints = 0 }: Props) {
               alignItems="center"
               gridGap={5}
             >
-              <Text>{t("Points", { points: userPoints })}</Text>
+              <Text>{t("Points", { points: Number(userPoints) })}</Text>
               <StarIcon color="yellow.300" />
             </Flex>
             <Button background="gray.100" borderRadius="100%" p={0}>

@@ -1,8 +1,4 @@
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-} from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { getSession } from "@auth0/nextjs-auth0";
 import {
   ApolloClient,
@@ -36,10 +32,10 @@ export const withApollo =
 
     const authLink = setContext((_, { headers }) => {
       const accessToken = session?.idToken;
+
       return {
         headers: {
           ...headers,
-          ...session?.user['https://hasura.io/jwt/claims'],
           authorization: accessToken && `Bearer ${accessToken}`,
         },
       };
