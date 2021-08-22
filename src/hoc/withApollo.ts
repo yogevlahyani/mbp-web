@@ -50,6 +50,9 @@ export const withApollo =
       };
     });
 
+    console.debug(session?.user.sub);
+    console.debug(session?.accessToken);
+
     const client = new ApolloClient({
       link: authLink.concat(httpLink),
       cache: new InMemoryCache(),

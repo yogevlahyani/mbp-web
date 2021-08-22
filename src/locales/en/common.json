@@ -5,5 +5,7 @@
     "Sign In": "Sign In",
     "Sign Up": "Sign Up",
     "Welcome Back": "Welcome Back, {{name}}",
-    "Points": "{{points}} Points"
+    "Points": "{{points}} Points",
+    "Weekly Videos": "Weekly Videos",
+    "Videos Completed": "{{completed}} videos out of {{total}} Completed"
 }

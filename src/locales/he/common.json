@@ -5,5 +5,7 @@
     "Sign In": "התחברות",
     "Sign Up": "הרשמה",
     "Welcome Back": "ברוך שובך, {{name}}",
-    "Points": "{{points}} נקודות"
+    "Points": "{{points}} נקודות",
+    "Weekly Videos": "סרטוני השבוע",
+    "Videos Completed": "הושלם {{completed}} מתוך {{total}}"
 }

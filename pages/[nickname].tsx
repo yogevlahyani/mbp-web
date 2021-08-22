@@ -1,78 +1,22 @@
 import React from "react";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import {
-  Avatar,
-  Text,
-  Container,
-  Flex,
-  Heading,
-  Skeleton,
-  SkeletonCircle,
-  HStack,
-  Button,
-  AvatarBadge,
-  Tooltip,
-} from "@chakra-ui/react";
-import useTranslation from "next-translate/useTranslation";
-import { CalendarIcon, CheckIcon, InfoIcon, StarIcon } from "@chakra-ui/icons";
+import { Container } from "@chakra-ui/react";
 import { GetServerSidePropsContext } from "next";
 import { withApollo } from "../src/hoc/withApollo";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
-import { GET_USER_POINTS } from "../src/queries/user";
+import { GET_USER_POINTS, GET_USER_PROGRAMS } from "../src/queries/user";
+import { UserRepresentation } from "../src/components/UserRepresentation/UserRepresentation";
+import { WeeklyVideos } from "../src/components/WeeklyVideos/WeeklyVideos";
 
 interface Props {
-  userPoints?: number;
+  programs: any[];
 }
 
-export default function UserDashboard({ userPoints = 0 }: Props) {
-  const { user, isLoading } = useUser();
-  const { t } = useTranslation("common");
-
+export default function UserDashboard({ programs }: Props) {
   return (
-    <Container maxW="full">
-      <Flex flexDir="column" alignItems="center" gridGap={5}>
-        <SkeletonCircle width={150} height={150} isLoaded={!isLoading}>
-          <Avatar
-            name={user?.name!}
-            src={user?.picture!}
-            width={150}
-            size="full"
-          >
-            <Tooltip label="Hey, I'm here!" aria-label="A tooltip">
-              <AvatarBadge
-                boxSize="5.5em"
-                bg="blue.500"
-                right="2em"
-                bottom="2em"
-              >
-                <CheckIcon fontSize="2em" />
-              </AvatarBadge>
-            </Tooltip>
-          </Avatar>
-        </SkeletonCircle>
-        <Skeleton isLoaded={!isLoading}>
-          <Heading as="h3" textStyle="h3" textAlign="center">
-            {t("Welcome Back", { name: user?.name! })}
-          </Heading>
-        </Skeleton>
-        <Skeleton isLoaded={!isLoading}>
-          <HStack gridGap={2}>
-            <Flex
-              background="gray.100"
-              px={5}
-              borderRadius={30}
-              alignItems="center"
-              gridGap={5}
-            >
-              <Text>{t("Points", { points: Number(userPoints) })}</Text>
-              <StarIcon color="yellow.300" />
-            </Flex>
-            <Button background="gray.100" borderRadius="100%" p={0}>
-              <CalendarIcon m={2.5} />
-            </Button>
-          </HStack>
-        </Skeleton>
-      </Flex>
+    <Container maxWidth="container.xl">
+      <UserRepresentation />
+      <WeeklyVideos mt={20} />
     </Container>
   );
 }
@@ -84,11 +28,11 @@ export const getServerSideProps = withPageAuthRequired({
       ctx: GetServerSidePropsContext,
       client: ApolloClient<NormalizedCacheObject>
     ) => {
-      const { data } = await client.query({ query: GET_USER_POINTS });
+      const { data } = await client.query({ query: GET_USER_PROGRAMS });
 
       return {
         props: {
-          userPoints: data.userPointsAggregate.aggregate.sum.amount,
+          programs: data.user_programs,
         },
       };
     }
