@@ -13,10 +13,13 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 
 interface Props extends UserProfile {}
 
 export const LoggedInNav = ({ nickname, picture }: Props) => {
+  const { t } = useTranslation("common");
+
   const userRow = useMemo(
     () => (
       <Flex align="center">
@@ -28,84 +31,17 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
   );
 
   return (
-    <Menu>
+    <Menu autoSelect={false}>
       <MenuButton as={Box}>{userRow}</MenuButton>
       <MenuList>
-        <MenuItem>{userRow}</MenuItem>
-        <MenuDivider />
-        <MenuGroup
-          title="Profile"
-          fontSize="smaller"
-          textTransform="uppercase"
-          color="tomato"
-        >
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              My profile
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Settings
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Become an instructor
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              My subscriptions
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Credits
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Invite friends
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Test your device
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Help center & FAQ
-            </Text>
-          </MenuItem>
-        </MenuGroup>
-        <MenuGroup
-          title="Gift Card"
-          fontSize="smaller"
-          textTransform="uppercase"
-          color="tomato"
-        >
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Send a gift card
-            </Text>
-          </MenuItem>
-          <MenuItem>
-            <Text as="strong" textTransform="uppercase" fontSize="smaller">
-              Redeem a gift card
-            </Text>
-          </MenuItem>
-        </MenuGroup>
-        <MenuDivider />
         <MenuItem
           as={Link}
           href="/sign-out"
-          fontSize="smaller"
+          fontSize="md"
           textTransform="uppercase"
-          _hover={{ textDecoration: "none", color: "tomato" }}
+          color="black"
         >
-          <a>Sign out</a>
+          {t("Sign out")}
         </MenuItem>
       </MenuList>
     </Menu>
