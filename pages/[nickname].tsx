@@ -13,8 +13,8 @@ export default function UserDashboard() {
   return (
     <Container maxWidth="container.xl">
       <UserRepresentation />
-      <WeeklyVideos mt={20} />
-      <Programs mt={20} />
+      <WeeklyVideos mt={[5, 20]} />
+      <Programs mt={[5, 20]} />
     </Container>
   );
 }

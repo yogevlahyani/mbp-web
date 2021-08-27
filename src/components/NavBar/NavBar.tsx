@@ -10,13 +10,10 @@ import { LanguageSelector } from "./LanguageSelector";
 export const NavBar = () => {
   const { user, isLoading } = useUser();
 
-  const renderRightNav = useMemo(() => {
-    if (isLoading) {
-      return <Skeleton w={300} height={5} />;
-    }
-
-    return !!user ? <LoggedInNav {...user} /> : <LoggedOutNav />;
-  }, [isLoading, user]);
+  const userNavigation = useMemo(
+    () => (user ? <LoggedInNav {...user} /> : <LoggedOutNav />),
+    [user]
+  );
 
   return (
     <NavBarContainer
@@ -26,14 +23,15 @@ export const NavBar = () => {
       left={0}
       background="transparent linear-gradient(180deg, #1A74E2 0%, #225EA8 100%) 0% 0% no-repeat padding-box"
       color="white"
+      zIndex={99}
     >
-      <Logo
-        w="100px"
-      />
+      <Logo width="150px" />
       <Spacer />
       {/* TODO: Enable when multi language */}
       {/* <LanguageSelector /> */}
-      {renderRightNav}
+      <Skeleton isLoaded={!isLoading}>
+        {userNavigation}
+      </Skeleton>
     </NavBarContainer>
   );
 };

@@ -46,7 +46,7 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
     >
       <AspectRatio>{video}</AspectRatio>
       <Flex py="9px" px="10px" gridGap={1} alignItems="center">
-        <Text fontSize="14px" isTruncated>{name}</Text>
+        <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">{name}</Text>
         <Spacer />
         <Text fontSize="12px" color="#1A74E2">12:00</Text>
       </Flex>

@@ -61,7 +61,7 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
             {
               breakpoint: 768,
               settings: {
-                slidesToShow: 3,
+                slidesToShow: 1,
                 centerPadding: "0px"
               },
             }
