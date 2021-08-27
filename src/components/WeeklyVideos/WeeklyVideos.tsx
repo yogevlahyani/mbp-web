@@ -27,9 +27,13 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
     [videos]
   );
 
+  if (!videos.length) {
+      return null;
+  }
+
   return (
     <Box {...boxProps}>
-      <Flex alignItems="center" gridGap={5}>
+      <Flex alignItems="center" gridGap={[1, 5]} flexDirection={["column", "row"]}>
         <Heading as="h2" fontSize="36px">
           {t("Weekly Videos")}
         </Heading>
@@ -53,6 +57,15 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
           infinite={false}
           arrows={false}
           speed={500}
+          responsive={[
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                centerPadding: "0px"
+              },
+            }
+          ]}
         >
           {weeklyVideos}
         </Slider>

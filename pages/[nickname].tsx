@@ -7,12 +7,14 @@ import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { GET_USER_PROGRAMS, GET_USER_WEEKLY_VIDEOS } from "../src/queries/user";
 import { UserRepresentation } from "../src/components/UserRepresentation/UserRepresentation";
 import { WeeklyVideos } from "../src/components/WeeklyVideos/WeeklyVideos";
+import { Programs } from "../src/components/Programs/Programs";
 
 export default function UserDashboard() {
   return (
     <Container maxWidth="container.xl">
       <UserRepresentation />
       <WeeklyVideos mt={20} />
+      <Programs mt={20} />
     </Container>
   );
 }

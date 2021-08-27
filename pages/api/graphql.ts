@@ -1,7 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "@auth0/nextjs-auth0";
 import httpProxyMiddleware from "next-http-proxy-middleware";
-import config from "../../config";
+import configuration from "../../config";
+
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,11 +17,11 @@ export default async function handler(
   const session = await getSession(req, res);
 
   return httpProxyMiddleware(req, res, {
-    target: config.providers.hasura.graphqlUrl,
+    target: configuration.providers.hasura.graphqlUrl,
     changeOrigin: true,
     headers: {
       authorization: `Bearer ${session?.accessToken}`,
-      'x-hasura-role': 'user',
+      "x-hasura-role": "user",
     },
     pathRewrite: {
       "^/api/graphql": "",
