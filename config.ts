@@ -13,6 +13,7 @@ const config = {
         repo: "yogevlahyani/mbp-web",
         branch: "main",
       },
+      publish_mode: "editorial_workflow",
       media_folder: "public/images/uploads",
       public_folder: "images",
       collections: [
@@ -26,13 +27,13 @@ const config = {
               file: "content/pages/home.md",
               fields: [
                 {
-                  label: "Hero Title",
-                  name: "hero_title",
+                  label: "Title",
+                  name: "title",
                   widget: "string",
                 },
                 {
-                  label: "Hero Description",
-                  name: "hero_description",
+                  label: "Description",
+                  name: "description",
                   widget: "markdown",
                 },
               ],
