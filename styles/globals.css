@@ -30,3 +30,13 @@ a {
   align-items: center;
   flex-grow: 1;
 }
+
+/* Netlify CMS */
+div#nc-root {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: white;
+  height: 100%;
+  direction: ltr;
+}
