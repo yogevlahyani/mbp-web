@@ -9,7 +9,7 @@ import "../styles/globals.css";
 import { Footer } from "../src/components/Footer/Footer";
 import theme from "../src/theme/theme";
 
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const client = new ApolloClient({
