@@ -25,7 +25,7 @@ export const Program: React.FC<Props> = ({
   created_at,
   index,
 }) => {
-  const { push, asPath } = useRouter();
+  const { push } = useRouter();
   const icon = useMemo(
     () => (
       <Tooltip
@@ -45,17 +45,20 @@ export const Program: React.FC<Props> = ({
     [author]
   );
 
-  const onClick = useCallback(() => {
-    push(`/programs/${id}`);
-  }, [push, id]);
+  const onProgramClick = useCallback(() => push(`/programs/${id}`), [push, id]);
+
+  const onAuthorClick = useCallback(
+    () => push(`/${author.nickname}`),
+    [push, author]
+  );
 
   return (
     <VerticalTimelineElement
       date={created_at}
       icon={icon}
       position="right"
-      onTimelineElementClick={onClick}
-      iconOnClick={onClick}
+      onTimelineElementClick={onProgramClick}
+      iconOnClick={onAuthorClick}
     >
       <Heading as="h5" color="black">
         {name}

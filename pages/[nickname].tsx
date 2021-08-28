@@ -8,7 +8,6 @@ import { GET_USER_PROGRAMS, GET_USER_WEEKLY_VIDEOS } from "../src/queries/user";
 import { UserRepresentation } from "../src/components/UserRepresentation/UserRepresentation";
 import { WeeklyVideos } from "../src/components/WeeklyVideos/WeeklyVideos";
 import { Programs } from "../src/components/Programs/Programs";
-import { useRouter } from "next/router";
 
 export default function UserDashboard() {
   return (
@@ -27,10 +26,12 @@ export const getServerSideProps = withPageAuthRequired({
 
     // TODO: Show Public Profile
     if (session?.user.nickname !== ctx.params?.nickname) {
-      ctx.res.setHeader("Location", `/${session?.user.nickname}`);
-      ctx.res.statusCode = 302;
-      ctx.res.end();
-      return { props: {} };
+      return {
+        redirect: {
+          statusCode: 302,
+          destination: `/${session?.user.nickname}`,
+        },
+      };
     }
 
     return {
