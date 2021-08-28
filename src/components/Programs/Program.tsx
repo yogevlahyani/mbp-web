@@ -25,7 +25,8 @@ export const Program: React.FC<Props> = ({
   created_at,
   index,
 }) => {
-  const { push } = useRouter();
+  const { push, asPath } = useRouter();
+
   const icon = useMemo(
     () => (
       <Tooltip
@@ -45,7 +46,13 @@ export const Program: React.FC<Props> = ({
     [author],
   );
 
-  const onProgramClick = useCallback(() => push(`/programs/${id}`), [push, id]);
+  const onProgramClick = useCallback(
+    () => {
+        console.log('id', id);
+        push(`programs/${id}`, asPath)
+    },
+    [push, asPath, id]
+  );
 
   const onAuthorClick = useCallback(
     () => push(`/${author.nickname}`),
