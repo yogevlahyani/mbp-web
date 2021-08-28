@@ -47,10 +47,7 @@ export const Program: React.FC<Props> = ({
   );
 
   const onProgramClick = useCallback(
-    () => {
-        console.log('id', id);
-        push(`programs/${id}`, asPath)
-    },
+    () => push(`programs/${id}`, asPath),
     [push, asPath, id]
   );
 
