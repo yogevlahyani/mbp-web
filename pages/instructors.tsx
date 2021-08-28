@@ -6,16 +6,17 @@ export default function Instructors() {
   return (
     <>
       <Head>
-        <title>MyBodyPro | Join to your all-in-one fitness kit</title>
-        <meta name="description" content="Join to your all-in-one fitness kit" />
+        <title>MyBodyPro | Sport & Fitness experts</title>
+        <meta
+          name="description"
+          content="Sport & Fitness experts"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Box my={200} textAlign="center">
-        <Heading as="h1">Join to your all-in-one fitness kit</Heading>
-        <Heading as="h2" color="tomato">
-          This is gonna be a killer instructors page!
-        </Heading>
+        <Heading as="h1">Sport & Fitness experts</Heading>
+        <Heading as="h2" color="tomato">This is gonna be a killer instructors page!</Heading>
       </Box>
     </>
   );
