@@ -8,5 +8,7 @@
     "Welcome Back": "Welcome Back, {{name}}",
     "Points": "{{points}} Points",
     "Weekly Videos": "Weekly Videos",
-    "Videos Completed": "{{completed}} videos out of {{total}} Completed"
+    "Videos Completed": "{{completed}} videos out of {{total}} Completed",
+    "My Programs": "My Programs",
+    "Programs Completed": "{{completed}} videos out of {{total}} Completed"
 }

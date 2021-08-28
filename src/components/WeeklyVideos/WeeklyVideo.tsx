@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { AspectRatio, Center } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, Spacer, Text } from "@chakra-ui/react";
 
 export interface WeeklyVideoProps {
   id: string;
@@ -21,6 +21,7 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
           <iframe
             title={name}
             src={`https://www.youtube.com/embed/${youtubeId}`}
+            width="100%"
             allowFullScreen
           />
         );
@@ -28,12 +29,27 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
     }
 
     return (
-      <video width="320" height="240" controls>
+      <video controls>
         <source src={url} />
         Your browser does not support the video tag.
       </video>
     );
   }, [url, name]);
 
-  return <Center>{video}</Center>;
+  return (
+    <Box
+      mx={10}
+      borderRadius={10}
+      background="#97D7D7"
+      overflow="hidden"
+      color="#646464"
+    >
+      <AspectRatio>{video}</AspectRatio>
+      <Flex py="9px" px="10px" gridGap={1} alignItems="center">
+        <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">{name}</Text>
+        <Spacer />
+        <Text fontSize="12px" color="#1A74E2">12:00</Text>
+      </Flex>
+    </Box>
+  );
 };

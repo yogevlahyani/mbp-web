@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { getSession } from "@auth0/nextjs-auth0";
+import { GetServerSidePropsResultWithSession, getSession } from "@auth0/nextjs-auth0";
 import {
   ApolloClient,
   createHttpLink,
@@ -24,7 +24,7 @@ type CallbackType<
 > = (
   context: GetServerSidePropsContext<Q>,
   client: ApolloClient<NormalizedCacheObject>
-) => Promise<GetServerSidePropsResult<P>>;
+) => Promise<GetServerSidePropsResult<P>> | Promise<GetServerSidePropsResultWithSession>;
 
 export const withApollo =
   (callback: CallbackType) => async (ctx: GetServerSidePropsContext) => {
