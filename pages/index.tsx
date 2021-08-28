@@ -6,15 +6,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 
 export default function Home() {
-  const { user, isLoading } = useUser();
-  const { replace } = useRouter();
   const { t } = useTranslation("common");
-
-  if (!isLoading && user) {
-      replace(`/${user.nickname!}`);
-    console.log("user.nickname", user.nickname);
-    return null;
-  }
 
   return (
     <>

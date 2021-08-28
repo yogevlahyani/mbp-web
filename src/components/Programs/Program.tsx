@@ -1,10 +1,8 @@
-import React, { useMemo } from "react";
-import { Avatar, Box, Heading } from "@chakra-ui/react";
-import {
-  VerticalTimelineElement,
-  VerticalTimelineElementProps,
-} from "react-vertical-timeline-component";
+import React, { useCallback, useMemo } from "react";
+import { Avatar, Tooltip, Heading } from "@chakra-ui/react";
 import { UserProfile } from "@auth0/nextjs-auth0";
+import { useRouter } from "next/router";
+import { VerticalTimelineElement } from "react-vertical-timeline-component";
 
 export interface ProgramType {
   id: string;
@@ -27,20 +25,38 @@ export const Program: React.FC<Props> = ({
   created_at,
   index,
 }) => {
+  const { push, asPath } = useRouter();
   const icon = useMemo(
     () => (
-      <Avatar
-        name={(author.nickname || author.name) as string}
-        src={author.picture as string}
-        width="full"
-        height="full"
-      />
+      <Tooltip
+        hasArrow
+        placement="top"
+        label={(author.name || author.nickname) as string}
+        bg="black"
+      >
+        <Avatar
+          name={(author.name || author.nickname) as string}
+          src={author.picture as string}
+          width="full"
+          height="full"
+        />
+      </Tooltip>
     ),
     [author]
   );
 
+  const onClick = useCallback(() => {
+    push(`/programs/${id}`);
+  }, [push, id]);
+
   return (
-    <VerticalTimelineElement date={created_at} icon={icon} position="right">
+    <VerticalTimelineElement
+      date={created_at}
+      icon={icon}
+      position="right"
+      onTimelineElementClick={onClick}
+      iconOnClick={onClick}
+    >
       <Heading as="h5" color="black">
         {name}
       </Heading>

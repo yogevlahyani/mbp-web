@@ -7,17 +7,17 @@ import {
   Link,
   Menu,
   MenuButton,
-  MenuDivider,
-  MenuGroup,
   MenuItem,
   MenuList,
   Text,
 } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
 
 interface Props extends UserProfile {}
 
 export const LoggedInNav = ({ nickname, picture }: Props) => {
+  const { push } = useRouter();
   const { t } = useTranslation("common");
 
   return (
@@ -44,8 +44,15 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
           </Flex>
         </MenuItem>
         <MenuItem
-          as={Link}
-          href="/sign-out"
+          onClick={() => push(`/${nickname}`)}
+          fontSize="md"
+          textTransform="uppercase"
+          color="black"
+        >
+          {t("My Programs")}
+        </MenuItem>
+        <MenuItem
+          onClick={() => push("/sign-out")}
           fontSize="md"
           textTransform="uppercase"
           color="black"
