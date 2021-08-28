@@ -20,7 +20,11 @@ export const GET_USER_PROGRAMS = gql`
         name
         description
         image
-        created_by
+        author {
+          picture
+          name
+          nickname
+        }
         program_weeks {
           id
           week_number

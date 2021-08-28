@@ -49,7 +49,7 @@ export const Programs: React.FC<Props> = ({ ...boxProps }) => {
         </Box>
       </Flex>
       <Skeleton isLoaded={!loading}>
-        <VerticalTimeline>{programs}</VerticalTimeline>
+        {programs?.length && <VerticalTimeline>{programs}</VerticalTimeline>}
       </Skeleton>
     </Box>
   );
