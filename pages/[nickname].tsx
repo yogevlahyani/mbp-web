@@ -22,24 +22,19 @@ export default function UserDashboard() {
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/",
-  getServerSideProps: withApollo(
-    async (
-      ctx: GetServerSidePropsContext,
-      client: ApolloClient<NormalizedCacheObject>
-    ) => {
-      const session = await getSession(ctx.req, ctx.res);
+  getServerSideProps: async (ctx: GetServerSidePropsContext) => {
+    const session = await getSession(ctx.req, ctx.res);
 
-      // TODO: Show Public Profile
-      if (session?.user.nickname !== ctx.params?.nickname) {
-        ctx.res.setHeader('Location', '/');
-        ctx.res.statusCode = 302;
-        ctx.res.end();
-        return { props: {} };
-      }
-
-      return {
-        props: {},
-      };
+    // TODO: Show Public Profile
+    if (session?.user.nickname !== ctx.params?.nickname) {
+      ctx.res.setHeader("Location", `/${session?.user.nickname}`);
+      ctx.res.statusCode = 302;
+      ctx.res.end();
+      return { props: {} };
     }
-  ),
+
+    return {
+      props: {},
+    };
+  },
 });
