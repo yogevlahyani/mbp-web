@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from "react";
-import { useUser } from "@auth0/nextjs-auth0";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useMemo } from 'react'
+import { useUser } from '@auth0/nextjs-auth0'
+import { useQuery } from '@apollo/client'
 import {
   Avatar,
   AvatarBadge,
@@ -12,22 +12,22 @@ import {
   SkeletonCircle,
   Tooltip,
   Text,
-} from "@chakra-ui/react";
-import { CalendarIcon, CheckIcon, StarIcon } from "@chakra-ui/icons";
-import useTranslation from "next-translate/useTranslation";
-import { GET_USER_POINTS } from "../../queries/user";
+} from '@chakra-ui/react'
+import { CalendarIcon, CheckIcon, StarIcon } from '@chakra-ui/icons'
+import useTranslation from 'next-translate/useTranslation'
+import { GET_USER_POINTS } from '../../queries/user'
 
 interface Props {}
 
 export const UserRepresentation: React.FC<Props> = () => {
-  const { user, isLoading } = useUser();
-  const { t } = useTranslation("common");
-  const { data, loading } = useQuery(GET_USER_POINTS);
+  const { user, isLoading } = useUser()
+  const { t } = useTranslation('common')
+  const { data, loading } = useQuery(GET_USER_POINTS)
 
   const userPoints = useMemo(
     () => data?.userPointsAggregate.aggregate.sum.amount,
     [data]
-  );
+  )
 
   return (
     <Flex flexDir="column" alignItems="center" gridGap={5}>
@@ -42,7 +42,7 @@ export const UserRepresentation: React.FC<Props> = () => {
       </SkeletonCircle>
       <Skeleton isLoaded={!isLoading}>
         <Heading as="h3" textStyle="h3" textAlign="center">
-          {t("Welcome Back", { name: user?.name! })}
+          {t('Welcome Back', { name: user?.name! })}
         </Heading>
       </Skeleton>
       <Skeleton isLoaded={!isLoading}>
@@ -55,7 +55,7 @@ export const UserRepresentation: React.FC<Props> = () => {
             gridGap={5}
           >
             <Skeleton isLoaded={!loading}>
-              <Text>{t("Points", { points: Number(userPoints) })}</Text>
+              <Text>{t('Points', { points: Number(userPoints) })}</Text>
             </Skeleton>
             <StarIcon color="yellow.300" />
           </Flex>
@@ -65,5 +65,5 @@ export const UserRepresentation: React.FC<Props> = () => {
         </HStack>
       </Skeleton>
     </Flex>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
-import { Box, HTMLChakraProps, Heading } from "@chakra-ui/react";
+import React from 'react'
+import Link from 'next/link'
+import { Box, HTMLChakraProps, Heading } from '@chakra-ui/react'
 
-interface Props extends HTMLChakraProps<"div"> {}
+interface Props extends HTMLChakraProps<'div'> {}
 
 export const Logo = (props: Props) => {
   return (
@@ -15,5 +15,5 @@ export const Logo = (props: Props) => {
         </a>
       </Link>
     </Box>
-  );
-};
+  )
+}

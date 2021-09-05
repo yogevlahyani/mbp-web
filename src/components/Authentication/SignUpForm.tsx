@@ -1,38 +1,38 @@
-import React from "react";
+import React from 'react'
 import {
   Button,
   FormControl,
   FormErrorMessage,
   Input,
   Stack,
-} from "@chakra-ui/react";
-import { Field, Form, Formik } from "formik";
-import * as Yup from "yup";
+} from '@chakra-ui/react'
+import { Field, Form, Formik } from 'formik'
+import * as Yup from 'yup'
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().email('Invalid email').required('Required'),
   confirmEmail: Yup.string()
-    .oneOf([Yup.ref("email"), null], "Emails must match")
-    .required("Required"),
+    .oneOf([Yup.ref('email'), null], 'Emails must match')
+    .required('Required'),
   password: Yup.string()
-    .min(4, "Password is too short")
-    .max(50, "Password is too long")
-    .required("Required"),
-});
+    .min(4, 'Password is too short')
+    .max(50, 'Password is too long')
+    .required('Required'),
+})
 
 interface Props {
-  onFormSubmit: (email: string, password: string) => void | Promise<void>;
+  onFormSubmit: (email: string, password: string) => void | Promise<void>
 }
 
 export const SignUpForm = ({ onFormSubmit }: Props) => {
   const onSubmit = async ({ email, password }: any, actions: any) => {
-    await onFormSubmit(email, password);
-    actions.setSubmitting(false);
-  };
+    await onFormSubmit(email, password)
+    actions.setSubmitting(false)
+  }
 
   return (
     <Formik
-      initialValues={{ email: "", confirmEmail: "", password: "" }}
+      initialValues={{ email: '', confirmEmail: '', password: '' }}
       validationSchema={SignupSchema}
       onSubmit={onSubmit}
     >
@@ -59,9 +59,7 @@ export const SignUpForm = ({ onFormSubmit }: Props) => {
               {({ field, form }: any) => (
                 <FormControl
                   isRequired
-                  isInvalid={
-                    form.errors.confirmEmail && form.touched.confirmEmail
-                  }
+                  isInvalid={form.errors.confirmEmail && form.touched.confirmEmail}
                 >
                   <Input
                     {...field}
@@ -69,9 +67,7 @@ export const SignUpForm = ({ onFormSubmit }: Props) => {
                     type="email"
                     placeholder="Confirm Email Address"
                   />
-                  <FormErrorMessage>
-                    {form.errors.confirmEmail}
-                  </FormErrorMessage>
+                  <FormErrorMessage>{form.errors.confirmEmail}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
@@ -93,10 +89,10 @@ export const SignUpForm = ({ onFormSubmit }: Props) => {
             </Field>
             <Stack spacing={10}>
               <Button
-                bg={"blue.400"}
-                color={"white"}
+                bg={'blue.400'}
+                color={'white'}
                 _hover={{
-                  bg: "blue.500",
+                  bg: 'blue.500',
                 }}
                 isLoading={isSubmitting}
                 textTransform="uppercase"
@@ -109,5 +105,5 @@ export const SignUpForm = ({ onFormSubmit }: Props) => {
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}

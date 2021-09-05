@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const GET_USER_POINTS = gql`
   query GetUserPoints {
@@ -10,7 +10,7 @@ export const GET_USER_POINTS = gql`
       }
     }
   }
-`;
+`
 
 export const GET_USER_PROGRAMS = gql`
   query GetUserPrograms {
@@ -42,7 +42,7 @@ export const GET_USER_PROGRAMS = gql`
       }
     }
   }
-`;
+`
 
 export const GET_USER_WEEKLY_VIDEOS = gql`
   query GetUserProgramsWeeklyVideos($weekNumber: Int!) {
@@ -67,4 +67,4 @@ export const GET_USER_WEEKLY_VIDEOS = gql`
       }
     }
   }
-`;
+`
