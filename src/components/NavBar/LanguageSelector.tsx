@@ -1,13 +1,13 @@
-import React from "react";
-import { Box, Menu, MenuButton, MenuList } from "@chakra-ui/react";
-import Image from "next/image";
-import useTranslation from "next-translate/useTranslation";
-import { useMemo } from "react";
-import { Language } from "./Language";
-import { LANGUAGES } from "../../locales";
+import React from 'react';
+import { Box, Menu, MenuButton, MenuList } from '@chakra-ui/react';
+import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
+import { useMemo } from 'react';
+import { Language } from './Language';
+import { LANGUAGES } from '../../locales';
 
 export const LanguageSelector: React.FC<{}> = () => {
-  const { lang } = useTranslation("common");
+  const { lang } = useTranslation('common');
 
   const listLanguages = useMemo(() => {
     return LANGUAGES.map((language) => (

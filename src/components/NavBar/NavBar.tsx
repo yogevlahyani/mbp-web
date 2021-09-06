@@ -1,18 +1,18 @@
-import React, { useMemo } from "react";
-import { useUser } from "@auth0/nextjs-auth0";
-import { Skeleton, Spacer } from "@chakra-ui/react";
-import { Logo } from "./Logo";
-import { NavBarContainer } from "./NavBarContainer";
-import { LoggedOutNav } from "./LoggedOutNav";
-import { LoggedInNav } from "./LoggedInNav";
-import { LanguageSelector } from "./LanguageSelector";
+import React, { useMemo } from 'react';
+import { useUser } from '@auth0/nextjs-auth0';
+import { Skeleton, Spacer } from '@chakra-ui/react';
+import { Logo } from './Logo';
+import { NavBarContainer } from './NavBarContainer';
+import { LoggedOutNav } from './LoggedOutNav';
+import { LoggedInNav } from './LoggedInNav';
+import { LanguageSelector } from './LanguageSelector';
 
 export const NavBar = () => {
   const { user, isLoading } = useUser();
 
   const userNavigation = useMemo(
     () => (user ? <LoggedInNav {...user} /> : <LoggedOutNav />),
-    [user]
+    [user],
   );
 
   return (
@@ -29,9 +29,7 @@ export const NavBar = () => {
       <Spacer />
       {/* TODO: Enable when multi language */}
       {/* <LanguageSelector /> */}
-      <Skeleton isLoaded={!isLoading}>
-        {userNavigation}
-      </Skeleton>
+      <Skeleton isLoaded={!isLoading}>{userNavigation}</Skeleton>
     </NavBarContainer>
   );
 };

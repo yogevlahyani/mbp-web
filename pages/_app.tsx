@@ -1,19 +1,19 @@
-import React from "react";
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import { UserProvider } from "@auth0/nextjs-auth0";
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { NavBar } from "../src/components/NavBar/NavBar";
-import "../styles/globals.css";
-import { Footer } from "../src/components/Footer/Footer";
-import theme from "../src/theme/theme";
+import React from 'react';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import { UserProvider } from '@auth0/nextjs-auth0';
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { NavBar } from '../src/components/NavBar/NavBar';
+import '../styles/globals.css';
+import { Footer } from '../src/components/Footer/Footer';
+import theme from '../src/theme/theme';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const client = new ApolloClient({
-  uri: "/api/graphql",
+  uri: '/api/graphql',
   cache: new InMemoryCache(),
 });
 
@@ -24,10 +24,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={theme}>
           <Head>
             <title>MyBodyPro | The most convenient way to work out</title>
-            <meta
-              name="description"
-              content="The most convenient way to work out"
-            />
+            <meta name="description" content="The most convenient way to work out" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
@@ -39,13 +36,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
           >
             <NavBar />
 
-            <Container
-              maxW="full"
-              minH="max-content"
-              py={10}
-              flex={1}
-              flexGrow={1}
-            >
+            <Container maxW="full" minH="max-content" flex={1} flexGrow={1}>
               <Component {...pageProps} />
             </Container>
 

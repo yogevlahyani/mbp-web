@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo } from "react";
-import { Avatar, Tooltip, Heading } from "@chakra-ui/react";
-import { UserProfile } from "@auth0/nextjs-auth0";
-import { useRouter } from "next/router";
-import { VerticalTimelineElement } from "react-vertical-timeline-component";
+import React, { useCallback, useMemo } from 'react';
+import { Avatar, Tooltip, Heading } from '@chakra-ui/react';
+import { UserProfile } from '@auth0/nextjs-auth0';
+import { useRouter } from 'next/router';
+import { VerticalTimelineElement } from 'react-vertical-timeline-component';
 
 export interface ProgramType {
   id: string;
@@ -42,14 +42,14 @@ export const Program: React.FC<Props> = ({
         />
       </Tooltip>
     ),
-    [author]
+    [author],
   );
 
   const onProgramClick = useCallback(() => push(`/programs/${id}`), [push, id]);
 
   const onAuthorClick = useCallback(
     () => push(`/${author.nickname}`),
-    [push, author]
+    [push, author],
   );
 
   return (

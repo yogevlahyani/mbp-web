@@ -1,14 +1,17 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { GetServerSidePropsResultWithSession, getSession } from "@auth0/nextjs-auth0";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import {
+  GetServerSidePropsResultWithSession,
+  getSession,
+} from '@auth0/nextjs-auth0';
 import {
   ApolloClient,
   createHttpLink,
   InMemoryCache,
   NormalizedCacheObject,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { ParsedUrlQuery } from "querystring";
-import config from "../../config";
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { ParsedUrlQuery } from 'querystring';
+import config from '../../config';
 
 const {
   providers: { hasura },
@@ -20,11 +23,13 @@ const httpLink = createHttpLink({
 
 type CallbackType<
   P extends { [key: string]: any } = { [key: string]: any },
-  Q extends ParsedUrlQuery = ParsedUrlQuery
+  Q extends ParsedUrlQuery = ParsedUrlQuery,
 > = (
   context: GetServerSidePropsContext<Q>,
-  client: ApolloClient<NormalizedCacheObject>
-) => Promise<GetServerSidePropsResult<P>> | Promise<GetServerSidePropsResultWithSession>;
+  client: ApolloClient<NormalizedCacheObject>,
+) =>
+  | Promise<GetServerSidePropsResult<P>>
+  | Promise<GetServerSidePropsResultWithSession>;
 
 export const withApollo =
   (callback: CallbackType) => async (ctx: GetServerSidePropsContext) => {
@@ -33,7 +38,7 @@ export const withApollo =
     if (Math.floor(Date.now() / 1000) > session?.accessTokenExpiresAt!) {
       return {
         redirect: {
-          destination: "/auth/logout",
+          destination: '/auth/logout',
           permanent: false,
         },
       };
@@ -43,9 +48,8 @@ export const withApollo =
       return {
         headers: {
           ...headers,
-          "x-hasura-role": "user",
-          authorization:
-            session?.accessToken && `Bearer ${session?.accessToken}`,
+          'x-hasura-role': 'user',
+          authorization: session?.accessToken && `Bearer ${session?.accessToken}`,
         },
       };
     });

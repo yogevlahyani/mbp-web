@@ -1,18 +1,15 @@
-import React, { useCallback } from "react";
-import { Box, Flex, MenuItem, Text } from "@chakra-ui/react";
-import useTranslation from "next-translate/useTranslation";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import React, { useCallback } from 'react';
+import { Box, Flex, MenuItem, Text } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface Props {
   language: string;
   namespace?: string;
 }
 
-export const Language: React.FC<Props> = ({
-  language,
-  namespace = "common",
-}) => {
+export const Language: React.FC<Props> = ({ language, namespace = 'common' }) => {
   const { t } = useTranslation(namespace);
   const { asPath, defaultLocale } = useRouter();
 

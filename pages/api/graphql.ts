@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "@auth0/nextjs-auth0";
-import httpProxyMiddleware from "next-http-proxy-middleware";
-import configuration from "../../config";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from '@auth0/nextjs-auth0';
+import httpProxyMiddleware from 'next-http-proxy-middleware';
+import configuration from '../../config';
 
 export const config = {
   api: {
@@ -10,10 +10,7 @@ export const config = {
   },
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
 
   return httpProxyMiddleware(req, res, {
@@ -21,10 +18,10 @@ export default async function handler(
     changeOrigin: true,
     headers: {
       authorization: `Bearer ${session?.accessToken}`,
-      "x-hasura-role": "user",
+      'x-hasura-role': 'user',
     },
     pathRewrite: {
-      "^/api/graphql": "",
+      '^/api/graphql': '',
     },
   });
 }

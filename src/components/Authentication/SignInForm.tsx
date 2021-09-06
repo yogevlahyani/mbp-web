@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   FormControl,
   FormErrorMessage,
   Input,
   Stack,
-} from "@chakra-ui/react";
-import * as Yup from "yup";
-import { Field, Form, Formik } from "formik";
+} from '@chakra-ui/react';
+import * as Yup from 'yup';
+import { Field, Form, Formik } from 'formik';
 
 const SigninSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
-    .min(4, "Password is too short")
-    .max(50, "Password is too long")
-    .required("Required"),
+    .min(4, 'Password is too short')
+    .max(50, 'Password is too long')
+    .required('Required'),
 });
 
 interface Props {
@@ -29,7 +29,7 @@ export const SignInForm = ({ onFormSubmit }: Props) => {
 
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: '', password: '' }}
       validationSchema={SigninSchema}
       onSubmit={onSubmit}
     >
@@ -70,10 +70,10 @@ export const SignInForm = ({ onFormSubmit }: Props) => {
             </Field>
             <Stack spacing={10}>
               <Button
-                bg={"blue.400"}
-                color={"white"}
+                bg={'blue.400'}
+                color={'white'}
                 _hover={{
-                  bg: "blue.500",
+                  bg: 'blue.500',
                 }}
                 isLoading={isSubmitting}
                 textTransform="uppercase"

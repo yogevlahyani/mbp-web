@@ -1,7 +1,7 @@
-import React from "react";
-import Head from "next/head";
-import { Box } from "@chakra-ui/react";
-import { SignInComponent } from "../src/components/Authentication/SignInComponent";
+import React from 'react';
+import Head from 'next/head';
+import { Box } from '@chakra-ui/react';
+import { SignInComponent } from '../src/components/Authentication/SignInComponent';
 
 export default function SignIn() {
   return (

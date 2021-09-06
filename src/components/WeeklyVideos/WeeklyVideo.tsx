@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { AspectRatio, Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import React, { useMemo } from 'react';
+import { AspectRatio, Box, Flex, Spacer, Text } from '@chakra-ui/react';
 
 export interface WeeklyVideoProps {
   id: string;
@@ -9,9 +9,8 @@ export interface WeeklyVideoProps {
 
 export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
   const video = useMemo(() => {
-    if (url.includes("youtube.com")) {
-      const regExp =
-        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    if (url.includes('youtube.com')) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
       const match = url.match(regExp);
 
       if (match && match[2].length === 11) {
@@ -46,9 +45,13 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
     >
       <AspectRatio>{video}</AspectRatio>
       <Flex py="9px" px="10px" gridGap={1} alignItems="center">
-        <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">{name}</Text>
+        <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">
+          {name}
+        </Text>
         <Spacer />
-        <Text fontSize="12px" color="#1A74E2">12:00</Text>
+        <Text fontSize="12px" color="#1A74E2">
+          12:00
+        </Text>
       </Flex>
     </Box>
   );
