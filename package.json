@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format:check": "prettier --write src pages"
+    "format": "prettier --write src pages",
+    "format:check": "prettier --check src pages"
   },
   "dependencies": {
     "@apollo/client": "^3.4.8",
