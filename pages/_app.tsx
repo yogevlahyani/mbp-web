@@ -32,7 +32,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
             flexDirection="column"
             justifyContent="space-between"
             minH="100vh"
-            background="#000000 linear-gradient(360deg, #1A74E266 0%, #00544800 100%) 0% 0% no-repeat padding-box"
+            background="#000000 linear-gradient(180deg, #1A74E266 0%, #00544800 100%) 0% 0% no-repeat padding-box"
           >
             <NavBar />
 

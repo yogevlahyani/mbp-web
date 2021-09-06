@@ -1,6 +1,6 @@
-import React from 'react'
-import useTranslation from 'next-translate/useTranslation'
-import Link from 'next/link'
+import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 import {
   Container,
   Box,
@@ -11,10 +11,10 @@ import {
   extendTheme,
   Button,
   ButtonGroup,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 export const ContentHeader = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('common');
 
   return (
     <Container mb="20" maxW="5xl" centerContent>
@@ -23,7 +23,7 @@ export const ContentHeader = () => {
         w="100%"
         align="flex-end"
         p="10"
-        bgGradient="linear(to-l, #1A74E266, #00544800)"
+        bgGradient="linear(to-tl, #1A74E266, #00544800)"
         borderBottomLeftRadius="40px"
         borderBottomRightRadius="40px"
       >
@@ -48,5 +48,5 @@ export const ContentHeader = () => {
         </Box>
       </Flex>
     </Container>
-  )
-}
+  );
+};
