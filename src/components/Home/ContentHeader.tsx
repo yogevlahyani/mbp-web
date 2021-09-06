@@ -1,6 +1,7 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import { attributes, react as HomeContent } from '../../../content/pages/home.md';
 import {
   Container,
   Box,
@@ -16,6 +17,8 @@ import {
 export const ContentHeader = () => {
   const { t } = useTranslation('common');
 
+  const { hero_title, hero_description } = attributes;
+
   return (
     <Container mb="20" maxW="5xl" centerContent>
       <Flex
@@ -29,7 +32,7 @@ export const ContentHeader = () => {
       >
         <Box>
           <Text fontWeight="bold" as="h1" fontSize="4xl">
-            {t('Workout and learn from the best')}
+            {hero_title /*t('Workout and learn from the best')*/}
           </Text>
           <Text mt="2" mb="4">
             {t('Loren ipsum dolor')}
