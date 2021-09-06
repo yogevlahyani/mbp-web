@@ -40,6 +40,7 @@ export const GET_USER_PROGRAMS = gql`
           }
         }
       }
+      starts_at
     }
   }
 `;

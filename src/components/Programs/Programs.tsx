@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, BoxProps, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
@@ -6,6 +7,14 @@ import { VerticalTimeline } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { GET_USER_PROGRAMS } from '../../queries/user';
 import { Program, ProgramType } from './Program';
+=======
+import React, { useMemo } from "react";
+import { useQuery } from "@apollo/client";
+import { Box, BoxProps, Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
+import { GET_USER_PROGRAMS } from "../../queries/user";
+import { Program, ProgramType } from "./Program";
+>>>>>>> 04e8678 (WIP)
 
 interface Props extends BoxProps {}
 
@@ -29,7 +38,18 @@ export const Programs: React.FC<Props> = ({ ...boxProps }) => {
 
   return (
     <Box {...boxProps}>
+<<<<<<< HEAD
       <Flex alignItems="center" gridGap={[1, 5]} flexDirection={['column', 'row']}>
+=======
+      <Skeleton isLoaded={!loading} my={20}>
+        <Flex gridGap={10}>{programs}</Flex>
+      </Skeleton>
+      <Flex
+        alignItems="center"
+        gridGap={[1, 5]}
+        flexDirection={["column", "row"]}
+      >
+>>>>>>> 04e8678 (WIP)
         <Heading as="h2" fontSize="36px">
           {t('My Programs')}
         </Heading>
@@ -44,9 +64,6 @@ export const Programs: React.FC<Props> = ({ ...boxProps }) => {
           </Skeleton>
         </Box>
       </Flex>
-      <Skeleton isLoaded={!loading}>
-        {programs?.length && <VerticalTimeline>{programs}</VerticalTimeline>}
-      </Skeleton>
     </Box>
   );
 };

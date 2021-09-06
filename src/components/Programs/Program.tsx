@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
-import { Avatar, Tooltip, Heading } from '@chakra-ui/react';
-import { UserProfile } from '@auth0/nextjs-auth0';
-import { useRouter } from 'next/router';
-import { VerticalTimelineElement } from 'react-vertical-timeline-component';
+import React, { useCallback, useEffect, useMemo } from "react";
+import { Avatar, Tooltip, Text, Box, Flex } from "@chakra-ui/react";
+import { UserProfile } from "@auth0/nextjs-auth0";
+import { useRouter } from "next/router";
+import moment from "moment";
 
 export interface ProgramType {
   id: string;
@@ -12,6 +12,7 @@ export interface ProgramType {
   author: UserProfile;
   created_at: string;
   updated_at?: string;
+  starts_at: string;
 }
 
 interface Props extends ProgramType {
@@ -23,28 +24,10 @@ export const Program: React.FC<Props> = ({
   name,
   author,
   created_at,
+  starts_at,
   index,
 }) => {
   const { push, asPath } = useRouter();
-
-  const icon = useMemo(
-    () => (
-      <Tooltip
-        hasArrow
-        placement="top"
-        label={(author.name || author.nickname) as string}
-        bg="black"
-      >
-        <Avatar
-          name={(author.name || author.nickname) as string}
-          src={author.picture as string}
-          width="full"
-          height="full"
-        />
-      </Tooltip>
-    ),
-    [author],
-  );
 
   const onProgramClick = useCallback(
     () => push(`programs/${id}`, asPath),
@@ -56,17 +39,46 @@ export const Program: React.FC<Props> = ({
     [push, author],
   );
 
+  const isOpen = useMemo(() => {
+    const startsAt = moment(starts_at);
+    console.log('startsAt', startsAt);
+
+    return false;
+  }, [starts_at]);
+
   return (
-    <VerticalTimelineElement
-      date={created_at}
-      icon={icon}
-      position="right"
-      onTimelineElementClick={onProgramClick}
-      iconOnClick={onAuthorClick}
+    <Flex
+      backgroundColor={isOpen ? 'blue' : 'white'}
+      borderRadius="10px"
+      alignItems="center"
+      borderTopRightRadius={50}
+      borderBottomRightRadius={50}
     >
-      <Heading as="h5" color="black">
-        {name}
-      </Heading>
-    </VerticalTimelineElement>
+      <Tooltip
+        hasArrow
+        placement="top"
+        label={(author?.name || author?.nickname) as string}
+        bg="black"
+      >
+        <Avatar
+          name={(author?.name || author?.nickname) as string}
+          src={author?.picture as string}
+          width="70px"
+          height="70px"
+          onClick={onAuthorClick}
+        />
+      </Tooltip>
+      <Tooltip hasArrow placement="top" label={name} bg="black">
+        <Text
+          color="black"
+          px={5}
+          maxWidth={200}
+          onClick={onProgramClick}
+          isTruncated
+        >
+          {name}
+        </Text>
+      </Tooltip>
+    </Flex>
   );
 };
