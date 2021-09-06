@@ -4,14 +4,16 @@ import { Container } from "@chakra-ui/react";
 import { GetServerSidePropsContext } from "next";
 import { UserRepresentation } from "../../src/components/UserRepresentation/UserRepresentation";
 import { WeeklyVideos } from "../../src/components/WeeklyVideos/WeeklyVideos";
-import { Programs } from "../../src/components/Programs/Programs";
+import { UserPrograms } from "../../src/components/UserPrograms/UserPrograms";
+import { ProgramWeeks } from "../../src/components/ProgramWeeks/ProgramWeeks";
 
 export default function UserDashboard() {
   return (
     <Container maxWidth="container.xl">
       <UserRepresentation />
       <WeeklyVideos mt={[5, 20]} />
-      <Programs mt={[5, 20]} />
+      <UserPrograms mt={5} />
+      <ProgramWeeks />
     </Container>
   );
 }
@@ -20,6 +22,7 @@ export const getServerSideProps = withPageAuthRequired({
   returnTo: '/',
   getServerSideProps: async (ctx: GetServerSidePropsContext) => {
     const session = await getSession(ctx.req, ctx.res);
+    console.log("session", session);
 
     // TODO: Show Public Profile
     if (session?.user.nickname !== ctx.params?.nickname) {

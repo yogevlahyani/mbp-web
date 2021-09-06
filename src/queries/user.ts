@@ -14,7 +14,8 @@ export const GET_USER_POINTS = gql`
 
 export const GET_USER_PROGRAMS = gql`
   query GetUserPrograms {
-    user_programs {
+    user_programs(order_by: { starts_at: asc }) {
+      id
       program {
         id
         name
