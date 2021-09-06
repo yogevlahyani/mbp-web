@@ -1,21 +1,21 @@
-import React from 'react'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
-import { UserProvider } from '@auth0/nextjs-auth0'
-import { ChakraProvider, Container, Flex } from '@chakra-ui/react'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { NavBar } from '../src/components/NavBar/NavBar'
-import '../styles/globals.css'
-import { Footer } from '../src/components/Footer/Footer'
-import theme from '../src/theme/theme'
+import React from 'react';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import { UserProvider } from '@auth0/nextjs-auth0';
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { NavBar } from '../src/components/NavBar/NavBar';
+import '../styles/globals.css';
+import { Footer } from '../src/components/Footer/Footer';
+import theme from '../src/theme/theme';
 
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const client = new ApolloClient({
   uri: '/api/graphql',
   cache: new InMemoryCache(),
-})
+});
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
   return (
@@ -45,6 +45,6 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
         </ChakraProvider>
       </UserProvider>
     </ApolloProvider>
-  )
+  );
 }
-export default MyBodyPro
+export default MyBodyPro;

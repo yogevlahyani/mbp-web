@@ -1,5 +1,5 @@
-import { Button, FormControl, Input, Stack } from '@chakra-ui/react'
-import React from 'react'
+import { Button, FormControl, Input, Stack } from '@chakra-ui/react';
+import React from 'react';
 
 export const ForgotPasswordForm = () => {
   return (
@@ -20,5 +20,5 @@ export const ForgotPasswordForm = () => {
         </Button>
       </Stack>
     </Stack>
-  )
-}
+  );
+};

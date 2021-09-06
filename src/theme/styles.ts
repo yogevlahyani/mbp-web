@@ -4,6 +4,6 @@ const styles = {
       color: 'white',
     },
   },
-}
+};
 
-export default styles
+export default styles;

@@ -1,36 +1,39 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { GetServerSidePropsResultWithSession, getSession } from '@auth0/nextjs-auth0'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import {
+  GetServerSidePropsResultWithSession,
+  getSession,
+} from '@auth0/nextjs-auth0';
 import {
   ApolloClient,
   createHttpLink,
   InMemoryCache,
   NormalizedCacheObject,
-} from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
-import { ParsedUrlQuery } from 'querystring'
-import config from '../../config'
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { ParsedUrlQuery } from 'querystring';
+import config from '../../config';
 
 const {
   providers: { hasura },
-} = config
+} = config;
 
 const httpLink = createHttpLink({
   uri: hasura.graphqlUrl,
-})
+});
 
 type CallbackType<
   P extends { [key: string]: any } = { [key: string]: any },
-  Q extends ParsedUrlQuery = ParsedUrlQuery
+  Q extends ParsedUrlQuery = ParsedUrlQuery,
 > = (
   context: GetServerSidePropsContext<Q>,
-  client: ApolloClient<NormalizedCacheObject>
+  client: ApolloClient<NormalizedCacheObject>,
 ) =>
   | Promise<GetServerSidePropsResult<P>>
-  | Promise<GetServerSidePropsResultWithSession>
+  | Promise<GetServerSidePropsResultWithSession>;
 
 export const withApollo =
   (callback: CallbackType) => async (ctx: GetServerSidePropsContext) => {
-    const session = getSession(ctx.req, ctx.res)
+    const session = getSession(ctx.req, ctx.res);
 
     if (Math.floor(Date.now() / 1000) > session?.accessTokenExpiresAt!) {
       return {
@@ -38,7 +41,7 @@ export const withApollo =
           destination: '/auth/logout',
           permanent: false,
         },
-      }
+      };
     }
 
     const authLink = setContext((_, { headers }) => {
@@ -48,16 +51,16 @@ export const withApollo =
           'x-hasura-role': 'user',
           authorization: session?.accessToken && `Bearer ${session?.accessToken}`,
         },
-      }
-    })
+      };
+    });
 
-    console.debug(session?.user.sub)
-    console.debug(session?.accessToken)
+    console.debug(session?.user.sub);
+    console.debug(session?.accessToken);
 
     const client = new ApolloClient({
       link: authLink.concat(httpLink),
       cache: new InMemoryCache(),
-    })
+    });
 
-    return callback(ctx, client)
-  }
+    return callback(ctx, client);
+  };

@@ -1,34 +1,34 @@
-import React, { useMemo } from 'react'
-import { Box, BoxProps, Flex, Heading, Skeleton, Text } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
-import useTranslation from 'next-translate/useTranslation'
-import Slider from 'react-slick'
-import { GET_USER_WEEKLY_VIDEOS } from '../../queries/user'
-import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo'
+import React, { useMemo } from 'react';
+import { Box, BoxProps, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
+import { useQuery } from '@apollo/client';
+import useTranslation from 'next-translate/useTranslation';
+import Slider from 'react-slick';
+import { GET_USER_WEEKLY_VIDEOS } from '../../queries/user';
+import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo';
 
 interface Props extends BoxProps {}
 
 export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('common');
   const { data, loading } = useQuery(GET_USER_WEEKLY_VIDEOS, {
     variables: { weekNumber: 1 },
-  })
-  const videos = useMemo(() => data?.program_week_videos || [], [data])
+  });
+  const videos = useMemo(() => data?.program_week_videos || [], [data]);
   const completedVideos = useMemo(
     () => data?.user_videos_history?.length || 0,
-    [data]
-  )
+    [data],
+  );
 
   const weeklyVideos = useMemo(
     () =>
       videos.map((weeklyVideo: WeeklyVideoProps) => (
         <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} />
       )),
-    [videos]
-  )
+    [videos],
+  );
 
   if (!videos.length) {
-    return null
+    return null;
   }
 
   return (
@@ -71,5 +71,5 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
         </Slider>
       </Box>
     </Box>
-  )
-}
+  );
+};

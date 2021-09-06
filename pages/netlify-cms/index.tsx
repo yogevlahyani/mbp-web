@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic'
-import { Skeleton } from '@chakra-ui/react'
-import config from '../../config'
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@chakra-ui/react';
+import config from '../../config';
 
 const {
   providers: { netlifyCMS },
-} = config
+} = config;
 
 const CMS = dynamic(
   () =>
@@ -12,11 +12,11 @@ const CMS = dynamic(
   {
     ssr: false,
     loading: Skeleton,
-  }
-)
+  },
+);
 
 const AdminPage: React.FC = () => {
-  return <CMS />
-}
+  return <CMS />;
+};
 
-export default AdminPage
+export default AdminPage;

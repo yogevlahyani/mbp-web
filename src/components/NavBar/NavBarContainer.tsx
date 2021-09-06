@@ -1,5 +1,5 @@
-import { Flex, HTMLChakraProps } from '@chakra-ui/react'
-import React, { PropsWithChildren } from 'react'
+import { Flex, HTMLChakraProps } from '@chakra-ui/react';
+import React, { PropsWithChildren } from 'react';
 
 interface Props extends HTMLChakraProps<'div'> {}
 
@@ -20,5 +20,5 @@ export const NavBarContainer = ({
     >
       {children}
     </Flex>
-  )
-}
+  );
+};

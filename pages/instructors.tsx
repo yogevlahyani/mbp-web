@@ -1,6 +1,6 @@
-import React from 'react'
-import Head from 'next/head'
-import { Box, Heading } from '@chakra-ui/react'
+import React from 'react';
+import Head from 'next/head';
+import { Box, Heading } from '@chakra-ui/react';
 
 export default function Instructors() {
   return (
@@ -18,5 +18,5 @@ export default function Instructors() {
         </Heading>
       </Box>
     </>
-  )
+  );
 }

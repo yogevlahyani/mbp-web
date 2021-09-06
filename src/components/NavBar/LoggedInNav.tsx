@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { UserProfile } from '@auth0/nextjs-auth0'
+import React, { useMemo } from 'react';
+import { UserProfile } from '@auth0/nextjs-auth0';
 import {
   Avatar,
   Box,
@@ -10,15 +10,15 @@ import {
   MenuItem,
   MenuList,
   Text,
-} from '@chakra-ui/react'
-import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
+} from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 interface Props extends UserProfile {}
 
 export const LoggedInNav = ({ nickname, picture }: Props) => {
-  const { push } = useRouter()
-  const { t } = useTranslation('common')
+  const { push } = useRouter();
+  const { t } = useTranslation('common');
 
   return (
     <Menu autoSelect={false}>
@@ -57,5 +57,5 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
         </MenuItem>
       </MenuList>
     </Menu>
-  )
-}
+  );
+};

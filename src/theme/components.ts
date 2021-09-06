@@ -4,8 +4,8 @@ const Text = {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: '24px',
   },
-}
+};
 
 export default {
   Text,
-}
+};

@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react'
-import { useUser } from '@auth0/nextjs-auth0'
-import { useQuery } from '@apollo/client'
+import React, { useEffect, useMemo } from 'react';
+import { useUser } from '@auth0/nextjs-auth0';
+import { useQuery } from '@apollo/client';
 import {
   Avatar,
   AvatarBadge,
@@ -12,22 +12,22 @@ import {
   SkeletonCircle,
   Tooltip,
   Text,
-} from '@chakra-ui/react'
-import { CalendarIcon, CheckIcon, StarIcon } from '@chakra-ui/icons'
-import useTranslation from 'next-translate/useTranslation'
-import { GET_USER_POINTS } from '../../queries/user'
+} from '@chakra-ui/react';
+import { CalendarIcon, CheckIcon, StarIcon } from '@chakra-ui/icons';
+import useTranslation from 'next-translate/useTranslation';
+import { GET_USER_POINTS } from '../../queries/user';
 
 interface Props {}
 
 export const UserRepresentation: React.FC<Props> = () => {
-  const { user, isLoading } = useUser()
-  const { t } = useTranslation('common')
-  const { data, loading } = useQuery(GET_USER_POINTS)
+  const { user, isLoading } = useUser();
+  const { t } = useTranslation('common');
+  const { data, loading } = useQuery(GET_USER_POINTS);
 
   const userPoints = useMemo(
     () => data?.userPointsAggregate.aggregate.sum.amount,
-    [data]
-  )
+    [data],
+  );
 
   return (
     <Flex flexDir="column" alignItems="center" gridGap={5}>
@@ -65,5 +65,5 @@ export const UserRepresentation: React.FC<Props> = () => {
         </HStack>
       </Skeleton>
     </Flex>
-  )
-}
+  );
+};

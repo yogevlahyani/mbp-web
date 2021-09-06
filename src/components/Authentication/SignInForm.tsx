@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import {
   Button,
   FormControl,
   FormErrorMessage,
   Input,
   Stack,
-} from '@chakra-ui/react'
-import * as Yup from 'yup'
-import { Field, Form, Formik } from 'formik'
+} from '@chakra-ui/react';
+import * as Yup from 'yup';
+import { Field, Form, Formik } from 'formik';
 
 const SigninSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -15,17 +15,17 @@ const SigninSchema = Yup.object().shape({
     .min(4, 'Password is too short')
     .max(50, 'Password is too long')
     .required('Required'),
-})
+});
 
 interface Props {
-  onFormSubmit: (email: string, password: string) => void | Promise<void>
+  onFormSubmit: (email: string, password: string) => void | Promise<void>;
 }
 
 export const SignInForm = ({ onFormSubmit }: Props) => {
   const onSubmit = async ({ email, password }: any, actions: any) => {
-    await onFormSubmit(email, password)
-    actions.setSubmitting(false)
-  }
+    await onFormSubmit(email, password);
+    actions.setSubmitting(false);
+  };
 
   return (
     <Formik
@@ -86,5 +86,5 @@ export const SignInForm = ({ onFormSubmit }: Props) => {
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};

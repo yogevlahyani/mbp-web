@@ -1,9 +1,9 @@
-import React from 'react'
-import { Button, Flex, Link } from '@chakra-ui/react'
-import useTranslation from 'next-translate/useTranslation'
+import React from 'react';
+import { Button, Flex, Link } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 
 export const LoggedOutNav = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('common');
 
   return (
     <Flex align="center">
@@ -29,5 +29,5 @@ export const LoggedOutNav = () => {
         {t('Sign Up')}
       </Button>
     </Flex>
-  )
-}
+  );
+};

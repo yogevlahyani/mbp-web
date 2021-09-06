@@ -1,5 +1,5 @@
-import React from 'react'
-import NextLink from 'next/link'
+import React from 'react';
+import NextLink from 'next/link';
 import {
   Flex,
   Heading,
@@ -8,9 +8,9 @@ import {
   Link,
   useColorModeValue,
   Box,
-} from '@chakra-ui/react'
-import { Logo } from '../NavBar/Logo'
-import { SignUpForm } from './SignUpForm'
+} from '@chakra-ui/react';
+import { Logo } from '../NavBar/Logo';
+import { SignUpForm } from './SignUpForm';
 
 export const SignUpComponent = () => {
   return (
@@ -41,5 +41,5 @@ export const SignUpComponent = () => {
         </Box>
       </Stack>
     </Flex>
-  )
-}
+  );
+};

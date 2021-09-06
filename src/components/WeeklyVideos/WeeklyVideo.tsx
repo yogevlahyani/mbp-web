@@ -1,20 +1,20 @@
-import React, { useMemo } from 'react'
-import { AspectRatio, Box, Flex, Spacer, Text } from '@chakra-ui/react'
+import React, { useMemo } from 'react';
+import { AspectRatio, Box, Flex, Spacer, Text } from '@chakra-ui/react';
 
 export interface WeeklyVideoProps {
-  id: string
-  name: string
-  url: string
+  id: string;
+  name: string;
+  url: string;
 }
 
 export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
   const video = useMemo(() => {
     if (url.includes('youtube.com')) {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
-      const match = url.match(regExp)
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
 
       if (match && match[2].length === 11) {
-        const youtubeId = match[2]
+        const youtubeId = match[2];
 
         return (
           <iframe
@@ -23,7 +23,7 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
             width="100%"
             allowFullScreen
           />
-        )
+        );
       }
     }
 
@@ -32,8 +32,8 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
         <source src={url} />
         Your browser does not support the video tag.
       </video>
-    )
-  }, [url, name])
+    );
+  }, [url, name]);
 
   return (
     <Box
@@ -54,5 +54,5 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
         </Text>
       </Flex>
     </Box>
-  )
-}
+  );
+};

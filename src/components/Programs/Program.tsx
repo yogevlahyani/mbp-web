@@ -1,21 +1,21 @@
-import React, { useCallback, useMemo } from 'react'
-import { Avatar, Tooltip, Heading } from '@chakra-ui/react'
-import { UserProfile } from '@auth0/nextjs-auth0'
-import { useRouter } from 'next/router'
-import { VerticalTimelineElement } from 'react-vertical-timeline-component'
+import React, { useCallback, useMemo } from 'react';
+import { Avatar, Tooltip, Heading } from '@chakra-ui/react';
+import { UserProfile } from '@auth0/nextjs-auth0';
+import { useRouter } from 'next/router';
+import { VerticalTimelineElement } from 'react-vertical-timeline-component';
 
 export interface ProgramType {
-  id: string
-  name: string
-  description?: string
-  image?: string
-  author: UserProfile
-  created_at: string
-  updated_at?: string
+  id: string;
+  name: string;
+  description?: string;
+  image?: string;
+  author: UserProfile;
+  created_at: string;
+  updated_at?: string;
 }
 
 interface Props extends ProgramType {
-  index: number
+  index: number;
 }
 
 export const Program: React.FC<Props> = ({
@@ -25,7 +25,7 @@ export const Program: React.FC<Props> = ({
   created_at,
   index,
 }) => {
-  const { push } = useRouter()
+  const { push } = useRouter();
   const icon = useMemo(
     () => (
       <Tooltip
@@ -42,15 +42,15 @@ export const Program: React.FC<Props> = ({
         />
       </Tooltip>
     ),
-    [author]
-  )
+    [author],
+  );
 
-  const onProgramClick = useCallback(() => push(`/programs/${id}`), [push, id])
+  const onProgramClick = useCallback(() => push(`/programs/${id}`), [push, id]);
 
   const onAuthorClick = useCallback(
     () => push(`/${author.nickname}`),
-    [push, author]
-  )
+    [push, author],
+  );
 
   return (
     <VerticalTimelineElement
@@ -64,5 +64,5 @@ export const Program: React.FC<Props> = ({
         {name}
       </Heading>
     </VerticalTimelineElement>
-  )
-}
+  );
+};

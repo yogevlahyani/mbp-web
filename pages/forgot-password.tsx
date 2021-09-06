@@ -1,7 +1,7 @@
-import React from 'react'
-import Head from 'next/head'
-import { Box } from '@chakra-ui/react'
-import { ForgotPasswordComponent } from '../src/components/Authentication/ForgotPasswordComponent'
+import React from 'react';
+import Head from 'next/head';
+import { Box } from '@chakra-ui/react';
+import { ForgotPasswordComponent } from '../src/components/Authentication/ForgotPasswordComponent';
 
 export default function ForgotPassword() {
   return (
@@ -16,11 +16,11 @@ export default function ForgotPassword() {
         <ForgotPasswordComponent />
       </Box>
     </>
-  )
+  );
 }
 
 export async function getServerSideProps(ctx: any) {
   return {
     props: {},
-  }
+  };
 }
