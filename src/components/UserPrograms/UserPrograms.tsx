@@ -13,7 +13,7 @@ import useTranslation from "next-translate/useTranslation";
 import { GET_USER_PROGRAMS } from "../../queries/user";
 import { UserProgram, UserProgramType } from "./UserProgram";
 import moment from "moment";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { selectedProgramAtom } from "./state";
 
 interface Props extends BoxProps {}
