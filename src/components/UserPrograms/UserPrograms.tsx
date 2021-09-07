@@ -37,18 +37,6 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
     [data?.user_programs],
   );
 
-  // const completed = useMemo(() => {
-  //   console.log("data?.user_programs", data?.user_programs);
-  //   const weeksCount = data?.user_programs?.reduce(
-  //     (accumulator: number, currentValue: UserProgramType) => {
-  //       return accumulator + currentValue.program.program_weeks.length;
-  //     },
-  //     0
-  //   );
-
-  //   return weeksCount;
-  // }, [data?.user_programs]);
-
   const completed = useMemo(
     () =>
       data?.user_programs.filter((userProgram: UserProgramType) => {
@@ -75,7 +63,7 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
         <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
           <Skeleton isLoaded={!loading}>
             <Text fontSize="20px">
-              {t('Videos Completed', {
+              {t('Programs Completed', {
                 completed,
                 total: userPrograms?.length || 0,
               })}
