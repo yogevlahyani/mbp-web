@@ -1,14 +1,14 @@
-import React from "react";
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import { UserProvider } from "@auth0/nextjs-auth0";
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { RecoilRoot } from "recoil";
-import { NavBar } from "../src/components/NavBar/NavBar";
-import "../styles/globals.css";
-import { Footer } from "../src/components/Footer/Footer";
-import theme from "../src/theme/theme";
+import React from 'react';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import { UserProvider } from '@auth0/nextjs-auth0';
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { RecoilRoot } from 'recoil';
+import { NavBar } from '../src/components/NavBar/NavBar';
+import '../styles/globals.css';
+import { Footer } from '../src/components/Footer/Footer';
+import theme from '../src/theme/theme';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

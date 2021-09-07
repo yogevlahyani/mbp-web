@@ -12,11 +12,11 @@ const colors = {
     900: '#120b0d66',
   },
   green: {
-    500: '#2BBE44'
+    500: '#2BBE44',
   },
   blue: {
     500: '#1A74E2',
-  }
+  },
 };
 
 export default colors;

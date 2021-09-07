@@ -1,11 +1,11 @@
-import React from "react";
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { Container } from "@chakra-ui/react";
-import { GetServerSidePropsContext } from "next";
-import { UserRepresentation } from "../../src/components/UserRepresentation/UserRepresentation";
-import { WeeklyVideos } from "../../src/components/WeeklyVideos/WeeklyVideos";
-import { UserPrograms } from "../../src/components/UserPrograms/UserPrograms";
-import { ProgramWeeks } from "../../src/components/ProgramWeeks/ProgramWeeks";
+import React from 'react';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { Container } from '@chakra-ui/react';
+import { GetServerSidePropsContext } from 'next';
+import { UserRepresentation } from '../../src/components/UserRepresentation/UserRepresentation';
+import { WeeklyVideos } from '../../src/components/WeeklyVideos/WeeklyVideos';
+import { UserPrograms } from '../../src/components/UserPrograms/UserPrograms';
+import { ProgramWeeks } from '../../src/components/ProgramWeeks/ProgramWeeks';
 
 export default function UserDashboard() {
   return (
@@ -22,7 +22,7 @@ export const getServerSideProps = withPageAuthRequired({
   returnTo: '/',
   getServerSideProps: async (ctx: GetServerSidePropsContext) => {
     const session = await getSession(ctx.req, ctx.res);
-    console.log("session", session);
+    console.log('session', session);
 
     // TODO: Show Public Profile
     if (session?.user.nickname !== ctx.params?.nickname) {
