@@ -29,6 +29,11 @@ export const ProgramWeeks: React.FC<Props> = (props) => {
     [selectedProgram],
   );
 
+  const isCompleted = useMemo(
+    () => completedWeeks === selectedProgram?.program?.program_weeks?.length,
+    [completedWeeks, selectedProgram],
+  );
+
   if (!selectedProgram?.program?.program_weeks?.length) {
     return null;
   }
@@ -39,7 +44,12 @@ export const ProgramWeeks: React.FC<Props> = (props) => {
         <Heading as="h2" fontSize="36px">
           {t('My Workouts')}
         </Heading>
-        <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
+        <Box
+          backgroundColor={isCompleted ? 'green.500' : 'blue.500'}
+          borderRadius="20px"
+          py={1}
+          px={3}
+        >
           <Text fontSize="20px">
             {t('Workouts Completed', {
               completed: completedWeeks,
