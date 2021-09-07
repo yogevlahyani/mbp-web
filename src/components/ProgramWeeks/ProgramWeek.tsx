@@ -39,7 +39,14 @@ export const ProgramWeek: React.FC<Props> = ({ id, week_number }) => {
   }, [currentWeekTime, isOpen, isActive]);
 
   return (
-    <Button disabled={!isOpen} width="100%" height={70} p={0} overflow="hidden">
+    <Button
+      disabled={!isOpen}
+      width="100%"
+      height={70}
+      p={0}
+      overflow="hidden"
+      onClick={onWeekClick}
+    >
       <Progress
         value={progress}
         height="100%"
@@ -57,7 +64,6 @@ export const ProgramWeek: React.FC<Props> = ({ id, week_number }) => {
           left={0}
           transform="translateY(-50%)"
           color="white"
-          onClick={onWeekClick}
           isTruncated
           width="100%"
           height="auto"
