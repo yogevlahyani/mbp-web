@@ -44,7 +44,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
               <Container
                 maxW="full"
                 minH="max-content"
-                py={10}
+                pb={10}
                 flex={1}
                 flexGrow={1}
               >

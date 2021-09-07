@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useMemo } from "react";
-import { Avatar, Tooltip, Text, Box, Flex, Button } from "@chakra-ui/react";
-import { UserProfile } from "@auth0/nextjs-auth0";
-import { useRouter } from "next/router";
-import moment from "moment";
-import { useSetRecoilState } from "recoil";
-import { selectedProgramAtom } from "./state";
-import { ProgramWeekType } from "../ProgramWeeks/ProgramWeeks";
+import React, { useCallback, useMemo } from 'react';
+import { Avatar, Tooltip, Text, Box, Flex, Button } from '@chakra-ui/react';
+import { UserProfile } from '@auth0/nextjs-auth0';
+import { useRouter } from 'next/router';
+import moment from 'moment';
+import { useRecoilState } from 'recoil';
+import { selectedProgramAtom } from './state';
+import { ProgramWeekType } from '../ProgramWeeks/ProgramWeeks';
 
 export interface ProgramType {
   id: string;
@@ -29,23 +29,18 @@ interface Props extends UserProgramType {
   index: number;
 }
 
-export const UserProgram: React.FC<Props> = ({
-  id,
-  program,
-  starts_at,
-  index,
-}) => {
-  const { push, asPath } = useRouter();
-  const setSelectedProgram = useSetRecoilState(selectedProgramAtom);
+export const UserProgram: React.FC<Props> = ({ id, program, starts_at }) => {
+  const { push } = useRouter();
+  const [selectedProgram, setSelectedProgram] = useRecoilState(selectedProgramAtom);
 
   const onProgramClick = useCallback(
-    () => setSelectedProgram(program),
-    [setSelectedProgram, program]
+    () => setSelectedProgram({ id, program, starts_at }),
+    [setSelectedProgram, id, program, starts_at],
   );
 
   const onAuthorClick = useCallback(
     () => push(`/${program.author.nickname}`),
-    [push, program.author.nickname]
+    [push, program.author.nickname],
   );
 
   const isOpen = useMemo(() => {
@@ -54,9 +49,28 @@ export const UserProgram: React.FC<Props> = ({
     return moment().isSameOrAfter(startsAt);
   }, [starts_at]);
 
+  const isActive = useMemo(
+    () => selectedProgram?.program?.id === program.id,
+    [selectedProgram, program.id],
+  );
+
+  const backgroundColor = useMemo(() => {
+    // Should be only one
+    if (isActive) {
+      return 'green.500';
+    }
+
+    // Should be multiple
+    if (isOpen) {
+      return 'blue.500';
+    }
+
+    return 'white';
+  }, [isActive, isOpen]);
+
   return (
     <Flex
-      backgroundColor={isOpen ? "#1A74E2" : "#FFFFFF"}
+      backgroundColor={backgroundColor}
       alignItems="center"
       borderRadius="10px"
       borderEndRadius={40}
@@ -71,26 +85,23 @@ export const UserProgram: React.FC<Props> = ({
         <Avatar
           name={(program.author?.name || program.author?.nickname) as string}
           src={program.author?.picture as string}
-          width="70px"
-          height="70px"
+          width={['50px', '70px']}
+          height={['50px', '70px']}
           onClick={onAuthorClick}
         />
       </Tooltip>
       <Tooltip hasArrow placement="top" label={program.name} bg="black">
         <Button
+          onClick={onProgramClick}
           variant="ghost"
-          _hover={{ background: "none" }}
-          _focus={{ border: "none" }}
+          _hover={{ background: 'none' }}
+          _focus={{ border: 'none' }}
           _active={{ opacity: 1 }}
           disabled={!isOpen}
           height="100%"
           px={3}
         >
-          <Text
-            color={isOpen ? "#FFFFFF" : "#8D8D8D"}
-            onClick={onProgramClick}
-            isTruncated
-          >
+          <Text color={isOpen ? '#FFFFFF' : '#8D8D8D'} isTruncated>
             {program.name}
           </Text>
         </Button>

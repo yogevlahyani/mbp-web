@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from "react";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useMemo } from 'react';
+import { useQuery } from '@apollo/client';
 import {
   Box,
   BoxProps,
@@ -8,24 +8,24 @@ import {
   Heading,
   Skeleton,
   Text,
-} from "@chakra-ui/react";
-import useTranslation from "next-translate/useTranslation";
-import { GET_USER_PROGRAMS } from "../../queries/user";
-import { UserProgram, UserProgramType } from "./UserProgram";
-import moment from "moment";
-import { useSetRecoilState } from "recoil";
-import { selectedProgramAtom } from "./state";
+} from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
+import { GET_USER_PROGRAMS } from '../../queries/user';
+import { UserProgram, UserProgramType } from './UserProgram';
+import moment from 'moment';
+import { useSetRecoilState } from 'recoil';
+import { selectedProgramAtom } from './state';
 
 interface Props extends BoxProps {}
 
 export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const setSelectedProgram = useSetRecoilState(selectedProgramAtom);
   const { data, loading } = useQuery(GET_USER_PROGRAMS);
 
   useEffect(() => {
     if (data?.user_programs) {
-      setSelectedProgram(data?.user_programs[0].program);
+      setSelectedProgram(data?.user_programs[0]);
     }
   }, [data?.user_programs, setSelectedProgram]);
 
@@ -34,7 +34,7 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
       data?.user_programs.map((userProgram: UserProgramType, index: number) => (
         <UserProgram key={userProgram.id} index={index} {...userProgram} />
       )),
-    [data?.user_programs]
+    [data?.user_programs],
   );
 
   // const completed = useMemo(() => {
@@ -54,12 +54,12 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
       data?.user_programs.filter((userProgram: UserProgramType) => {
         const finishDate = moment(userProgram.starts_at).add(
           userProgram.program.program_weeks.length,
-          "weeks"
+          'weeks',
         );
 
         return moment().isSameOrAfter(finishDate);
       }).length,
-    [data?.user_programs]
+    [data?.user_programs],
   );
 
   if (data?.user_programs && !data?.user_programs.length) {
@@ -68,18 +68,14 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
 
   return (
     <Box {...boxProps}>
-      <Flex
-        alignItems="center"
-        gridGap={[1, 5]}
-        flexDirection={["column", "row"]}
-      >
+      <Flex alignItems="center" gridGap={[1, 5]} flexDirection={['column', 'row']}>
         <Heading as="h2" fontSize="36px">
-          {t("My Programs")}
+          {t('My Programs')}
         </Heading>
         <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
           <Skeleton isLoaded={!loading}>
             <Text fontSize="20px">
-              {t("Videos Completed", {
+              {t('Videos Completed', {
                 completed,
                 total: userPrograms?.length || 0,
               })}
@@ -87,8 +83,13 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
           </Skeleton>
         </Box>
       </Flex>
-      <Skeleton isLoaded={!loading} my={10} overflowX="scroll">
-        <Flex gridGap={10} position="relative" width="fit-content">
+      <Skeleton isLoaded={!loading} my={[5, 10]} overflowX="scroll">
+        <Flex
+          flexDirection={['column', 'row']}
+          gridGap={[3, 10]}
+          position="relative"
+          width={['full', 'fit-content']}
+        >
           <Divider
             orientation="horizontal"
             position="absolute"
@@ -99,6 +100,7 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
             borderTopWidth="2px"
             borderBottomWidth="2px"
             opacity={1}
+            display={['none', 'block']}
           />
           {userPrograms}
         </Flex>

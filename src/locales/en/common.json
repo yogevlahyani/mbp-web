@@ -15,5 +15,6 @@
   "Workouts Completed": "{{completed}} workouts out of {{total}} Completed",
   "Workout and learn from the best": "Workout and learn from the best",
   "Loren ipsum dolor": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "Learn more": "Learn more"
+  "Learn more": "Learn more",
+  "Week Number": "Week No. {{weekNumber}}"
 }

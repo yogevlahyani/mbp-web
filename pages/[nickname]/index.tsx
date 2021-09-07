@@ -9,11 +9,11 @@ import { ProgramWeeks } from "../../src/components/ProgramWeeks/ProgramWeeks";
 
 export default function UserDashboard() {
   return (
-    <Container maxWidth="container.xl">
+    <Container maxWidth="container.xl" py={10}>
       <UserRepresentation />
-      <WeeklyVideos mt={[5, 20]} />
-      <UserPrograms mt={5} />
-      <ProgramWeeks />
+      <WeeklyVideos my={[10, 20]} />
+      <UserPrograms my={[10, 20]} />
+      <ProgramWeeks my={[10, 20]} />
     </Container>
   );
 }

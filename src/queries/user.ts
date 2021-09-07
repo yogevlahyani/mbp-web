@@ -45,28 +45,3 @@ export const GET_USER_PROGRAMS = gql`
     }
   }
 `;
-
-export const GET_USER_WEEKLY_VIDEOS = gql`
-  query GetUserProgramsWeeklyVideos($weekNumber: Int!) {
-    program_week_videos(
-      where: { program_week: { week_number: { _eq: $weekNumber } } }
-    ) {
-      id
-      name
-      url
-      order
-      program_week {
-        week_number
-        program {
-          id
-          name
-        }
-      }
-      user_videos_histories {
-        id
-        last_seconds_stamp
-        is_completed
-      }
-    }
-  }
-`;
