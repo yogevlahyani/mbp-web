@@ -20,8 +20,8 @@ export const ProgramWorkouts: React.FC<Props> = ({ weekId }) => {
   const workouts = useMemo(
     () =>
       data?.program_weeks_by_pk?.program_week_workouts?.map(
-        ({ workout }: { workout: ProgramWorkout }) => (
-          <div key={workout.id}>{workout.name}</div>
+        ({ workout }: { workout: ProgramWorkout }, index: number) => (
+          <div key={`${workout.id}-${index}`}>{workout.name}</div>
         ),
       ),
     [data],

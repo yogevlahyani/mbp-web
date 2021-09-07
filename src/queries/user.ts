@@ -32,6 +32,13 @@ export const GET_USER_PROGRAMS = gql`
           program_week_workouts {
             id
             day_of_the_week
+            workout {
+              workouts_exercises_aggregate {
+                aggregate {
+                  count
+                }
+              }
+            }
           }
           program_week_videos {
             id

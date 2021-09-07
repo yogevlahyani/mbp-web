@@ -16,5 +16,8 @@
   "Workout and learn from the best": "Workout and learn from the best",
   "Loren ipsum dolor": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "Learn more": "Learn more",
-  "Week Number": "Week No. {{weekNumber}}"
+  "Week Number": "Week No. {{weekNumber}}",
+  "Day": "Day {{number}}",
+  "Exercises": "{{exercisesCount}} exercises",
+  "Will open in": "Will open in {{days}} days"
 }

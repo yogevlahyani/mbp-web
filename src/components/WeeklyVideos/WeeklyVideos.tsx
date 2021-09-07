@@ -14,10 +14,6 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
   const { t } = useTranslation('common');
   const weekNumber = useRecoilValue(weekNumberSelector);
 
-  useEffect(() => {
-    console.log('weekNumber', weekNumber);
-  }, [weekNumber]);
-
   const { data, loading } = useQuery(GET_WEEKLY_VIDEOS, {
     variables: { weekNumber },
   });

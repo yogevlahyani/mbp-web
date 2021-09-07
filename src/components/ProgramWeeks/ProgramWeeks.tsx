@@ -1,17 +1,18 @@
-import React, { useEffect, useMemo } from 'react';
-import { Box, BoxProps, Flex, Heading, Text, Tooltip } from '@chakra-ui/react';
+import React, { useMemo } from 'react';
+import {
+  Accordion,
+  Box,
+  BoxProps,
+  Flex,
+  Heading,
+  Text,
+  Tooltip,
+} from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import { selectedProgramAtom } from '../UserPrograms/state';
 import useTranslation from 'next-translate/useTranslation';
 import { ProgramWeek } from './ProgramWeek';
-import { completedWeeksSelector, weekNumberSelector } from './state';
-
-export interface ProgramWeekType {
-  id: string;
-  program_week_videos: any[];
-  program_week_workouts: any[];
-  week_number: number;
-}
+import { completedWeeksSelector } from './state';
 
 interface Props extends BoxProps {}
 
@@ -47,9 +48,15 @@ export const ProgramWeeks: React.FC<Props> = (props) => {
           </Text>
         </Box>
       </Flex>
-      <Flex flexDirection="column" gridGap={[3, 10]} width="full" my={5}>
+      <Accordion
+        as={Flex}
+        flexDirection="column"
+        gridGap={[3, 10]}
+        width="full"
+        my={5}
+      >
         {programWeeks}
-      </Flex>
+      </Accordion>
     </Box>
   );
 };

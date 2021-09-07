@@ -16,5 +16,8 @@
   "Workout and learn from the best": "להתאמן וללמוד מהטובים ביותר",
   "Loren ipsum dolor": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית.",
   "Learn more": "למד עוד",
-  "Week Number": "שבוע {{weekNumber}}"
+  "Week Number": "שבוע {{weekNumber}}",
+  "Day": "יום {{number}}",
+  "Exercises": "{{exercisesCount}} תרגילים",
+  "Will open in": "יפתח בעוד {{days}} ימים"
 }
