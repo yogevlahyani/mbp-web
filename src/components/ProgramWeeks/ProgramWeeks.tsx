@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { selectedProgramAtom } from '../UserPrograms/state';
 import useTranslation from 'next-translate/useTranslation';
 import { ProgramWeek } from './ProgramWeek';
+import { completedWeeksSelector, weekNumberSelector } from './state';
 
 export interface ProgramWeekType {
   id: string;
@@ -17,9 +18,7 @@ interface Props extends BoxProps {}
 export const ProgramWeeks: React.FC<Props> = (props) => {
   const { t } = useTranslation('common');
   const selectedProgram = useRecoilValue(selectedProgramAtom);
-  useEffect(() => {
-    console.log('selectedProgram', selectedProgram);
-  }, [selectedProgram]);
+  const completedWeeks = useRecoilValue(completedWeeksSelector);
 
   const programWeeks = useMemo(
     () =>
@@ -42,8 +41,8 @@ export const ProgramWeeks: React.FC<Props> = (props) => {
         <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
           <Text fontSize="20px">
             {t('Workouts Completed', {
-              completed: 1,
-              total: 1,
+              completed: completedWeeks,
+              total: selectedProgram?.program?.program_weeks?.length,
             })}
           </Text>
         </Box>

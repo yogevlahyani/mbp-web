@@ -3,13 +3,25 @@ import { selector, selectorFamily } from 'recoil';
 import { selectedProgramAtom } from '../UserPrograms/state';
 
 export const weekNumberSelector = selector({
-  key: 'weekNumberTime',
+  key: 'WeekNumberTime',
   get: ({ get }) => {
     const selectedProgram = get(selectedProgramAtom);
     const startsAt = moment(selectedProgram?.starts_at);
     const today = moment();
 
     return today.isoWeek() - startsAt.isoWeek() - 1;
+  },
+});
+
+export const completedWeeksSelector = selector({
+  key: 'CompletedWeeks',
+  get: ({ get }) => {
+    const selectedProgram = get(selectedProgramAtom);
+    const startsAt = moment(selectedProgram?.starts_at);
+    const today = moment();
+    const totalProgramWeeks = selectedProgram?.program?.program_weeks?.length || 0;
+
+    return Math.min(today.isoWeek() - startsAt.isoWeek(), totalProgramWeeks);
   },
 });
 
