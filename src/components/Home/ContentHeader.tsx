@@ -32,10 +32,10 @@ export const ContentHeader = () => {
       >
         <Box>
           <Text fontWeight="bold" as="h1" fontSize="4xl">
-            {hero_title /*t('Workout and learn from the best')*/}
+            {hero_title}
           </Text>
           <Text mt="2" mb="4">
-            {t('Loren ipsum dolor')}
+            {hero_description}
           </Text>
           <Button
             fontSize="21px"

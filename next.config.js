@@ -2,14 +2,16 @@ const nextTranslate = require('next-translate');
 
 module.exports = {
   reactStrictMode: true,
-  webpack: (cfg) => {
-    cfg.module.rules.push({
-      test: /\.md$/,
-      loader: 'frontmatter-markdown-loader',
-      options: { mode: ['react-component'] },
-    });
-    return cfg;
-  },
+  ...nextTranslate({
+    webpack: (cfg) => {
+      cfg.module.rules.push({
+        test: /\.md$/,
+        loader: 'frontmatter-markdown-loader',
+        options: { mode: ['react-component'] },
+      });
+      return cfg;
+    },
+  }),
   async rewrites() {
     return {
       beforeFiles: [
@@ -35,5 +37,4 @@ module.exports = {
   images: {
     domains: ['unpkg.com'],
   },
-  ...nextTranslate(),
 };
