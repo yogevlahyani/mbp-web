@@ -5,11 +5,11 @@ import { ProgramWorkouts } from '../../../../src/components/ProgramWorkouts/Prog
 
 export default function Week() {
   const { query } = useRouter();
-  const { weekId } = query;
+  const { weekId, weekday } = query;
 
   return (
     <Container maxWidth="container.xl" py={10}>
-      <ProgramWorkouts weekId={String(weekId)} />
+      <ProgramWorkouts weekId={String(weekId)} weekday={Number(weekday)} />
     </Container>
   );
 }

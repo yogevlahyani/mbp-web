@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Button, Text, VStack } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 import { useRecoilValue } from 'recoil';
 import { currentWeekTimeSelector, isOngoingWeekSelector } from './state';
@@ -13,11 +14,13 @@ interface Props {
 }
 
 export const Weekday: React.FC<Props> = ({
+  weekId,
   weekday,
   week_number,
   exercisesCount,
 }) => {
   const { t } = useTranslation('common');
+  const { push } = useRouter();
   const currentWeekTime = useRecoilValue(currentWeekTimeSelector(week_number));
   const isOngoing = useRecoilValue(isOngoingWeekSelector(week_number));
 
@@ -28,8 +31,14 @@ export const Weekday: React.FC<Props> = ({
     [weekday, isOngoing, currentWeekTime],
   );
 
+  const onClick = useCallback(
+    () => push(`/weeks/${weekId}/weekday/${weekday}`),
+    [push, weekId, weekday],
+  );
+
   return (
     <Button
+      onClick={onClick}
       colorScheme={isActive ? 'green' : 'gray'}
       py="15px"
       px="45px"

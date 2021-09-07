@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { Skeleton } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
-import { GET_WEEK_WORKOUTS } from '../../queries/workouts';
+import { GET_WEEKDAY_WORKOUTS } from '../../queries/workouts';
 
 export interface ProgramWorkout {
   id: string;
@@ -12,10 +12,13 @@ export interface ProgramWorkout {
 
 interface Props {
   weekId: string;
+  weekday: number;
 }
 
-export const ProgramWorkouts: React.FC<Props> = ({ weekId }) => {
-  const { data, loading } = useQuery(GET_WEEK_WORKOUTS, { variables: { weekId } });
+export const ProgramWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
+  const { data, loading } = useQuery(GET_WEEKDAY_WORKOUTS, {
+    variables: { weekId, weekday },
+  });
 
   const workouts = useMemo(
     () =>
