@@ -11,7 +11,7 @@ const CMS = dynamic(
   {
     ssr: false,
     loading: function loading() {
-      return <div>Loading..</div>;
+      return <div />;
     },
   },
 );
