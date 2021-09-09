@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { Skeleton } from '@chakra-ui/react';
 import config from '../../config';
 
 const {
@@ -11,7 +10,9 @@ const CMS = dynamic(
     import('netlify-cms-app').then((CMS: any) => CMS.init({ config: netlifyCMS })),
   {
     ssr: false,
-    loading: Skeleton,
+    loading: function loading() {
+      return <div>Loading..</div>;
+    },
   },
 );
 
