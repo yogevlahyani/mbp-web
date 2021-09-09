@@ -9,7 +9,7 @@ export const weekNumberSelector = selector({
     const startsAt = moment(selectedProgram?.starts_at);
     const today = moment();
 
-    return today.isoWeek() - startsAt.isoWeek() - 1;
+    return today.isoWeek() - startsAt.isoWeek();
   },
 });
 
@@ -32,7 +32,7 @@ export const currentWeekTimeSelector = selectorFamily({
     ({ get }) => {
       const selectedProgram = get(selectedProgramAtom);
 
-      return moment(selectedProgram?.starts_at).add(weekNumber - 1, 'weeks');
+      return moment(selectedProgram?.starts_at).add(weekNumber, 'weeks');
     },
 });
 
