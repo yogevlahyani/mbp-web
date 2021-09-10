@@ -1,20 +1,14 @@
 import { useQuery } from '@apollo/client';
-import { Box, Text, Heading, Skeleton, Flex } from '@chakra-ui/react';
+import { Box, Text, Heading, Flex } from '@chakra-ui/react';
 import Trans from 'next-translate/Trans';
 import React, { useMemo } from 'react';
 import { GET_WORKOUT } from '../../queries/workouts';
+import { WeekdayWorkoutType } from '../WeekdayWorkouts/WeekdayWorkout';
 import { WorkoutMuscle, WorkoutMuscleType } from '../WorkoutMuscles/WorkoutMuscle';
-
-export interface WeekdayWorkoutType {
-  id: string;
-  name: string;
-  description?: string;
-  image?: string;
-}
 
 interface Props extends WeekdayWorkoutType {}
 
-export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
+export const FittokWeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
   const { data, loading } = useQuery(GET_WORKOUT, { variables: { workoutId: id } });
 
   const exercises = useMemo(
@@ -30,12 +24,13 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
   }
 
   return (
-    <Box>
+    <Box flex={1} height="100%">
       <Flex
         gridGap={[0, 2]}
         flexDirection={['column', 'row']}
         alignItems={['center', 'flex-end']}
         justifyContent={['center', 'flex-start']}
+        height="100%"
       >
         <Heading size="lg">
           <Trans
@@ -49,9 +44,6 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
         <Text fontSize="sm">זמן משוער לאימון הוא 50:00 דק</Text>
       </Flex>
       <Text size="sm">{description}</Text>
-      <Flex flexDirection="column">
-        <Skeleton isLoaded={!loading}>{exercises}</Skeleton>
-      </Flex>
     </Box>
   );
 };

@@ -45,5 +45,15 @@
     "other": "{{count}} Minutes"
   },
   "ABS": "Abs",
-  "FULL BODY": "Full Body"
+  "FULL BODY": "Full Body",
+  "BACK": "Back",
+  "CHEST": "Chest",
+  "LEGS": "Legs",
+  "WARM UP": "Warm Up",
+  "RUN": "Run",
+  "50% UPPER PUSH UPS": "50% Upper Push Ups",
+  "50% BOTTOM PUSH UPS": "50% Bottom Push Ups",
+  "CHEST PRESS MACHINE": "Chest Press Machine",
+  "CHEST FLYS – MACHINE": "Chest Flys – Machine",
+  "PULLY STANDARD GRIP PULL DOWN": "Pully Standard Grip Pull Down"
 }

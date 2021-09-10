@@ -105,3 +105,33 @@ export const GET_WORKOUT = gql`
     }
   }
 `;
+
+export const GET_WEEKDAY_WORKOUT_WITH_EXERCISES = gql`
+  query GetWeekdayWorkouts($weekId: uuid!, $weekday: smallint!) {
+    program_weeks_by_pk(id: $weekId) {
+      week_number
+      program_week_workouts(where: { day_of_the_week: { _eq: $weekday } }) {
+        workout {
+          id
+          name
+          description
+          image
+          workouts_exercises(order_by: { order: asc_nulls_first }) {
+            kg
+            sets
+            rest
+            repeats
+            exercise {
+              name
+              exercises_muscles {
+                muscle {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

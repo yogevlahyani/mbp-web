@@ -45,5 +45,15 @@
     "other": "{{count}} דקות"
   },
   "ABS": "בטן",
-  "FULL BODY": "פול באדי"
+  "FULL BODY": "פול באדי",
+  "BACK": "גב",
+  "CHEST": "חזה",
+  "LEGS": "רגליים",
+  "WARM UP": "חימום",
+  "RUN": "ריצה",
+  "50% UPPER PUSH UPS": "50% שכיבות סמיכה בשיפוע חיובי",
+  "50% BOTTOM PUSH UPS": "50% שכיבות סמיכה בשיפוע שלילי",
+  "CHEST PRESS MACHINE": "לחיצת חזה מכונה",
+  "CHEST FLYS – MACHINE": "פרפר מכונה",
+  "PULLY STANDARD GRIP PULL DOWN": "פולי תחתון"
 }
