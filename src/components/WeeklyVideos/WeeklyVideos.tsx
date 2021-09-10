@@ -3,15 +3,19 @@ import { Box, BoxProps, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
 import { useQuery } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-slick';
-import { GET_USER_WEEKLY_VIDEOS } from '../../queries/user';
+import { GET_WEEKLY_VIDEOS } from '../../queries/workouts';
 import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo';
+import { useRecoilValue } from 'recoil';
+import { weekNumberSelector } from '../ProgramWeeks/state';
 
 interface Props extends BoxProps {}
 
 export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
   const { t } = useTranslation('common');
-  const { data, loading } = useQuery(GET_USER_WEEKLY_VIDEOS, {
-    variables: { weekNumber: 1 },
+  const weekNumber = useRecoilValue(weekNumberSelector);
+
+  const { data, loading } = useQuery(GET_WEEKLY_VIDEOS, {
+    variables: { weekNumber },
   });
   const videos = useMemo(() => data?.program_week_videos || [], [data]);
   const completedVideos = useMemo(

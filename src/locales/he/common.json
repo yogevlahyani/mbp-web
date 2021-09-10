@@ -11,7 +11,49 @@
   "Videos Completed": "הושלם {{completed}} מתוך {{total}}",
   "My Programs": "התוכניות שלי",
   "Programs Completed": "הושלם {{completed}} מתוך {{total}}",
+  "My Workouts": "האימונים שלי",
+  "Workouts Completed": "הושלם {{completed}} מתוך {{total}}",
   "Workout and learn from the best": "להתאמן וללמוד מהטובים ביותר",
   "Loren ipsum dolor": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית.",
-  "Learn more": "למד עוד"
+  "Learn more": "למד עוד",
+  "Week Number": "שבוע {{weekNumber}}",
+  "Day": "יום {{number}}",
+  "Exercises": "{{exercisesCount}} תרגילים",
+  "Will open in": "יפתח בעוד {{days}} ימים",
+  "Workout": "אימון <0>{{workoutName}}</0>",
+  "Sets": "סטים",
+  "Repeats": "חזרות",
+  "Rest": "מנוחה",
+  "Sets Count": {
+    "0": "ללא סטים",
+    "one": "סט אחד (1)",
+    "other": "{{count}} סטים"
+  },
+  "Repeats Count": {
+    "0": "ללא חזרות",
+    "one": "חזרה אחת (1)",
+    "other": "{{count}} חזרות"
+  },
+  "Rest In Seconds": {
+    "0": "ללא מנוחה",
+    "one": "שניה אחת",
+    "other": "{{count}} שניות"
+  },
+  "Rest In Minutes": {
+    "0": "ללא מנוחה",
+    "one": "דקה אחת",
+    "other": "{{count}} דקות"
+  },
+  "ABS": "בטן",
+  "FULL BODY": "פול באדי",
+  "BACK": "גב",
+  "CHEST": "חזה",
+  "LEGS": "רגליים",
+  "WARM UP": "חימום",
+  "RUN": "ריצה",
+  "50% UPPER PUSH UPS": "50% שכיבות סמיכה בשיפוע חיובי",
+  "50% BOTTOM PUSH UPS": "50% שכיבות סמיכה בשיפוע שלילי",
+  "CHEST PRESS MACHINE": "לחיצת חזה מכונה",
+  "CHEST FLYS – MACHINE": "פרפר מכונה",
+  "PULLY STANDARD GRIP PULL DOWN": "פולי תחתון"
 }
