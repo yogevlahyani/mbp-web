@@ -94,7 +94,7 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
       <Progress
         isAnimated={slideIndex < slides.length}
         hasStripe={slideIndex < slides.length}
-        min={1}
+        min={0}
         max={slides.length}
         value={slideIndex}
         zIndex={9999}
