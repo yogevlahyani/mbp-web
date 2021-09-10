@@ -15,7 +15,7 @@ const config = {
       },
       publish_mode: 'editorial_workflow',
       media_folder: 'public/images/uploads',
-      public_folder: 'images',
+      public_folder: 'images/uploads',
       collections: [
         {
           name: 'pages',
