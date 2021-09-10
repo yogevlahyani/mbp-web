@@ -11,7 +11,39 @@
   "Videos Completed": "{{completed}} videos out of {{total}} Completed",
   "My Programs": "My Programs",
   "Programs Completed": "{{completed}} videos out of {{total}} Completed",
+  "My Workouts": "My Workouts",
+  "Workouts Completed": "{{completed}} workouts out of {{total}} Completed",
   "Workout and learn from the best": "Workout and learn from the best",
   "Loren ipsum dolor": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "Learn more": "Learn more"
+  "Learn more": "Learn more",
+  "Week Number": "Week No. {{weekNumber}}",
+  "Day": "Day {{number}}",
+  "Exercises": "{{exercisesCount}} exercises",
+  "Will open in": "Will open in {{days}} days",
+  "Workout": "Workout <0>{{workoutName}}</0>",
+  "Sets": "Sets",
+  "Repeats": "Repeatitions",
+  "Rest": "Rest",
+  "Sets Count": {
+    "0": "No Sets",
+    "one": "One Set (1)",
+    "other": "{{count}} Sets"
+  },
+  "Repeats Count": {
+    "0": "No Repeatitions",
+    "one": "One Repeatition (1)",
+    "other": "{{count}} Repeatitions"
+  },
+  "Rest In Seconds": {
+    "0": "No Rest",
+    "one": "One Second",
+    "other": "{{count}} Seconds"
+  },
+  "Rest In Minutes": {
+    "0": "No Rest",
+    "one": "One Minute (1)",
+    "other": "{{count}} Minutes"
+  },
+  "ABS": "Abs",
+  "FULL BODY": "Full Body"
 }
