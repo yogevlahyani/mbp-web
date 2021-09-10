@@ -1,7 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useUser } from '@auth0/nextjs-auth0';
 import { Box, Heading } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { ContentHeader } from '../src/components/Home/ContentHeader';

@@ -9,3 +9,18 @@ div#nc-root {
   height: 100%;
   direction: ltr;
 }
+
+.slick-vertical,
+.slick-vertical .slick-list,
+.slick-vertical .slick-track {
+  height: 100% !important;
+}
+
+.slick-vertical .slick-slide {
+  flex: 1;
+  height: 100% !important;
+}
+
+.slick-vertical .slick-slide > div {
+  height: 100% !important;
+}

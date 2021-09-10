@@ -14,7 +14,8 @@ export const GET_USER_POINTS = gql`
 
 export const GET_USER_PROGRAMS = gql`
   query GetUserPrograms {
-    user_programs {
+    user_programs(order_by: { starts_at: asc }) {
+      id
       program {
         id
         name
@@ -31,6 +32,13 @@ export const GET_USER_PROGRAMS = gql`
           program_week_workouts {
             id
             day_of_the_week
+            workout {
+              workouts_exercises_aggregate {
+                aggregate {
+                  count
+                }
+              }
+            }
           }
           program_week_videos {
             id
@@ -40,31 +48,7 @@ export const GET_USER_PROGRAMS = gql`
           }
         }
       }
-    }
-  }
-`;
-
-export const GET_USER_WEEKLY_VIDEOS = gql`
-  query GetUserProgramsWeeklyVideos($weekNumber: Int!) {
-    program_week_videos(
-      where: { program_week: { week_number: { _eq: $weekNumber } } }
-    ) {
-      id
-      name
-      url
-      order
-      program_week {
-        week_number
-        program {
-          id
-          name
-        }
-      }
-      user_videos_histories {
-        id
-        last_seconds_stamp
-        is_completed
-      }
+      starts_at
     }
   }
 `;
