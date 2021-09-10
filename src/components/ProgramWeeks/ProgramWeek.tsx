@@ -19,7 +19,7 @@ import {
 } from './state';
 import { selectedProgramAtom } from '../UserPrograms/state';
 import { Weekday } from './Weekday';
-import { ProgramWorkout } from '../ProgramWorkouts/ProgramWorkouts';
+import { WeekdayWorkoutType } from '../WeekdayWorkouts/WeekdayWorkout';
 import { LockIcon } from '@chakra-ui/icons';
 import moment from 'moment';
 
@@ -34,7 +34,7 @@ interface WorkoutAggregation {
 export interface ProgramWeekWorkout {
   id: string;
   day_of_the_week: number;
-  workout: ProgramWorkout & WorkoutAggregation;
+  workout: WeekdayWorkoutType & WorkoutAggregation;
 }
 
 export interface ProgramWeekType {

@@ -19,5 +19,31 @@
   "Week Number": "Week No. {{weekNumber}}",
   "Day": "Day {{number}}",
   "Exercises": "{{exercisesCount}} exercises",
-  "Will open in": "Will open in {{days}} days"
+  "Will open in": "Will open in {{days}} days",
+  "Workout": "Workout <0>{{workoutName}}</0>",
+  "Sets": "Sets",
+  "Repeats": "Repeatitions",
+  "Rest": "Rest",
+  "Sets Count": {
+    "0": "No Sets",
+    "one": "One Set (1)",
+    "other": "{{count}} Sets"
+  },
+  "Repeats Count": {
+    "0": "No Repeatitions",
+    "one": "One Repeatition (1)",
+    "other": "{{count}} Repeatitions"
+  },
+  "Rest In Seconds": {
+    "0": "No Rest",
+    "one": "One Second",
+    "other": "{{count}} Seconds"
+  },
+  "Rest In Minutes": {
+    "0": "No Rest",
+    "one": "One Minute (1)",
+    "other": "{{count}} Minutes"
+  },
+  "ABS": "Abs",
+  "FULL BODY": "Full Body"
 }

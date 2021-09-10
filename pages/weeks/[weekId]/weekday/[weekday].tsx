@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { ProgramWorkouts } from '../../../../src/components/ProgramWorkouts/ProgramWorkouts';
+import { WeekdayWorkouts } from '../../../../src/components/WeekdayWorkouts/WeekdayWorkouts';
 
 export default function Week() {
   const { query } = useRouter();
@@ -9,7 +9,7 @@ export default function Week() {
 
   return (
     <Container maxWidth="container.xl" py={10}>
-      <ProgramWorkouts weekId={String(weekId)} weekday={Number(weekday)} />
+      <WeekdayWorkouts weekId={String(weekId)} weekday={Number(weekday)} />
     </Container>
   );
 }

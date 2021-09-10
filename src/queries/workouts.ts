@@ -58,31 +58,47 @@ export const GET_WEEKLY_VIDEOS = gql`
 export const GET_WEEKDAY_WORKOUTS = gql`
   query GetWeekdayWorkouts($weekId: uuid!, $weekday: smallint!) {
     program_weeks_by_pk(id: $weekId) {
+      week_number
       program_week_workouts(where: { day_of_the_week: { _eq: $weekday } }) {
         workout {
           id
           name
           description
           image
+        }
+      }
+    }
+  }
+`;
+
+export const GET_WORKOUT = gql`
+  query GetWorkout($workoutId: uuid!) {
+    muscles(
+      where: {
+        excercises_muscles: {
+          exercise: { workouts_exercises: { workout: { id: { _eq: $workoutId } } } }
+        }
+      }
+      order_by: { display_name: asc }
+      distinct_on: display_name
+    ) {
+      display_name
+      image
+      name
+      excercises_muscles {
+        exercise {
           workouts_exercises(order_by: { order: asc_nulls_first }) {
-            kg
-            sets
-            repeats
-            rest
             order
+            rest
+            repeats
+            sets
+            kg
             exercise {
               id
               name
+              instructions
               image
               video
-              instructions
-              exercises_muscles {
-                muscle {
-                  name
-                  display_name
-                  image
-                }
-              }
             }
           }
         }

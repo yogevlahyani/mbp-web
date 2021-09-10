@@ -1,15 +1,24 @@
 import React, { useMemo } from 'react';
-import { AspectRatio, Box, Flex, Spacer, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, BoxProps, Flex, Spacer, Text } from '@chakra-ui/react';
 
 export interface WeeklyVideoProps {
-  id: string;
+  id?: string;
   name: string;
   url: string;
 }
 
-export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
+interface Props extends WeeklyVideoProps, BoxProps {
+  hideDetails?: boolean;
+}
+
+export const WeeklyVideo: React.FC<Props> = ({
+  name,
+  url,
+  hideDetails,
+  ...boxProps
+}) => {
   const video = useMemo(() => {
-    if (url.includes('youtube.com')) {
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
       const match = url.match(regExp);
 
@@ -21,6 +30,7 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
             title={name}
             src={`https://www.youtube.com/embed/${youtubeId}`}
             width="100%"
+            height="100%"
             allowFullScreen
           />
         );
@@ -42,17 +52,20 @@ export const WeeklyVideo: React.FC<WeeklyVideoProps> = ({ name, url }) => {
       background="#97D7D7"
       overflow="hidden"
       color="#646464"
+      {...boxProps}
     >
-      <AspectRatio>{video}</AspectRatio>
-      <Flex py="9px" px="10px" gridGap={1} alignItems="center">
-        <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">
-          {name}
-        </Text>
-        <Spacer />
-        <Text fontSize="12px" color="#1A74E2">
-          12:00
-        </Text>
-      </Flex>
+      {video}
+      {hideDetails ? null : (
+        <Flex py="9px" px="10px" gridGap={1} alignItems="center">
+          <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">
+            {name}
+          </Text>
+          <Spacer />
+          <Text fontSize="12px" color="#1A74E2">
+            12:00
+          </Text>
+        </Flex>
+      )}
     </Box>
   );
 };
