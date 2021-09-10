@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { useRecoilState } from 'recoil';
 import { selectedProgramAtom } from './state';
-import { ProgramWeekType } from '../ProgramWeeks/ProgramWeeks';
+import { ProgramWeekType } from '../ProgramWeeks/ProgramWeek';
 
 export interface ProgramType {
   id: string;
