@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { Divider, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -18,10 +18,6 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
   });
 
   const weekNumber = useMemo(() => data?.program_weeks_by_pk.week_number, [data]);
-
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
 
   const workouts = useMemo(
     () =>

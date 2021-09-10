@@ -1,6 +1,6 @@
 import { Accordion, Box, Flex, Heading } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
 
 export interface WorkoutMuscleType {
@@ -19,15 +19,13 @@ interface Props extends WorkoutMuscleType {}
 export const WorkoutMuscle: React.FC<Props> = ({ name, excercises_muscles }) => {
   const { t } = useTranslation('common');
 
-  useEffect(() => {
-    console.log('excercises_muscles', excercises_muscles);
-  }, [excercises_muscles]);
-
   const exercises = useMemo(
     () =>
-      excercises_muscles[0]?.exercise?.workouts_exercises?.map((exercise, index) => (
-        <WorkoutExercise key={`${exercise.id}-${index}`} {...exercise} />
-      )),
+      excercises_muscles?.map((excercises_muscle) =>
+        excercises_muscle.exercise?.workouts_exercises?.map((exercise, index) => (
+          <WorkoutExercise key={`${exercise.id}-${index}`} {...exercise} />
+        )),
+      ),
     [excercises_muscles],
   );
 
@@ -41,7 +39,7 @@ export const WorkoutMuscle: React.FC<Props> = ({ name, excercises_muscles }) => 
         {t(name)}
       </Heading>
       <Accordion allowMultiple={false} allowToggle={true}>
-        <Flex flexDirection="column" my={5}>
+        <Flex flexDirection="column" my={5} gridGap={5}>
           {exercises}
         </Flex>
       </Accordion>

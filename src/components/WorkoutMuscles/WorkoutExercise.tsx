@@ -74,12 +74,13 @@ export const WorkoutExercise: React.FC<Props> = ({
           overflow="hidden"
           flexDirection={['column-reverse', 'row']}
           _hover={{ backgroundColor: 'inherit', cursor: 'pointer' }}
+          position="relative"
         >
-          <Box position="relative" width="auto" height="auto">
+          <Box>
             <Checkbox
               position={['absolute', 'static']}
-              left={1}
-              top={2}
+              top={0}
+              left={0}
               colorScheme="green"
               width={['auto', '100%']}
               height={['auto', '100%']}

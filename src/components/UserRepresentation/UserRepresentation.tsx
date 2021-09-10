@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useUser } from '@auth0/nextjs-auth0';
 import { useQuery } from '@apollo/client';
 import {

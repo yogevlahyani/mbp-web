@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Box, BoxProps, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
 import { useQuery } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';

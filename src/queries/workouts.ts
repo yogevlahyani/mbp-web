@@ -80,7 +80,6 @@ export const GET_WORKOUT = gql`
         }
       }
       order_by: { display_name: asc }
-      distinct_on: display_name
     ) {
       display_name
       image
