@@ -91,7 +91,7 @@ export const GET_WORKOUT = gql`
             rest
             repeats
             sets
-            kg
+            weight_in_kg
             exercise {
               id
               name
