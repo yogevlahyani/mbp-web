@@ -10,16 +10,23 @@ export const config = {
   },
 };
 
+type Headers = { [header: string]: string };
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
+
+  const headers: Headers = {
+    'x-hasura-role': session?.accessToken ? 'user' : 'public',
+  };
+
+  if (session?.accessToken) {
+    headers.authorization = `Bearer ${session.accessToken}`;
+  }
 
   return httpProxyMiddleware(req, res, {
     target: configuration.providers.hasura.graphqlUrl,
     changeOrigin: true,
-    headers: {
-      authorization: `Bearer ${session?.accessToken}`,
-      'x-hasura-role': 'user',
-    },
+    headers,
     pathRewrite: {
       '^/api/graphql': '',
     },

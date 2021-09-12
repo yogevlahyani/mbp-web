@@ -48,7 +48,7 @@ export const withApollo =
       return {
         headers: {
           ...headers,
-          'x-hasura-role': 'user',
+          'x-hasura-role': session?.accessToken ? 'user' : 'public',
           authorization: session?.accessToken && `Bearer ${session?.accessToken}`,
         },
       };
