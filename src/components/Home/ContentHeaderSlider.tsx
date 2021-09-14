@@ -2,18 +2,18 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { Box, Flex, Spacer, Text, Image, Button } from '@chakra-ui/react';
 
-interface SliderItemType {
+export interface SliderItemType {
   title: string;
   description: String;
   image: string;
 }
 
-export interface ContentHeaderProps {
-  slider_item: SliderItemType;
-}
+interface Props extends SliderItemType {}
 
-export const ContentHeaderSlider: React.FC<ContentHeaderProps> = ({
-  slider_item,
+export const ContentHeaderSlider: React.FC<Props> = ({
+  title,
+  description,
+  image,
 }) => {
   const { t } = useTranslation('common');
 
@@ -26,13 +26,13 @@ export const ContentHeaderSlider: React.FC<ContentHeaderProps> = ({
       alignItems="flex-end"
       textAlign="right"
     >
-      <Image src={slider_item.image} />
+      <Image src={image} alt={title} />
       <Box zIndex="10">
         <Text fontWeight="bold" as="h1" fontSize="4xl">
-          {slider_item.title}
+          {title}
         </Text>
         <Text mt="2" mb="4">
-          {slider_item.description}
+          {description}
         </Text>
         <Button
           fontSize="21px"

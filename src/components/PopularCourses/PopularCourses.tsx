@@ -2,22 +2,23 @@ import React, { useMemo } from 'react';
 import { Box, BoxProps, Flex, Heading, Container } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-slick';
-import { PopularCourse, PopularCourseProps } from './PopularCourse';
+import { PopularCourse, PopularCourseType } from './PopularCourse';
 import { attributes } from '../../../content/pages/home.md';
 
-interface Props extends BoxProps {}
-
-export const PopularCourses: React.FC<Props> = ({ ...boxProps }) => {
+export const PopularCourses = () => {
   const { t } = useTranslation('common');
 
-  const { slider_images } = attributes;
+  const { slider_images: courses } = attributes;
 
-  const _PopularCrouses = useMemo(
+  const PopularCrouses = useMemo(
     () =>
-      slider_images.map((popularCourse: PopularCourseProps) => (
-        <PopularCourse {...popularCourse} />
-      )),
-    [slider_images],
+      courses.map(
+        (
+          { slider_item: course }: { slider_item: PopularCourseType },
+          index: number,
+        ) => <PopularCourse key={index.toString()} {...course} />,
+      ),
+    [courses],
   );
 
   return (
@@ -56,7 +57,7 @@ export const PopularCourses: React.FC<Props> = ({ ...boxProps }) => {
             },
           ]}
         >
-          {_PopularCrouses}
+          {PopularCrouses}
         </Slider>
       </Box>
     </Box>

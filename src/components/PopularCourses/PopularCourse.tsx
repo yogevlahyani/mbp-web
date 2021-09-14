@@ -1,17 +1,15 @@
 import React from 'react';
 import { Box, Flex, Spacer, Text, Image } from '@chakra-ui/react';
 
-interface SliderItemType {
+export interface PopularCourseType {
   title: string;
   description: String;
   image: string;
 }
 
-export interface PopularCourseProps {
-  slider_item: SliderItemType;
-}
+interface Props extends PopularCourseType {}
 
-export const PopularCourse: React.FC<PopularCourseProps> = ({ slider_item }) => {
+export const PopularCourse: React.FC<Props> = ({ title, description, image }) => {
   return (
     <Box
       mx={10}
@@ -20,14 +18,14 @@ export const PopularCourse: React.FC<PopularCourseProps> = ({ slider_item }) => 
       overflow="hidden"
       color="#646464"
     >
-      <Image src={slider_item.image} />
+      <Image src={image} alt={title} />
       <Flex py="9px" px="10px" gridGap={1} alignItems="center">
         <Text isTruncated fontWeight="bold" fontSize="21px" color="#646464">
-          {slider_item.title}
+          {title}
         </Text>
         <Spacer />
         <Text fontSize="16px" color="#1A74E2">
-          {slider_item.description}
+          {description}
         </Text>
       </Flex>
     </Box>

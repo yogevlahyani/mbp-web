@@ -2,21 +2,21 @@ import React, { useMemo } from 'react';
 import { Box, BoxProps, Flex, Heading, Container } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-slick';
-import { ContentHeaderSlider, ContentHeaderProps } from './ContentHeaderSlider';
+import { ContentHeaderSlider, SliderItemType } from './ContentHeaderSlider';
 import { attributes } from '../../../content/pages/home.md';
 
-interface Props extends BoxProps {}
-
-export const ContentHeaderSliders: React.FC<Props> = ({ ...boxProps }) => {
+export const ContentHeaderSliders = () => {
   const { t } = useTranslation('common');
 
   const { slider_images } = attributes;
 
   const contentHeaderSlides = useMemo(
     () =>
-      slider_images.map((contentHeaderSlider: ContentHeaderProps) => (
-        <ContentHeaderSlider {...contentHeaderSlider} />
-      )),
+      slider_images.map(
+        ({ slider_item }: { slider_item: SliderItemType }, index: number) => (
+          <ContentHeaderSlider key={index.toString()} {...slider_item} />
+        ),
+      ),
     [slider_images],
   );
 
