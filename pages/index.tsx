@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Box, Heading } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { ContentHeader } from '../src/components/Home/ContentHeader';
+import { PopularCourses } from '../src/components/PopularCourses/PopularCourses';
 
 export default function Home() {
   const { t } = useTranslation('common');
@@ -17,6 +18,7 @@ export default function Home() {
 
       <Box>
         <ContentHeader />
+        <PopularCourses />
         <Heading as="h1" textAlign="center" color="white">
           {t('This is gonna be a killer home page!')}
         </Heading>
