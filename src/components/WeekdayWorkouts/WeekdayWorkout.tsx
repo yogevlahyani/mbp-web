@@ -18,8 +18,6 @@ interface Props extends WeekdayWorkoutType {}
 export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
   const { data, loading } = useQuery(GET_WORKOUT, { variables: { workoutId: id } });
 
-  console.log('data', data?.workouts_by_pk?.workouts_exercises);
-
   const muscles = useMemo(
     () =>
       chain(data?.workouts_by_pk?.workouts_exercises)

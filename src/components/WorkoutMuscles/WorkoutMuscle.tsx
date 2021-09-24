@@ -20,8 +20,6 @@ export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
     [exercises_muscles],
   );
 
-  console.log('setGroups', setGroups);
-
   const exercises = useMemo(
     () =>
       setGroups.map((workoutExercises) => (

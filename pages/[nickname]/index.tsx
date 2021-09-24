@@ -22,7 +22,6 @@ export const getServerSideProps = withPageAuthRequired({
   returnTo: '/',
   getServerSideProps: async (ctx: GetServerSidePropsContext) => {
     const session = await getSession(ctx.req, ctx.res);
-    console.log('session', session);
 
     // TODO: Show Public Profile
     if (session?.user.nickname !== ctx.params?.nickname) {

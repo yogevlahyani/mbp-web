@@ -49,10 +49,6 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
     [data],
   );
 
-  useEffect(() => {
-    console.log('slides', slides);
-  }, [slides]);
-
   const weekNumber = useMemo(() => data?.program_weeks_by_pk.week_number, [data]);
 
   const workouts = useMemo(
