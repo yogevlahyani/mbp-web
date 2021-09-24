@@ -34,12 +34,12 @@
     "one": "חזרה אחת (1)",
     "other": "{{count}} חזרות"
   },
-  "Rest In Seconds": {
+  "Seconds": {
     "0": "ללא מנוחה",
     "one": "שניה אחת",
     "other": "{{count}} שניות"
   },
-  "Rest In Minutes": {
+  "Minutes": {
     "0": "ללא מנוחה",
     "one": "דקה אחת",
     "other": "{{count}} דקות"
@@ -55,5 +55,16 @@
   "50% BOTTOM PUSH UPS": "50% שכיבות סמיכה בשיפוע שלילי",
   "CHEST PRESS MACHINE": "לחיצת חזה מכונה",
   "CHEST FLYS – MACHINE": "פרפר מכונה",
-  "PULLY STANDARD GRIP PULL DOWN": "פולי תחתון"
+  "PULLY STANDARD GRIP PULL DOWN": "פולי תחתון",
+  "Weight": "משקל",
+  "Kilograms": "{{count}} קילו",
+  "Distance": "מרחק",
+  "Meters": "{{count}} מטר",
+  "Time": "זמן",
+  "Body Weight": "משקל גוף",
+  "BPM": "BPM",
+  "RPE": "RPE",
+  "Speed": "מהירות",
+  "Tempo": "טמפו",
+  "Timer": "טיימר"
 }

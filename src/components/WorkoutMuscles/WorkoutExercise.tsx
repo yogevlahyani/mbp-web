@@ -18,8 +18,15 @@ import { TimeIcon } from '@chakra-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
 import { WeeklyVideo } from '../WeeklyVideos/WeeklyVideo';
-import dg from '../../utils/dg';
-import embedYoutubeUrl from '../../utils/youtube-url';
+import { Repeats } from './RepModes/Repeats';
+import { Distance } from './RepModes/Distance';
+import { Time } from './RepModes/Time';
+import { BodyWeight } from './WeightModes/BodyWeight';
+import { BPM } from './WeightModes/BPM';
+import { RPE } from './WeightModes/RPE';
+import { Speed } from './WeightModes/Speed';
+import { Tempo } from './WeightModes/Tempo';
+import { Weight } from './WeightModes/Weight';
 
 interface ExerciseType {
   id: string;
@@ -29,39 +36,103 @@ interface ExerciseType {
   video?: string;
 }
 
+enum WeightMode {
+  WEIGHT = 'weight',
+  BODY_WEIGHT = 'body_weight',
+  SPEED = 'speed',
+  RPE = 'rpe',
+  BPM = 'bpm',
+  TEMPO = 'tempo',
+}
+
+enum RepMode {
+  REPEATS = 'repeats',
+  DISTANCE = 'distance',
+  TIME = 'time',
+}
 export interface WorkoutExerciseType {
   id: string;
   order: number;
-  kg: number;
+  weight_in_kg: number;
   repeats: number;
-  rest: number;
+  set_rest_duration_in_seconds: number;
   sets: number;
+  mode: WeightMode;
+  rep_mode: RepMode;
   exercise: ExerciseType;
+  distance_in_meters: number;
+  time_in_seconds: number;
+  bpm: number;
+  rpe: number;
+  speed_percentage: number;
+  tempo: number;
+  set_group?: string;
 }
 
 interface Props extends WorkoutExerciseType {}
 
 export const WorkoutExercise: React.FC<Props> = ({
-  order,
-  kg,
   repeats,
-  rest,
+  set_rest_duration_in_seconds,
   sets,
+  mode,
+  rep_mode,
+  distance_in_meters,
+  time_in_seconds,
+  bpm,
+  rpe,
+  speed_percentage,
+  tempo,
+  weight_in_kg,
+  set_group,
   exercise: { id, name, instructions, image, video },
 }) => {
   const { t } = useTranslation('common');
 
   const restTimeText = useMemo(() => {
-    if (rest > 59) {
-      return t('Rest In Minutes', {
-        count: moment.duration(rest, 'seconds').asMinutes(),
-      });
+    console.log('set_rest_duration_in_seconds', set_rest_duration_in_seconds);
+    if (!set_rest_duration_in_seconds || set_rest_duration_in_seconds <= 0) {
+      return t('Seconds', { count: 0 });
     }
 
-    return t('Rest In Seconds', {
-      count: moment.duration(rest, 'seconds').asSeconds(),
-    });
-  }, [t, rest]);
+    const milliseconds = moment
+      .duration(set_rest_duration_in_seconds, 'seconds')
+      .asMilliseconds();
+
+    return moment.utc(milliseconds).format('mm:ss');
+  }, [t, set_rest_duration_in_seconds]);
+
+  const repMode = useMemo(() => {
+    switch (rep_mode) {
+      case RepMode.REPEATS:
+        return <Repeats count={repeats} />;
+      case RepMode.DISTANCE:
+        return <Distance meters={distance_in_meters} />;
+      case RepMode.TIME:
+        return <Time seconds={time_in_seconds} />;
+      default:
+        return null;
+    }
+  }, [rep_mode, repeats, distance_in_meters, time_in_seconds]);
+
+  const weightMode = useMemo(() => {
+    switch (mode) {
+      case WeightMode.BODY_WEIGHT:
+        return <BodyWeight />;
+      case WeightMode.BPM:
+        return <BPM count={bpm} />;
+      case WeightMode.RPE:
+        return <RPE count={rpe} />;
+      case WeightMode.SPEED:
+        return <Speed percentage={speed_percentage} />;
+      case WeightMode.TEMPO:
+        return <Tempo seconds={tempo} />;
+      case WeightMode.WEIGHT:
+        return <Weight count={weight_in_kg} />;
+      default:
+        return null;
+    }
+  }, [mode, bpm, rpe, speed_percentage, tempo, weight_in_kg]);
 
   return (
     <AccordionItem border="none">
@@ -129,18 +200,6 @@ export const WorkoutExercise: React.FC<Props> = ({
           flexDirection={['column', 'row']}
           justifyContent="space-between"
         >
-          {image && (
-            <Box height={270}>
-              <Image
-                src={dg(image)}
-                alt={name}
-                objectFit="cover"
-                height="100%"
-                fallback={<SkeletonCircle width="full" />}
-                borderRadius="10px"
-              />
-            </Box>
-          )}
           {video && (
             <Box height={270} width="100%">
               <WeeklyVideo
@@ -172,18 +231,14 @@ export const WorkoutExercise: React.FC<Props> = ({
               <Text>{t('Sets Count', { count: sets })}</Text>
             </Badge>
           </Box>
-          <Box>
-            <Text>{t('Repeats')}</Text>
-            <Badge colorScheme="green" variant="solid">
-              <Text>{t('Repeats Count', { count: sets })}</Text>
-            </Badge>
-          </Box>
+          {repMode}
           <Box>
             <Text>{t('Rest')}</Text>
             <Badge colorScheme="blue" variant="solid">
               <Text>{restTimeText}</Text>
             </Badge>
           </Box>
+          {weightMode}
         </Flex>
       </AccordionPanel>
     </AccordionItem>

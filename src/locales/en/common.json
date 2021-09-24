@@ -34,12 +34,12 @@
     "one": "One Repeatition (1)",
     "other": "{{count}} Repeatitions"
   },
-  "Rest In Seconds": {
+  "Seconds": {
     "0": "No Rest",
     "one": "One Second",
     "other": "{{count}} Seconds"
   },
-  "Rest In Minutes": {
+  "Minutes": {
     "0": "No Rest",
     "one": "One Minute (1)",
     "other": "{{count}} Minutes"

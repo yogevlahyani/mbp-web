@@ -37,12 +37,12 @@ export const FittokWorkoutWorkout: React.FC<Props> = ({
 
   const restTimeText = useMemo(() => {
     if (rest > 59) {
-      return t('Rest In Minutes', {
+      return t('Minutes', {
         count: moment.duration(rest, 'seconds').asMinutes(),
       });
     }
 
-    return t('Rest In Seconds', {
+    return t('Seconds', {
       count: moment.duration(rest, 'seconds').asSeconds(),
     });
   }, [rest, t]);

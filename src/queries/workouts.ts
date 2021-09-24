@@ -86,12 +86,23 @@ export const GET_WORKOUT = gql`
       name
       excercises_muscles {
         exercise {
-          workouts_exercises(order_by: { order: asc_nulls_first }) {
+          workouts_exercises(
+            order_by: { order: asc_nulls_first }
+          ) {
             order
             rest
             repeats
             sets
             weight_in_kg
+            set_group
+            mode
+            rep_mode
+            rpe
+            set_rest_duration_in_seconds
+            speed_percentage
+            tempo
+            time_in_seconds
+            distance_in_meters
             exercise {
               id
               name
@@ -116,11 +127,25 @@ export const GET_WEEKDAY_WORKOUT_WITH_EXERCISES = gql`
           name
           description
           image
-          workouts_exercises(order_by: { order: asc_nulls_first }) {
-            kg
+          workouts_exercises(order_by: { set_group: asc }, distinct_on: set_group) {
+            weight_in_kg
             sets
             rest
             repeats
+            rep_mode
+            mode
+            alternative
+            body_weight
+            bpm
+            distance_in_meters
+            duration_in_seconds
+            time_in_seconds
+            tempo
+            each_side
+            rpe
+            set_rest_duration_in_seconds
+            set_group
+            speed_percentage
             exercise {
               name
               exercises_muscles {
