@@ -40,6 +40,7 @@ export const Timer: React.FC<{}> = ({}) => {
         background="blackAlpha.900"
         width="100%"
         p={5}
+        zIndex={999}
       >
         <HStack>
           <Text fontSize="21px">{formattedTimer}</Text>
