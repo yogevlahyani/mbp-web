@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Box, Button, Container, Portal } from '@chakra-ui/react';
+import { Box, Button, Container, IconButton, Portal } from '@chakra-ui/react';
 import { UnlockIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
@@ -7,15 +7,16 @@ import { WeekdayWorkouts } from '../../../../src/components/WeekdayWorkouts/Week
 import { fittokModeAtom } from '../../../../src/components/Fittok/state';
 import { Fittok } from '../../../../src/components/Fittok/Fittok';
 import { Timer } from '../../../../src/components/Timer/Timer';
+import { GoBackButton } from '../../../../src/components/GoBackButton';
 
 export default function Week() {
   const [fittokMode, setFittokMode] = useRecoilState(fittokModeAtom);
   const { query } = useRouter();
   const { weekId, weekday } = query;
 
-  const toggleFittokMode = useCallback(() => {
-    setFittokMode(!fittokMode);
-  }, [fittokMode, setFittokMode]);
+  // const toggleFittokMode = useCallback(() => {
+  //   setFittokMode(!fittokMode);
+  // }, [fittokMode, setFittokMode]);
 
   return (
     <Container
@@ -26,12 +27,13 @@ export default function Week() {
       minH="max-content"
       position="relative"
     >
+        <GoBackButton mb={5} size="sm" variant="solid" colorScheme="gray" />
       {fittokMode ? (
         <Fittok weekId={String(weekId)} weekday={Number(weekday)} />
       ) : (
         <WeekdayWorkouts weekId={String(weekId)} weekday={Number(weekday)} />
       )}
-      <Box display={['block', 'none']}>
+      {/* <Box display={['block', 'none']}>
         <Button
           variant="solid"
           position="absolute"
@@ -47,7 +49,7 @@ export default function Week() {
         >
           <UnlockIcon width="16px" height="16px" />
         </Button>
-      </Box>
+      </Box> */}
       <Timer />
     </Container>
   );
