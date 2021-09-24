@@ -6,30 +6,12 @@ import {
   PauseCircle,
   PlayCircle,
 } from 'phosphor-react';
-import { atom, useRecoilState, useResetRecoilState } from 'recoil';
-import moment, { Moment } from 'moment';
-import {
-  AnimatePresence,
-  AnimateSharedLayout,
-  motion,
-  useMotionValue,
-  useSpring,
-} from 'framer-motion';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import moment from 'moment';
+import { AnimatePresence, motion } from 'framer-motion';
+import { timerAtom, timerCountAtom } from './Timer';
 
 export const MotionBox = motion<BoxProps>(Box);
-
-export const timerAtom = atom<{ startedAt: Moment | null; isActive: boolean }>({
-  key: 'Timer',
-  default: {
-    startedAt: null,
-    isActive: false,
-  },
-});
-
-export const timerCountAtom = atom({
-  key: 'TimerCount',
-  default: 0,
-});
 
 export const Controls: React.FC<{}> = ({}) => {
   const [timer, setTimer] = useRecoilState(timerAtom);

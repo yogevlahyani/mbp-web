@@ -24,7 +24,12 @@ export const SetGroup: React.FC<Props> = ({ workoutExercises }) => {
 
       return (
         <Flex my="-40px" zIndex={999}>
-          <Tooltip label={`Super Set (${workoutExercises.length})`} placement="top" hasArrow background="black">
+          <Tooltip
+            label={`Super Set (${workoutExercises.length})`}
+            placement="top"
+            hasArrow
+            background="black"
+          >
             <Box
               height="48px"
               background="black"

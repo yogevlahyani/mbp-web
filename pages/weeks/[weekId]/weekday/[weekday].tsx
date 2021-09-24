@@ -1,51 +1,17 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  HStack,
-  IconButton,
-  Portal,
-  Spacer,
-  Text,
-} from '@chakra-ui/react';
+import React, { useCallback } from 'react';
+import { Box, Button, Container, Portal } from '@chakra-ui/react';
 import { UnlockIcon } from '@chakra-ui/icons';
-import {
-  ArrowsCounterClockwise,
-  PauseCircle,
-  PlayCircle,
-  StopCircle,
-} from 'phosphor-react';
 import { useRouter } from 'next/router';
-import { atom, useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
-import useTranslation from 'next-translate/useTranslation';
+import { useRecoilState } from 'recoil';
 import { WeekdayWorkouts } from '../../../../src/components/WeekdayWorkouts/WeekdayWorkouts';
 import { fittokModeAtom } from '../../../../src/components/Fittok/state';
 import { Fittok } from '../../../../src/components/Fittok/Fittok';
-import moment, { Moment } from 'moment';
-import {
-  Controls,
-  timerAtom,
-  timerCountAtom,
-} from '../../../../src/components/Timer/Controls';
+import { Timer } from '../../../../src/components/Timer/Timer';
 
 export default function Week() {
   const [fittokMode, setFittokMode] = useRecoilState(fittokModeAtom);
-  const timer = useRecoilValue(timerAtom);
-  const timerCount = useRecoilValue(timerCountAtom);
   const { query } = useRouter();
   const { weekId, weekday } = query;
-
-  const formattedTimer = useMemo(() => {
-    if (!timer.isActive && !timer.startedAt) {
-      return '00:00:00';
-    }
-
-    const milliseconds = moment.duration(timerCount, 'seconds').asMilliseconds();
-
-    return moment.utc(milliseconds).format('HH:mm:ss');
-  }, [timerCount, timer]);
 
   const toggleFittokMode = useCallback(() => {
     setFittokMode(!fittokMode);
@@ -82,22 +48,7 @@ export default function Week() {
           <UnlockIcon width="16px" height="16px" />
         </Button>
       </Box>
-      <Portal>
-        <Box
-          position="fixed"
-          bottom={0}
-          left={0}
-          background="blackAlpha.900"
-          width="100%"
-          p={5}
-        >
-          <HStack>
-            <Text fontSize="21px">{formattedTimer}</Text>
-            <Spacer />
-            <Controls />
-          </HStack>
-        </Box>
-      </Portal>
+      <Timer />
     </Container>
   );
 }
