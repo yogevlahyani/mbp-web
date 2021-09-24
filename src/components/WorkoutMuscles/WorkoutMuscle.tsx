@@ -1,32 +1,36 @@
 import { Accordion, Box, Flex, Heading } from '@chakra-ui/react';
+import { chain } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useMemo } from 'react';
+import { SetGroup } from './SetGroup';
 import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
 
 export interface WorkoutMuscleType {
-  display_name: string;
   name: string;
-  image?: string;
-  excercises_muscles: {
-    exercise: {
-      workouts_exercises: WorkoutExerciseType[];
-    };
-  }[];
+  exercises_muscles: WorkoutExerciseType[];
 }
 
 interface Props extends WorkoutMuscleType {}
 
-export const WorkoutMuscle: React.FC<Props> = ({ name, excercises_muscles }) => {
+export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
   const { t } = useTranslation('common');
+
+  const setGroups: WorkoutExerciseType[][] = useMemo(
+    () => chain(exercises_muscles).groupBy('set_group').sortBy('order').value(),
+    [exercises_muscles],
+  );
+
+  console.log('setGroups', setGroups);
 
   const exercises = useMemo(
     () =>
-      excercises_muscles?.map((excercises_muscle) =>
-        excercises_muscle.exercise?.workouts_exercises?.map((exercise, index) => (
-          <WorkoutExercise key={`${exercise.id}-${index}`} {...exercise} />
-        )),
-      ),
-    [excercises_muscles],
+      setGroups.map((workoutExercises) => (
+        <SetGroup
+          key={workoutExercises[0].set_group}
+          workoutExercises={workoutExercises}
+        />
+      )),
+    [setGroups],
   );
 
   if (!exercises || !exercises.length) {

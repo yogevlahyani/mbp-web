@@ -13,8 +13,11 @@ import {
   Skeleton,
   Badge,
   SkeletonCircle,
+  Tooltip,
+  chakra,
 } from '@chakra-ui/react';
 import { TimeIcon } from '@chakra-ui/icons';
+import { Link } from 'phosphor-react';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
 import { WeeklyVideo } from '../WeeklyVideos/WeeklyVideo';
@@ -71,6 +74,8 @@ export interface WorkoutExerciseType {
 
 interface Props extends WorkoutExerciseType {}
 
+const LinkIcon = chakra(Link);
+
 export const WorkoutExercise: React.FC<Props> = ({
   repeats,
   set_rest_duration_in_seconds,
@@ -84,13 +89,11 @@ export const WorkoutExercise: React.FC<Props> = ({
   speed_percentage,
   tempo,
   weight_in_kg,
-  set_group,
   exercise: { id, name, instructions, image, video },
 }) => {
   const { t } = useTranslation('common');
 
   const restTimeText = useMemo(() => {
-    console.log('set_rest_duration_in_seconds', set_rest_duration_in_seconds);
     if (!set_rest_duration_in_seconds || set_rest_duration_in_seconds <= 0) {
       return t('Seconds', { count: 0 });
     }

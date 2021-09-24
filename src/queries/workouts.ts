@@ -73,42 +73,37 @@ export const GET_WEEKDAY_WORKOUTS = gql`
 
 export const GET_WORKOUT = gql`
   query GetWorkout($workoutId: uuid!) {
-    muscles(
-      where: {
-        excercises_muscles: {
-          exercise: { workouts_exercises: { workout: { id: { _eq: $workoutId } } } }
-        }
-      }
-      order_by: { display_name: asc }
-    ) {
-      display_name
-      image
+    workouts_by_pk(id: $workoutId) {
+      id
       name
-      excercises_muscles {
+      description
+      image
+      workouts_exercises {
+        order
+        rest
+        repeats
+        sets
+        weight_in_kg
+        set_group
+        mode
+        rep_mode
+        rpe
+        set_rest_duration_in_seconds
+        speed_percentage
+        tempo
+        time_in_seconds
+        distance_in_meters
         exercise {
-          workouts_exercises(
-            order_by: { order: asc_nulls_first }
-          ) {
-            order
-            rest
-            repeats
-            sets
-            weight_in_kg
-            set_group
-            mode
-            rep_mode
-            rpe
-            set_rest_duration_in_seconds
-            speed_percentage
-            tempo
-            time_in_seconds
-            distance_in_meters
-            exercise {
-              id
-              name
-              instructions
+          id
+          name
+          instructions
+          image
+          video
+          exercises_muscles {
+            muscle {
+              display_name
               image
-              video
+              name
             }
           }
         }

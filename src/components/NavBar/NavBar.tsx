@@ -23,7 +23,7 @@ export const NavBar = () => {
       left={0}
       background="transparent linear-gradient(180deg, #1A74E2 0%, #225EA8 100%) 0% 0% no-repeat padding-box"
       color="white"
-      zIndex={99}
+      zIndex={9999}
     >
       <Logo width="150px" />
       <Spacer />
