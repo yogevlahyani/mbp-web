@@ -24,9 +24,9 @@ interface Props extends WorkoutExerciseType {
 
 export const FittokWorkoutWorkout: React.FC<Props> = ({
   order,
-  kg,
+  weight_in_kg,
   repeats,
-  rest,
+  set_rest_duration_in_seconds,
   sets,
   name,
   image,
@@ -36,16 +36,16 @@ export const FittokWorkoutWorkout: React.FC<Props> = ({
   const { t } = useTranslation('common');
 
   const restTimeText = useMemo(() => {
-    if (rest > 59) {
+    if (set_rest_duration_in_seconds > 59) {
       return t('Minutes', {
-        count: moment.duration(rest, 'seconds').asMinutes(),
+        count: moment.duration(set_rest_duration_in_seconds, 'seconds').asMinutes(),
       });
     }
 
     return t('Seconds', {
-      count: moment.duration(rest, 'seconds').asSeconds(),
+      count: moment.duration(set_rest_duration_in_seconds, 'seconds').asSeconds(),
     });
-  }, [rest, t]);
+  }, [set_rest_duration_in_seconds, t]);
 
   return (
     <Flex flexDirection="column" display="flex !important">
