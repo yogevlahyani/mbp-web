@@ -8,6 +8,7 @@ import { fittokModeAtom } from '../../../../src/components/Fittok/state';
 import { Fittok } from '../../../../src/components/Fittok/Fittok';
 import { Timer } from '../../../../src/components/Timer/Timer';
 import { GoBackButton } from '../../../../src/components/GoBackButton';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default function Week() {
   const [fittokMode, setFittokMode] = useRecoilState(fittokModeAtom);
@@ -27,7 +28,7 @@ export default function Week() {
       minH="max-content"
       position="relative"
     >
-        <GoBackButton mb={5} size="sm" variant="solid" colorScheme="gray" />
+      <GoBackButton mb={5} size="sm" variant="solid" colorScheme="gray" />
       {fittokMode ? (
         <Fittok weekId={String(weekId)} weekday={Number(weekday)} />
       ) : (
@@ -54,3 +55,7 @@ export default function Week() {
     </Container>
   );
 }
+
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: '/',
+});
