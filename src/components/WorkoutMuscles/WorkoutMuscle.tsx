@@ -3,18 +3,16 @@ import { chain } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useMemo } from 'react';
 import { SetGroup } from './SetGroup';
-import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
+import { WorkoutExerciseType } from './WorkoutExercise';
 
 export interface WorkoutMuscleType {
-  name: string;
+  name?: string;
   exercises_muscles: WorkoutExerciseType[];
 }
 
 interface Props extends WorkoutMuscleType {}
 
 export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
-  const { t } = useTranslation('common');
-
   const setGroups: WorkoutExerciseType[][] = useMemo(
     () => chain(exercises_muscles).groupBy('set_group').sortBy('order').value(),
     [exercises_muscles],
@@ -31,15 +29,25 @@ export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
     [setGroups],
   );
 
+  const muscleName = useMemo(() => {
+    if (!name) {
+      return null;
+    }
+
+    return (
+      <Heading size="md" textTransform="capitalize">
+        {name}
+      </Heading>
+    );
+  }, [name]);
+
   if (!exercises || !exercises.length) {
     return null;
   }
 
   return (
     <Box my={5}>
-      <Heading size="md" textTransform="capitalize">
-        {t(name)}
-      </Heading>
+      {muscleName}
       <Accordion allowMultiple={false} allowToggle={true}>
         <Flex flexDirection="column" my={5} gridGap={5}>
           {exercises}

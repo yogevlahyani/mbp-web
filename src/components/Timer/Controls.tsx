@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { Box, BoxProps, IconButton } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, HStack, IconButton } from '@chakra-ui/react';
 import {
   ArrowsCounterClockwise,
   StopCircle,
@@ -9,11 +9,12 @@ import {
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import moment from 'moment';
 import { AnimatePresence, motion } from 'framer-motion';
-import { timerAtom, timerCountAtom } from './Timer';
+import { timerAtom, timerCountAtom } from './state';
+import { PropsWithChildren } from 'hoist-non-react-statics/node_modules/@types/react';
 
 export const MotionBox = motion<BoxProps>(Box);
 
-export const Controls: React.FC<{}> = ({}) => {
+export const Controls: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [timer, setTimer] = useRecoilState(timerAtom);
   const [timerCount, setTimerCount] = useRecoilState(timerCountAtom);
   const resetTimer = useResetRecoilState(timerAtom);
@@ -68,11 +69,12 @@ export const Controls: React.FC<{}> = ({}) => {
           animate={{ transform: `translateY(${Number(!timer.isActive) * 100}%)` }}
           exit={{ transform: `translateY(-${Number(timer.isActive) * 100}%)` }}
           position="absolute"
+          left={0}
+          top="4px"
         >
           <IconButton
             aria-label="Pause"
             icon={<PauseCircle size="100%" />}
-            size="lg"
             variant="unstyled"
             onClick={pauseTimer}
             _focus={{ border: 'none' }}
@@ -88,11 +90,12 @@ export const Controls: React.FC<{}> = ({}) => {
         animate={{ transform: `translateY(${Number(timer.isActive) * 100}%)` }}
         exit={{ transform: `translateY(-${Number(!timer.isActive) * 100}%)` }}
         position="absolute"
+        left={0}
+        top="4px"
       >
         <IconButton
           aria-label="Play"
           icon={<PlayCircle size="100%" />}
-          size="lg"
           variant="unstyled"
           onClick={startTimer}
           _focus={{ border: 'none' }}
@@ -102,28 +105,37 @@ export const Controls: React.FC<{}> = ({}) => {
   }, [pauseTimer, startTimer, timer.isActive]);
 
   return (
-    <>
-      <IconButton
-        key="ResetControl"
-        aria-label="Reset"
-        icon={<ArrowsCounterClockwise size="100%" />}
-        size="md"
-        variant="unstyled"
-        onClick={resetTimerWithActive}
-        _focus={{ border: 'none' }}
-      />
-      <IconButton
-        key="StopControl"
-        aria-label="Pause"
-        icon={<StopCircle size="100%" />}
-        size="lg"
-        variant="unstyled"
-        onClick={stopTimer}
-        _focus={{ border: 'none' }}
-      />
-      <MotionBox position="relative" width="48px" height="48px" overflowY="hidden">
+    <Flex justifyContent="center">
+      <HStack flex={1}>
+        <IconButton
+          key="ResetControl"
+          aria-label="Reset"
+          icon={<ArrowsCounterClockwise size="100%" />}
+          variant="unstyled"
+          onClick={resetTimerWithActive}
+          _focus={{ border: 'none' }}
+        />
+        <IconButton
+          key="StopControl"
+          aria-label="Pause"
+          icon={<StopCircle size="100%" />}
+          variant="unstyled"
+          onClick={stopTimer}
+          _focus={{ border: 'none' }}
+        />
+      </HStack>
+      <Box flex={3} textAlign="center">
+        {children}
+      </Box>
+      <MotionBox
+        position="relative"
+        width="auto"
+        height="48px"
+        overflowY="hidden"
+        flex={1}
+      >
         <AnimatePresence>{playPause}</AnimatePresence>
       </MotionBox>
-    </>
+    </Flex>
   );
 };

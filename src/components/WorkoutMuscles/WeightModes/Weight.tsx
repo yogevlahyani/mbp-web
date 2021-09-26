@@ -1,20 +1,24 @@
 import React from 'react';
-import { Badge, Box, BoxProps, Text } from '@chakra-ui/react';
+import { Badge, Flex, FlexProps, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 
-interface Props extends BoxProps {
+interface Props extends FlexProps {
   count: number;
 }
 
-export const Weight: React.FC<Props> = ({ count, ...boxProps }) => {
+export const Weight: React.FC<Props> = ({ count, ...flexProps }) => {
   const { t } = useTranslation('common');
 
   return (
-    <Box {...boxProps}>
+    <Flex
+      {...flexProps}
+      flexDirection={['row', 'column']}
+      justifyContent="space-between"
+    >
       <Text>{t('Weight')}</Text>
-      <Badge colorScheme="red" variant="solid" width="100%">
+      <Badge colorScheme="red" variant="solid" width={['auto', '100%']}>
         <Text textAlign="center">{t('Kilograms', { count })}</Text>
       </Badge>
-    </Box>
+    </Flex>
   );
 };

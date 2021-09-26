@@ -1,20 +1,24 @@
 import React from 'react';
-import { Badge, Box, BoxProps, Text } from '@chakra-ui/react';
+import { Badge, Flex, FlexProps, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 
-interface Props extends BoxProps {
+interface Props extends FlexProps {
   meters: number;
 }
 
-export const Distance: React.FC<Props> = ({ meters, ...boxProps }) => {
+export const Distance: React.FC<Props> = ({ meters, ...flexProps }) => {
   const { t } = useTranslation('common');
 
   return (
-    <Box {...boxProps}>
+    <Flex
+      {...flexProps}
+      flexDirection={['row', 'column']}
+      justifyContent="space-between"
+    >
       <Text>{t('Distance')}</Text>
-      <Badge colorScheme="green" variant="solid" width="100%">
+      <Badge colorScheme="green" variant="solid" width={['auto', '100%']}>
         <Text textAlign="center">{t('Meters', { count: meters })}</Text>
       </Badge>
-    </Box>
+    </Flex>
   );
 };

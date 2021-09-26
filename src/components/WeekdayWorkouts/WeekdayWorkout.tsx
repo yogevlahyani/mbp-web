@@ -22,7 +22,7 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
     () =>
       chain(data?.workouts_by_pk?.workouts_exercises)
         .groupBy('exercise.exercises_muscles.muscle.name')
-        .map((value, key) => ({ name: key, exercises_muscles: value }))
+        .map((value, key) => ({ name: key !== 'undefined' ? key : undefined, exercises_muscles: value }))
         .value(),
     [data],
   );
@@ -30,7 +30,7 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
   const exercises = useMemo(
     () =>
       muscles.map((muscle: WorkoutMuscleType) => (
-        <WorkoutMuscle key={muscle.name} {...muscle} />
+        <WorkoutMuscle key={`${muscle.name}`} {...muscle} />
       )),
     [muscles],
   );

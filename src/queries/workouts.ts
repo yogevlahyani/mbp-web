@@ -78,7 +78,7 @@ export const GET_WORKOUT = gql`
       name
       description
       image
-      workouts_exercises {
+      workouts_exercises(order_by: { order: asc }) {
         order
         rest
         repeats

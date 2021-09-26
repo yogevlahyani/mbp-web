@@ -20,15 +20,11 @@
   "Day": "יום {{number}}",
   "Exercises": "{{exercisesCount}} תרגילים",
   "Will open in": "יפתח בעוד {{days}} ימים",
-  "Workout": "אימון <0>{{workoutName}}</0>",
+  "Workout": "<0>{{workoutName}}</0>",
   "Sets": "סטים",
   "Repeats": "חזרות",
   "Rest": "מנוחה",
-  "Sets Count": {
-    "0": "ללא סטים",
-    "one": "סט אחד (1)",
-    "other": "{{count}} סטים"
-  },
+  "Sets Count": "{{count}} סטים",
   "Repeats Count": {
     "0": "ללא חזרות",
     "one": "חזרה אחת (1)",
@@ -66,5 +62,8 @@
   "RPE": "RPE",
   "Speed": "מהירות",
   "Tempo": "טמפו",
-  "Timer": "טיימר"
+  "Timer": "טיימר",
+  "Show": "הצג",
+  "Hide": "הסתר",
+  "Instructions": "הוראות"
 }

@@ -14,7 +14,8 @@ export const GoBackButton: React.FC<Props> = (iconProps) => {
     <IconButton
       {...iconProps}
       aria-label="Go Back"
-      icon={<ArrowBendUpRightIcon size="100%" />}
+      icon={<ArrowBendUpRightIcon size={20} />}
+      size="md"
       onClick={back}
     />
   );

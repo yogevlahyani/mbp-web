@@ -15,6 +15,8 @@ import {
   SkeletonCircle,
   Tooltip,
   chakra,
+  Collapse,
+  Button,
 } from '@chakra-ui/react';
 import { TimeIcon } from '@chakra-ui/icons';
 import { Link } from 'phosphor-react';
@@ -30,6 +32,7 @@ import { RPE } from './WeightModes/RPE';
 import { Speed } from './WeightModes/Speed';
 import { Tempo } from './WeightModes/Tempo';
 import { Weight } from './WeightModes/Weight';
+import { useState } from 'hoist-non-react-statics/node_modules/@types/react';
 
 interface ExerciseType {
   id: string;
@@ -92,6 +95,8 @@ export const WorkoutExercise: React.FC<Props> = ({
   exercise: { id, name, instructions, image, video },
 }) => {
   const { t } = useTranslation('common');
+  const [showInstructions, setShowInstructions] = React.useState<boolean>(false);
+  const handleToggleInstructions = () => setShowInstructions(!showInstructions);
 
   const restTimeText = useMemo(() => {
     if (!set_rest_duration_in_seconds || set_rest_duration_in_seconds <= 0) {
@@ -139,7 +144,13 @@ export const WorkoutExercise: React.FC<Props> = ({
 
   return (
     <AccordionItem border="none">
-      <Flex flexDirection={['column', 'row']} gridGap={1}>
+      <Flex
+        flexDirection={['column', 'row']}
+        gridGap={1}
+        position="sticky"
+        top={20}
+        zIndex={9}
+      >
         <AccordionButton
           as={Flex}
           width="100%"
@@ -199,6 +210,7 @@ export const WorkoutExercise: React.FC<Props> = ({
       </Flex>
       <AccordionPanel py={4}>
         <Flex
+          my={5}
           gridGap={10}
           flexDirection={['column', 'row']}
           justifyContent="space-between"
@@ -206,43 +218,58 @@ export const WorkoutExercise: React.FC<Props> = ({
           {video && (
             <Box height={270} width="100%">
               <WeeklyVideo
+                hideDetails
                 name={name}
                 url={video}
                 height="100%"
-                width="100%"
+                width="auto"
                 m="0"
-                hideDetails
               />
             </Box>
           )}
         </Flex>
-        {instructions && (
-          <Box my={10}>
-            <Text fontSize="md" textAlign="center">
-              {instructions}
-            </Text>
-          </Box>
-        )}
         <Flex
           gridGap={5}
+          my={5}
           flexDirection={['column', 'row']}
           textAlign={['center', 'start']}
         >
-          <Box>
+          {repMode}
+          <Flex flexDirection={['row', 'column']} justifyContent="space-between">
             <Text>{t('Sets')}</Text>
             <Badge colorScheme="purple" variant="solid">
               <Text>{t('Sets Count', { count: sets })}</Text>
             </Badge>
-          </Box>
-          {repMode}
-          <Box>
+          </Flex>
+          {weightMode}
+          <Flex flexDirection={['row', 'column']} justifyContent="space-between">
             <Text>{t('Rest')}</Text>
             <Badge colorScheme="blue" variant="solid">
               <Text>{restTimeText}</Text>
             </Badge>
-          </Box>
-          {weightMode}
+          </Flex>
         </Flex>
+        {instructions && (
+          <Flex justifyContent="center" flexDirection="column">
+            <Button size="sm" onClick={handleToggleInstructions} mx="auto" mt={10}>
+              {showInstructions ? t('Hide') : t('Show')} {t('Instructions')}
+            </Button>
+            <Collapse startingHeight={20} in={showInstructions}>
+              <Box my={10}>
+                {instructions.split('\n').map((chunk: string, index: number) => (
+                  <Text
+                    key={`instructions-${index}`}
+                    fontSize="md"
+                    textAlign="center"
+                    my={3}
+                  >
+                    {chunk}
+                  </Text>
+                ))}
+              </Box>
+            </Collapse>
+          </Flex>
+        )}
       </AccordionPanel>
     </AccordionItem>
   );

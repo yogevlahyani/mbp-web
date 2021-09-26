@@ -37,8 +37,24 @@ export const WeeklyVideo: React.FC<Props> = ({
       }
     }
 
+    if (url.startsWith('https://drive.google.com/')) {
+      const driveVideoId = url
+        .split('https://drive.google.com/file/d/')[1]
+        .split('/view')[0];
+      const driveVideoUrl = `https://drive.google.com/file/d/${driveVideoId}/preview`;
+
+      return (
+        <iframe
+          src={driveVideoUrl}
+          style={{ height: '100%', width: '100%', margin: 'auto' }}
+          width="100%"
+          height="100%"
+        />
+      );
+    }
+
     return (
-      <video controls>
+      <video controls playsInline muted style={{ height: '100%', margin: 'auto' }}>
         <source src={url} />
         Your browser does not support the video tag.
       </video>
