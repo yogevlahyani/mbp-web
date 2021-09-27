@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0';
-import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { Box, ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { RecoilRoot } from 'recoil';
 import { NavBar } from '../src/components/NavBar/NavBar';
@@ -19,6 +19,34 @@ const client = new ApolloClient({
 });
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
+  const [showInstallMessage, setShowInstallMessage] = useState<boolean>(false);
+
+  // Detects if device is on iOS
+  const isIos = useMemo(() => {
+    if (!process.browser) {
+      return;
+    }
+
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+  }, []);
+
+  // Detects if device is in standalone mode
+  const isInStandaloneMode = useMemo(() => {
+    if (!process.browser) {
+      return;
+    }
+
+    return 'standalone' in window.navigator && (window.navigator as any).standalone;
+  }, []);
+
+  useEffect(() => {
+    // Checks if should display install popup notification:
+    if (isIos && !isInStandaloneMode) {
+      setShowInstallMessage(true);
+    }
+  }, [isIos, isInStandaloneMode]);
+
   return (
     <ApolloProvider client={client}>
       <UserProvider>
