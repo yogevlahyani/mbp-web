@@ -10,16 +10,13 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  Skeleton,
   Badge,
-  SkeletonCircle,
-  Tooltip,
   chakra,
   Collapse,
   Button,
 } from '@chakra-ui/react';
 import { TimeIcon } from '@chakra-ui/icons';
-import { Link } from 'phosphor-react';
+import { Link, Note } from 'phosphor-react';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
 import { WeeklyVideo } from '../WeeklyVideos/WeeklyVideo';
@@ -32,7 +29,6 @@ import { RPE } from './WeightModes/RPE';
 import { Speed } from './WeightModes/Speed';
 import { Tempo } from './WeightModes/Tempo';
 import { Weight } from './WeightModes/Weight';
-import { useState } from 'hoist-non-react-statics/node_modules/@types/react';
 
 interface ExerciseType {
   id: string;
@@ -73,11 +69,11 @@ export interface WorkoutExerciseType {
   speed_percentage: number;
   tempo: number;
   set_group?: string;
+  notes: string;
+  max_repeats: boolean;
 }
 
 interface Props extends WorkoutExerciseType {}
-
-const LinkIcon = chakra(Link);
 
 export const WorkoutExercise: React.FC<Props> = ({
   repeats,
@@ -92,6 +88,8 @@ export const WorkoutExercise: React.FC<Props> = ({
   speed_percentage,
   tempo,
   weight_in_kg,
+  notes,
+  max_repeats,
   exercise: { id, name, instructions, image, video },
 }) => {
   const { t } = useTranslation('common');
@@ -113,7 +111,7 @@ export const WorkoutExercise: React.FC<Props> = ({
   const repMode = useMemo(() => {
     switch (rep_mode) {
       case RepMode.REPEATS:
-        return <Repeats count={repeats} />;
+        return <Repeats count={repeats} isMaxRepeats={max_repeats} />;
       case RepMode.DISTANCE:
         return <Distance meters={distance_in_meters} />;
       case RepMode.TIME:
@@ -121,7 +119,7 @@ export const WorkoutExercise: React.FC<Props> = ({
       default:
         return null;
     }
-  }, [rep_mode, repeats, distance_in_meters, time_in_seconds]);
+  }, [rep_mode, repeats, distance_in_meters, time_in_seconds, max_repeats]);
 
   const weightMode = useMemo(() => {
     switch (mode) {
@@ -148,7 +146,7 @@ export const WorkoutExercise: React.FC<Props> = ({
         flexDirection={['column', 'row']}
         gridGap={1}
         position="sticky"
-        top={20}
+        top="68px"
         zIndex={9}
       >
         <AccordionButton
@@ -249,6 +247,12 @@ export const WorkoutExercise: React.FC<Props> = ({
             </Badge>
           </Flex>
         </Flex>
+        {notes &&
+          notes
+            .split('\n')
+            .map((note: string, index: number) => (
+              <Text key={`note-${index}`}>{note}</Text>
+            ))}
         {instructions && (
           <Flex justifyContent="center" flexDirection="column">
             <Button size="sm" onClick={handleToggleInstructions} mx="auto" mt={10}>

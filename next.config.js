@@ -1,7 +1,13 @@
 const nextTranslate = require('next-translate');
+const withPWA = require('next-pwa');
 
-module.exports = {
+module.exports = withPWA({
   reactStrictMode: true,
+  pwa: {
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+  },
   ...nextTranslate({
     webpack: (cfg) => {
       cfg.module.rules.push({
@@ -37,4 +43,4 @@ module.exports = {
   images: {
     domains: ['unpkg.com'],
   },
-};
+});

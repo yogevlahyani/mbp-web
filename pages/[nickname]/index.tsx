@@ -11,7 +11,6 @@ export default function UserDashboard() {
   return (
     <Container maxWidth="container.xl" py={10}>
       <UserRepresentation />
-      <WeeklyVideos my={[10, 20]} />
       <UserPrograms my={[10, 20]} />
       <ProgramWeeks my={[10, 20]} />
     </Container>

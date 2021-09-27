@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { Box, Heading } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { ContentHeader } from '../src/components/Home/ContentHeader';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { GetServerSidePropsContext } from 'next';
 
 export default function Home() {
   const { t } = useTranslation('common');
@@ -24,3 +26,24 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: '/',
+  getServerSideProps: async (ctx: GetServerSidePropsContext) => {
+    const session = await getSession(ctx.req, ctx.res);
+
+    // TODO: Show Public Profile
+    if (session?.user.nickname !== ctx.params?.nickname) {
+      return {
+        redirect: {
+          statusCode: 302,
+          destination: `/${session?.user.nickname}`,
+        },
+      };
+    }
+
+    return {
+      props: {},
+    };
+  },
+});

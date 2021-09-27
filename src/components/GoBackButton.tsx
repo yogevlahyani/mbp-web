@@ -17,6 +17,8 @@ export const GoBackButton: React.FC<Props> = (iconProps) => {
       icon={<ArrowBendUpRightIcon size={20} />}
       size="md"
       onClick={back}
+      variant="solid"
+      colorScheme="twitter"
     />
   );
 };

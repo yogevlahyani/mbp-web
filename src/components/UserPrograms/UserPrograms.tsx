@@ -10,24 +10,24 @@ import {
   Text,
 } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
+import moment from 'moment';
+import { useRecoilState } from 'recoil';
 import { GET_USER_PROGRAMS } from '../../queries/user';
 import { UserProgram, UserProgramType } from './UserProgram';
-import moment from 'moment';
-import { useSetRecoilState } from 'recoil';
 import { selectedProgramAtom } from './state';
 
 interface Props extends BoxProps {}
 
 export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
   const { t } = useTranslation('common');
-  const setSelectedProgram = useSetRecoilState(selectedProgramAtom);
+  const [selectedProgram, setSelectedProgram] = useRecoilState(selectedProgramAtom);
   const { data, loading } = useQuery(GET_USER_PROGRAMS);
 
   useEffect(() => {
-    if (data?.user_programs) {
+    if (data?.user_programs && !selectedProgram) {
       setSelectedProgram(data?.user_programs[0]);
     }
-  }, [data?.user_programs, setSelectedProgram]);
+  }, [data?.user_programs, setSelectedProgram, selectedProgram]);
 
   const userPrograms = useMemo(
     () =>
@@ -73,7 +73,7 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
       </Flex>
       <Skeleton isLoaded={!loading} my={[5, 10]} overflowX="scroll">
         <Flex
-          flexDirection={['column', 'row']}
+          flexDirection="row"
           gridGap={[3, 10]}
           position="relative"
           width={['full', 'fit-content']}
@@ -88,7 +88,6 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
             borderTopWidth="2px"
             borderBottomWidth="2px"
             opacity={1}
-            display={['none', 'block']}
           />
           {userPrograms}
         </Flex>

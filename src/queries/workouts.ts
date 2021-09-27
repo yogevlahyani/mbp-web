@@ -93,6 +93,8 @@ export const GET_WORKOUT = gql`
         tempo
         time_in_seconds
         distance_in_meters
+        notes
+        max_repeats
         exercise {
           id
           name
@@ -141,6 +143,8 @@ export const GET_WEEKDAY_WORKOUT_WITH_EXERCISES = gql`
             set_rest_duration_in_seconds
             set_group
             speed_percentage
+            notes
+            max_repeats
             exercise {
               name
               exercises_muscles {

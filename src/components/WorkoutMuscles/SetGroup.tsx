@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
-import { Box, chakra, Flex, Tooltip } from '@chakra-ui/react';
+import { Box, chakra, Flex, Tooltip, Text } from '@chakra-ui/react';
 import { Link } from 'phosphor-react';
+import useTranslation from 'next-translate/useTranslation';
 import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 const LinkIcon = chakra(Link);
 
 export const SetGroup: React.FC<Props> = ({ workoutExercises }) => {
+  const { t } = useTranslation('common');
+
   // More than 2 items linked
   const isProperSetGroup = useMemo(
     () => workoutExercises[0].set_group && workoutExercises.length > 1,
@@ -47,8 +50,21 @@ export const SetGroup: React.FC<Props> = ({ workoutExercises }) => {
     [isProperSetGroup, workoutExercises],
   );
 
+  const title = useMemo(() => {
+    if (!isProperSetGroup) {
+      return null;
+    }
+
+    if (workoutExercises.length === 2) {
+      return t('Super Set');
+    }
+
+    return t('Round');
+  }, [t, isProperSetGroup, workoutExercises]);
+
   return (
     <Flex flexDirection="column" gridGap={5}>
+      <Text>{title}</Text>
       {workoutExercises.map((exercise, index) => (
         <React.Fragment key={`${exercise.id}-${index}`}>
           <WorkoutExercise {...exercise} />
