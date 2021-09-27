@@ -2,9 +2,10 @@ import React, { useEffect, useState, useMemo } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0';
-import { Badge, Box, ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { Badge, ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { RecoilRoot } from 'recoil';
+import { DefaultSeo } from 'next-seo';
 import { NavBar } from '../src/components/NavBar/NavBar';
 import '../styles/globals.css';
 import { Footer } from '../src/components/Footer/Footer';
@@ -72,13 +73,22 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
     );
   }, []);
 
+  const title = useMemo(() => 'MyBodyPro | The most convenient way to work out', []);
+  const description = useMemo(() => 'The most convenient way to work out', []);
+
   return (
     <ApolloProvider client={client}>
       <UserProvider>
         <RecoilRoot>
           <ChakraProvider theme={theme}>
+            <DefaultSeo
+              noindex={!config.isProduction}
+              nofollow={!config.isProduction}
+              title={title}
+              description={description}
+            />
             <Head>
-              <title>MyBodyPro | The most convenient way to work out</title>
+              <title>{title}</title>
               <meta
                 name="description"
                 content="The most convenient way to work out"
