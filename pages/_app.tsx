@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0';
-import { Box, ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { Badge, Box, ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { RecoilRoot } from 'recoil';
 import { NavBar } from '../src/components/NavBar/NavBar';
@@ -12,6 +12,7 @@ import theme from '../src/theme/theme';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import config from '../config';
 
 const client = new ApolloClient({
   uri: '/api/graphql',
@@ -46,6 +47,30 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
       setShowInstallMessage(true);
     }
   }, [isIos, isInStandaloneMode]);
+
+  const envBadge = useMemo(() => {
+    console.log('config.isProduction', config.isProduction);
+    if (config.isProduction) {
+      return null;
+    }
+
+    const colorSchema =
+      config.environment.toLowerCase() === 'staging' ? 'green' : 'red';
+
+    return (
+      <Badge
+        position="fixed"
+        bottom={3}
+        left={3}
+        zIndex={9999999999}
+        colorScheme={colorSchema}
+        p={1}
+        textTransform="uppercase"
+      >
+        {config.environment}
+      </Badge>
+    );
+  }, []);
 
   return (
     <ApolloProvider client={client}>
@@ -83,6 +108,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
 
               <Footer />
             </Flex>
+            {envBadge}
           </ChakraProvider>
         </RecoilRoot>
       </UserProvider>
