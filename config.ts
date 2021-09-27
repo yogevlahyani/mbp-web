@@ -1,6 +1,6 @@
 const config = {
-  environment: process.env.APP_ENV || 'local',
-  isProduction: process.env.APP_ENV === 'production',
+  environment: process.env.VERCEL_ENV || 'local',
+  isProduction: process.env.VERCEL_ENV === 'production',
   providers: {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
