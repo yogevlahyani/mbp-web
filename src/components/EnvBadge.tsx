@@ -8,20 +8,17 @@ export const EnvBadge: React.FC<Props> = ({}) => {
   const { environment, isProduction } = config;
   console.log('isProduction', isProduction);
   console.log('environment', environment);
-  console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-  console.log('process.env.APP_ENV', process.env.APP_ENV);
-  console.log(
-    'config.providers.hasura.graphqlUrl',
-    config.providers.hasura.graphqlUrl,
-  );
-  console.log('process.env.HASURA_GRAPHQL_URL', process.env.HASURA_GRAPHQL_URL);
+  console.log('process.env.APP_ENV', process.env.VERCEL_ENV);
 
   const colorSchema = useMemo(() => {
     console.log('colorSchema environment', environment);
     console.log('colorSchema environment.toLowerCase()', environment.toLowerCase());
+    console.log('environment.toLowerCase() === staging', environment.toLowerCase() === 'staging');
 
     return environment.toLowerCase() === 'staging' ? 'green' : 'red';
   }, [environment]);
+
+  console.log('colorSchema', colorSchema);
 
   if (isProduction) {
     return null;
