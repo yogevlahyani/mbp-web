@@ -21,10 +21,10 @@ class Document extends NextDocument {
       <Html dir={dir} lang={locale}>
         <Head>
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/logo.png" />
-          <link rel="apple-touch-icon" sizes="152x152" href="logo.png" />
-          <link rel="apple-touch-icon" sizes="180x180" href="logo.png" />
-          <link rel="apple-touch-icon" sizes="167x167" href="logo.png" />
+          <link rel="apple-touch-icon" href="/icon.png" />
+          <link rel="apple-touch-icon" sizes="152x152" href="icon.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="icon.png" />
+          <link rel="apple-touch-icon" sizes="167x167" href="icon.png" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <link href="/logo.png" sizes="2048x2732" rel="apple-touch-startup-image" />
           <link href="/logo.png" sizes="1668x2224" rel="apple-touch-startup-image" />
