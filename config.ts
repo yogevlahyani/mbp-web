@@ -5,9 +5,6 @@ const config = {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
     },
-    backend: {
-      baseUrl: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
-    },
     netlifyCMS: {
       cms_manual_init: true,
       backend: {
