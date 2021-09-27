@@ -50,12 +50,11 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
   }, [isIos, isInStandaloneMode]);
 
   const envBadge = useMemo(() => {
-    console.log(
-      'config.isProduction',
-      config.environment,
-      process.env.NODE_ENV,
-      config.isProduction,
-    );
+    console.log('config.isProduction', config.isProduction);
+    console.log('config.environment', config.environment);
+    console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+    console.log('process.env.APP_ENV', process.env.APP_ENV);
+
     if (config.isProduction) {
       return null;
     }
