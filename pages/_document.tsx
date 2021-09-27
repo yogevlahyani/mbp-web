@@ -33,7 +33,7 @@ class Document extends NextDocument {
           <link href="/logo.png" sizes="1242x2208" rel="apple-touch-startup-image" />
           <link href="/logo.png" sizes="750x1334" rel="apple-touch-startup-image" />
           <link href="/logo.png" sizes="640x1136" rel="apple-touch-startup-image" />
-          <meta name="theme-color" content="#fff" />
+          <meta name="theme-color" content="#000" />
         </Head>
         <body>
           <Main />
