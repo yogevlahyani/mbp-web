@@ -12,6 +12,8 @@ export const EnvBadge: React.FC<Props> = ({}) => {
     [environment],
   );
 
+  console.log('colorSchema', colorSchema);
+
   if (isProduction) {
     return null;
   }
