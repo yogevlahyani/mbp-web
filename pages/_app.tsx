@@ -14,6 +14,7 @@ import theme from '../src/theme/theme';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import config from '../config';
+import { EnvBadge } from '../src/components/EnvBadge';
 
 const client = new ApolloClient({
   uri: '/api/graphql',
@@ -48,36 +49,6 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
       setShowInstallMessage(true);
     }
   }, [isIos, isInStandaloneMode]);
-
-  const envBadge = useMemo(() => {
-    console.log('config.isProduction', config.isProduction);
-    console.log('config.environment', config.environment);
-    console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-    console.log('process.env.APP_ENV', process.env.APP_ENV);
-    console.log('config.providers.hasura.graphqlUrl', config.providers.hasura.graphqlUrl);
-    console.log('process.env.HASURA_GRAPHQL_URL', process.env.HASURA_GRAPHQL_URL);
-
-    if (config.isProduction) {
-      return null;
-    }
-
-    const colorSchema =
-      config.environment.toLowerCase() === 'staging' ? 'green' : 'red';
-
-    return (
-      <Badge
-        position="fixed"
-        bottom={3}
-        left={3}
-        zIndex={9999999999}
-        colorScheme={colorSchema}
-        p={1}
-        textTransform="uppercase"
-      >
-        {config.environment}
-      </Badge>
-    );
-  }, []);
 
   const title = useMemo(() => 'MyBodyPro | The most convenient way to work out', []);
   const description = useMemo(() => 'The most convenient way to work out', []);
@@ -124,7 +95,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
 
               <Footer />
             </Flex>
-            {envBadge}
+            <EnvBadge />
           </ChakraProvider>
         </RecoilRoot>
       </UserProvider>
