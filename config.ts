@@ -1,10 +1,9 @@
 const config = {
+  environment: process.env.NEXT_PUBLIC_VERCEL_ENV || 'local',
+  isProduction: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
   providers: {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
-    },
-    backend: {
-      baseUrl: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
     },
     netlifyCMS: {
       cms_manual_init: true,
