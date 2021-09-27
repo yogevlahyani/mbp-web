@@ -2,19 +2,19 @@ import React, { useEffect, useState, useMemo } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0';
-import { Badge, ChakraProvider, Container, Flex } from '@chakra-ui/react';
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
 import { NavBar } from '../src/components/NavBar/NavBar';
-import '../styles/globals.css';
+import { EnvBadge } from '../src/components/EnvBadge';
 import { Footer } from '../src/components/Footer/Footer';
 import theme from '../src/theme/theme';
+import config from '../config';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import config from '../config';
-import { EnvBadge } from '../src/components/EnvBadge';
+import '../styles/globals.css';
 
 const client = new ApolloClient({
   uri: '/api/graphql',

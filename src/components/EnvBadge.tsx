@@ -16,10 +16,12 @@ export const EnvBadge: React.FC<Props> = ({}) => {
   );
   console.log('process.env.HASURA_GRAPHQL_URL', process.env.HASURA_GRAPHQL_URL);
 
-  const colorSchema = useMemo(
-    () => (environment.toLowerCase() === 'staging' ? 'green' : 'red'),
-    [environment],
-  );
+  const colorSchema = useMemo(() => {
+    console.log('colorSchema environment', environment);
+    console.log('colorSchema environment.toLowerCase()', environment.toLowerCase());
+
+    return environment.toLowerCase() === 'staging' ? 'green' : 'red';
+  }, [environment]);
 
   if (isProduction) {
     return null;
