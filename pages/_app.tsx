@@ -54,6 +54,8 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
     console.log('config.environment', config.environment);
     console.log('process.env.NODE_ENV', process.env.NODE_ENV);
     console.log('process.env.APP_ENV', process.env.APP_ENV);
+    console.log('config.providers.hasura.graphqlUrl', config.providers.hasura.graphqlUrl);
+    console.log('process.env.HASURA_GRAPHQL_URL', process.env.HASURA_GRAPHQL_URL);
 
     if (config.isProduction) {
       return null;
