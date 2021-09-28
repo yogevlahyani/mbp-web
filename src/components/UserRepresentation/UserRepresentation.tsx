@@ -30,6 +30,11 @@ export const UserRepresentation: React.FC<Props> = () => {
     [data],
   );
 
+  const name = useMemo(
+    () => (user?.name?.includes('@') ? user.nickname || user.name : user?.name!),
+    [user],
+  );
+
   return (
     <Flex flexDir="column" alignItems="center" gridGap={5}>
       <SkeletonCircle width={150} height={150} isLoaded={!isLoading}>
@@ -45,10 +50,8 @@ export const UserRepresentation: React.FC<Props> = () => {
         <Heading as="h3" textStyle="h3" textAlign="center">
           <Trans
             i18nKey="common:Welcome Back"
-            values={{ name: user?.name! }}
-            components={[
-              <Text key="0" isTruncated />,
-            ]}
+            values={{ name }}
+            components={[<Text key="0" isTruncated />]}
           />
         </Heading>
       </Skeleton>
