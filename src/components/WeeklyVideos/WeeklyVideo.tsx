@@ -41,11 +41,12 @@ export const WeeklyVideo: React.FC<Props> = ({
       const driveVideoId = url
         .split('https://drive.google.com/file/d/')[1]
         .split('/view')[0];
-      const driveVideoUrl = `https://drive.google.com/file/d/${driveVideoId}/preview`;
+      const driveVideoUrl = `https://drive.google.com/file/d/uc?id=${driveVideoId}`;
 
       return (
         <iframe
-          src={driveVideoUrl}
+          src={url.replace('/view', '/preview')}
+          allowFullScreen={true}
           style={{ height: '100%', width: '100%', margin: 'auto' }}
           width="100%"
           height="100%"
