@@ -15,6 +15,8 @@ type Headers = { [header: string]: string };
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
 
+  console.log('session', session);
+
   const headers: Headers = {
     'x-hasura-role': session?.accessToken ? 'user' : 'public',
   };
