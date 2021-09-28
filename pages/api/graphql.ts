@@ -19,13 +19,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     !session?.accessTokenExpiresAt ||
     session?.accessTokenExpiresAt <= Date.now() / 1000;
 
-  if (isTokenExpired) {
-    handleLogout(req, res);
-    return;
-  }
-
   console.log('session', session);
   console.log('isTokenExpired', isTokenExpired);
+
+  if (isTokenExpired) {
+    res.writeHead(302, { Location: '/sign-out' });
+    res.end();
+    return;
+  }
 
   const headers: Headers = {
     'x-hasura-role': 'public',
