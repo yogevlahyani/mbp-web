@@ -48,7 +48,6 @@ export const GET_WEEKLY_VIDEOS = gql`
       url
       order
       user_videos_histories {
-        id
         offset
         is_completed
       }

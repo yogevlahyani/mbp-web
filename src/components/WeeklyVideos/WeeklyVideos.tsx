@@ -6,6 +6,11 @@ import Slider from 'react-slick';
 import { GET_WEEKLY_VIDEOS } from '../../queries/workouts';
 import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo';
 
+interface VideoHistoryType {
+  offset: number;
+  is_completed: boolean;
+}
+
 interface Props extends BoxProps {
   weekId: string;
 }
@@ -18,7 +23,10 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
   });
   const videos = useMemo(() => data?.program_week_videos || [], [data]);
   const completedVideos = useMemo(
-    () => data?.user_videos_history?.length || 0,
+    () =>
+      data?.user_videos_history?.filter(
+        ({ is_completed }: VideoHistoryType) => !!is_completed,
+      ).length || 0,
     [data],
   );
 
