@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const session = await getSession(req, res);
 
   if (!session) {
-    return res.redirect('/sign-in');
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const { accessTokenExpiresAt, accessToken } = session;
@@ -24,8 +24,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const isTokenExpired =
     !accessTokenExpiresAt || accessTokenExpiresAt <= Date.now() / 1000;
 
+  console.log('session', session);
+  console.log('isTokenExpired', isTokenExpired);
+
   if (isTokenExpired) {
-    return res.redirect('/sign-in');
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const headers: Headers = {
