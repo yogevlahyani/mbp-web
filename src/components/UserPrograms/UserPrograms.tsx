@@ -51,25 +51,31 @@ export const UserPrograms: React.FC<Props> = ({ ...boxProps }) => {
   );
 
   if (data?.user_programs && !data?.user_programs.length) {
-    return <Box>No Programs yet</Box>;
+    return (
+      <Box textAlign="center" my={20}>
+        <Heading>{t('No Programs yet')}</Heading>
+      </Box>
+    );
   }
 
   return (
     <Box {...boxProps}>
       <Flex alignItems="center" gridGap={[1, 5]} flexDirection={['column', 'row']}>
-        <Heading as="h2" fontSize="36px">
-          {t('My Programs')}
-        </Heading>
-        <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
-          <Skeleton isLoaded={!loading}>
+        <Skeleton isLoaded={!loading}>
+          <Heading as="h2" fontSize="36px">
+            {t('My Programs')}
+          </Heading>
+        </Skeleton>
+        <Skeleton isLoaded={!loading}>
+          <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
             <Text fontSize="20px">
               {t('Programs Completed', {
                 completed,
                 total: userPrograms?.length || 0,
               })}
             </Text>
-          </Skeleton>
-        </Box>
+          </Box>
+        </Skeleton>
       </Flex>
       <Skeleton isLoaded={!loading} my={[5, 10]} overflowX="scroll">
         <Flex

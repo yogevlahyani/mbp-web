@@ -16,6 +16,7 @@ import {
 import { CalendarIcon, CheckIcon, StarIcon } from '@chakra-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import { GET_USER_POINTS } from '../../queries/user';
+import Trans from 'next-translate/Trans';
 
 interface Props {}
 
@@ -42,7 +43,13 @@ export const UserRepresentation: React.FC<Props> = () => {
       </SkeletonCircle>
       <Skeleton isLoaded={!isLoading}>
         <Heading as="h3" textStyle="h3" textAlign="center">
-          {t('Welcome Back', { name: user?.name! })}
+          <Trans
+            i18nKey="common:Welcome Back"
+            values={{ name: user?.name! }}
+            components={[
+              <Text key="0" isTruncated />,
+            ]}
+          />
         </Heading>
       </Skeleton>
       <Skeleton isLoaded={!isLoading}>
