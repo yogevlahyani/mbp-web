@@ -22,6 +22,7 @@ import { Weekday } from './Weekday';
 import { WeekdayWorkoutType } from '../WeekdayWorkouts/WeekdayWorkout';
 import { LockIcon } from '@chakra-ui/icons';
 import moment from 'moment';
+import { WeeklyVideos } from '../WeeklyVideos/WeeklyVideos';
 
 interface WorkoutAggregation {
   workouts_exercises_aggregate: {
@@ -52,7 +53,6 @@ export const ProgramWeek: React.FC<Props> = ({
   program_week_workouts,
 }) => {
   const { t } = useTranslation('common');
-  const selectedProgram = useRecoilValue(selectedProgramAtom);
   const currentWeekTime = useRecoilValue(currentWeekTimeSelector(week_number));
   const isUnlocked = useRecoilValue(isUnlockedSelector(week_number));
   const isOngoing = useRecoilValue(isOngoingWeekSelector(week_number));
@@ -91,8 +91,10 @@ export const ProgramWeek: React.FC<Props> = ({
       return 7;
     }
 
-    return currentWeekTime.isoWeekday();
+    return currentWeekTime.isoWeekday() + 1;
   }, [currentWeekTime, isUnlocked, isOngoing]);
+
+  console.log('progress', progress);
 
   const icon = useMemo(() => {
     if (isUnlocked) {
@@ -161,6 +163,7 @@ export const ProgramWeek: React.FC<Props> = ({
         </Progress>
       </AccordionButton>
       <AccordionPanel px={0} py={5}>
+        <WeeklyVideos weekId={id} />
         <Flex
           flexDirection="row"
           flexWrap="wrap"

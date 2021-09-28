@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { selector, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 import { selectedProgramAtom } from '../UserPrograms/state';
 
 export const weekNumberSelector = selector({
@@ -32,7 +32,7 @@ export const currentWeekTimeSelector = selectorFamily({
     ({ get }) => {
       const selectedProgram = get(selectedProgramAtom);
 
-      return moment(selectedProgram?.starts_at).add(weekNumber, 'weeks');
+      return moment(selectedProgram?.starts_at).add(weekNumber - 1, 'weeks');
     },
 });
 

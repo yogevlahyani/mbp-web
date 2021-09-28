@@ -41,11 +41,12 @@ export const WeeklyVideo: React.FC<Props> = ({
       const driveVideoId = url
         .split('https://drive.google.com/file/d/')[1]
         .split('/view')[0];
-      const driveVideoUrl = `https://drive.google.com/file/d/${driveVideoId}/preview`;
+      const driveVideoUrl = `https://drive.google.com/file/d/uc?id=${driveVideoId}`;
 
       return (
         <iframe
-          src={driveVideoUrl}
+          src={url.replace('/view', '/preview')}
+          allowFullScreen={true}
           style={{ height: '100%', width: '100%', margin: 'auto' }}
           width="100%"
           height="100%"
@@ -62,26 +63,33 @@ export const WeeklyVideo: React.FC<Props> = ({
   }, [url, name]);
 
   return (
-    <Box
-      mx={10}
-      borderRadius={10}
-      background="#97D7D7"
-      overflow="hidden"
-      color="#646464"
-      {...boxProps}
-    >
-      {video}
-      {hideDetails ? null : (
-        <Flex py="9px" px="10px" gridGap={1} alignItems="center">
-          <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">
-            {name}
-          </Text>
-          <Spacer />
-          <Text fontSize="12px" color="#1A74E2">
-            12:00
-          </Text>
-        </Flex>
-      )}
+    <Box px={5}>
+      <Box
+        borderRadius={10}
+        background="#97D7D7"
+        overflow="hidden"
+        color="#646464"
+        {...boxProps}
+      >
+        {video}
+        {hideDetails ? null : (
+          <Flex
+            py="9px"
+            px="10px"
+            gridGap={1}
+            alignItems="center"
+            flexDirection="row-reverse"
+          >
+            <Text isTruncated fontWeight="bold" fontSize="14px" color="#646464">
+              {name}
+            </Text>
+            <Spacer />
+            <Text fontSize="12px" color="#1A74E2">
+              12:00
+            </Text>
+          </Flex>
+        )}
+      </Box>
     </Box>
   );
 };

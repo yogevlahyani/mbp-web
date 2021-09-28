@@ -38,16 +38,16 @@ export const GET_WEEK_WORKOUTS = gql`
 `;
 
 export const GET_WEEKLY_VIDEOS = gql`
-  query GetUserProgramsWeeklyVideos($weekNumber: Int!) {
+  query GetUserProgramsWeeklyVideos($weekId: uuid!) {
     program_week_videos(
-      where: { program_week: { week_number: { _eq: $weekNumber } } }
+      where: { program_week_id: { _eq: $weekId } }
+      order_by: { order: asc }
     ) {
       id
       name
       url
       order
       user_videos_histories {
-        id
         offset
         is_completed
       }

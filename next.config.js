@@ -6,6 +6,7 @@ module.exports = withPWA({
   pwa: {
     dest: 'public',
     register: true,
+    disable: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production',
   },
   ...nextTranslate({
     webpack: (cfg) => {

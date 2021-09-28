@@ -5,21 +5,28 @@ import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-slick';
 import { GET_WEEKLY_VIDEOS } from '../../queries/workouts';
 import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo';
-import { useRecoilValue } from 'recoil';
-import { weekNumberSelector } from '../ProgramWeeks/state';
 
-interface Props extends BoxProps {}
+interface VideoHistoryType {
+  offset: number;
+  is_completed: boolean;
+}
 
-export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
+interface Props extends BoxProps {
+  weekId: string;
+}
+
+export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
   const { t } = useTranslation('common');
-  const weekNumber = useRecoilValue(weekNumberSelector);
 
   const { data, loading } = useQuery(GET_WEEKLY_VIDEOS, {
-    variables: { weekNumber },
+    variables: { weekId },
   });
   const videos = useMemo(() => data?.program_week_videos || [], [data]);
   const completedVideos = useMemo(
-    () => data?.user_videos_history?.length || 0,
+    () =>
+      data?.user_videos_history?.filter(
+        ({ is_completed }: VideoHistoryType) => !!is_completed,
+      ).length || 0,
     [data],
   );
 
@@ -38,12 +45,14 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
   return (
     <Box {...boxProps}>
       <Flex alignItems="center" gridGap={[1, 5]} flexDirection={['column', 'row']}>
-        <Heading as="h2" fontSize="36px">
-          {t('Weekly Videos')}
-        </Heading>
+        <Skeleton isLoaded={!loading}>
+          <Heading as="h5" fontSize="22px">
+            {t('Weekly Videos')}
+          </Heading>
+        </Skeleton>
         <Box backgroundColor="#1A74E2" borderRadius="20px" py={1} px={3}>
           <Skeleton isLoaded={!loading}>
-            <Text fontSize="20px">
+            <Text fontSize="18px">
               {t('Videos Completed', {
                 completed: completedVideos,
                 total: videos.length,
@@ -52,27 +61,26 @@ export const WeeklyVideos: React.FC<Props> = ({ ...boxProps }) => {
           </Skeleton>
         </Box>
       </Flex>
-      <Box my={10} width="full">
-        <Slider
-          rtl
-          centerMode
-          centerPadding="60px"
-          slidesToShow={3}
-          infinite={false}
-          arrows={false}
-          speed={500}
-          responsive={[
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-                centerPadding: '0px',
+      <Box my={10} px={15} width="full">
+        <Skeleton isLoaded={!loading}>
+          <Slider
+            slidesToShow={3}
+            infinite={false}
+            arrows={true}
+            speed={500}
+            responsive={[
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 1,
+                  centerPadding: '0px',
+                },
               },
-            },
-          ]}
-        >
-          {weeklyVideos}
-        </Slider>
+            ]}
+          >
+            {weeklyVideos}
+          </Slider>
+        </Skeleton>
       </Box>
     </Box>
   );
