@@ -27,17 +27,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   console.log('session', session);
   console.log('isTokenExpired', isTokenExpired);
 
-  if (isTokenExpired) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
   const headers: Headers = {
     'x-hasura-role': 'public',
   };
 
-  if (session.accessToken) {
+  if (session?.accessToken) {
     headers['x-hasura-role'] = 'user';
-    headers.authorization = `Bearer ${session.accessToken}`;
+    headers.authorization = `Bearer ${session?.accessToken}`;
   }
 
   return httpProxyMiddleware(req, res, {
