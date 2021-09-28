@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from '@auth0/nextjs-auth0';
+import { getSession, handleLogout } from '@auth0/nextjs-auth0';
 import httpProxyMiddleware from 'next-http-proxy-middleware';
 import configuration from '../../config';
 
@@ -15,14 +15,14 @@ type Headers = { [header: string]: string };
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
 
-  if (!session) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
-  const { accessTokenExpiresAt, accessToken } = session;
-
   const isTokenExpired =
-    !accessTokenExpiresAt || accessTokenExpiresAt <= Date.now() / 1000;
+    !session?.accessTokenExpiresAt ||
+    session?.accessTokenExpiresAt <= Date.now() / 1000;
+
+  if (isTokenExpired) {
+    handleLogout(req, res);
+    return;
+  }
 
   console.log('session', session);
   console.log('isTokenExpired', isTokenExpired);
@@ -32,11 +32,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const headers: Headers = {
-    'x-hasura-role': accessToken ? 'user' : 'public',
+    'x-hasura-role': 'public',
   };
 
-  if (accessToken) {
-    headers.authorization = `Bearer ${accessToken}`;
+  if (session.accessToken) {
+    headers['x-hasura-role'] = 'user';
+    headers.authorization = `Bearer ${session.accessToken}`;
   }
 
   return httpProxyMiddleware(req, res, {
