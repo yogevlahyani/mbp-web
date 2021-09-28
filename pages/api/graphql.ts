@@ -15,19 +15,6 @@ type Headers = { [header: string]: string };
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
 
-  const isTokenExpired =
-    !session?.accessTokenExpiresAt ||
-    session?.accessTokenExpiresAt <= Date.now() / 1000;
-
-  console.log('session', session);
-  console.log('isTokenExpired', isTokenExpired);
-
-  if (isTokenExpired) {
-    res.writeHead(302, { Location: '/sign-out' });
-    res.end();
-    return;
-  }
-
   const headers: Headers = {
     'x-hasura-role': 'public',
   };
