@@ -22,6 +22,7 @@ import { Weekday } from './Weekday';
 import { WeekdayWorkoutType } from '../WeekdayWorkouts/WeekdayWorkout';
 import { LockIcon } from '@chakra-ui/icons';
 import moment from 'moment';
+import { WeeklyVideos } from '../WeeklyVideos/WeeklyVideos';
 
 interface WorkoutAggregation {
   workouts_exercises_aggregate: {
@@ -162,6 +163,7 @@ export const ProgramWeek: React.FC<Props> = ({
         </Progress>
       </AccordionButton>
       <AccordionPanel px={0} py={5}>
+        <WeeklyVideos weekId={id} />
         <Flex
           flexDirection="row"
           flexWrap="wrap"
