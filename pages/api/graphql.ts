@@ -15,14 +15,25 @@ type Headers = { [header: string]: string };
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
 
-  console.log('session', session);
+  if (!session) {
+    return res.redirect('/sign-in');
+  }
+
+  const { accessTokenExpiresAt, accessToken } = session;
+
+  const isTokenExpired =
+    !accessTokenExpiresAt || accessTokenExpiresAt <= Date.now() / 1000;
+
+  if (isTokenExpired) {
+    return res.redirect('/sign-in');
+  }
 
   const headers: Headers = {
-    'x-hasura-role': session?.accessToken ? 'user' : 'public',
+    'x-hasura-role': accessToken ? 'user' : 'public',
   };
 
-  if (session?.accessToken) {
-    headers.authorization = `Bearer ${session.accessToken}`;
+  if (accessToken) {
+    headers.authorization = `Bearer ${accessToken}`;
   }
 
   return httpProxyMiddleware(req, res, {
