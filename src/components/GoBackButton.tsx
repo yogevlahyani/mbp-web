@@ -1,6 +1,6 @@
 import React from 'react';
-import { chakra, IconButton, IconButtonProps } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { chakra, IconButton, IconButtonProps } from '@chakra-ui/react';
 import { ArrowBendUpRight } from 'phosphor-react';
 
 interface Props extends Omit<IconButtonProps, 'aria-label'> {}
@@ -8,9 +8,7 @@ interface Props extends Omit<IconButtonProps, 'aria-label'> {}
 const ArrowBendUpRightIcon = chakra(ArrowBendUpRight);
 
 export const GoBackButton: React.FC<Props> = (iconProps) => {
-  const { back, pathname } = useRouter();
-
-  console.log('pathname', pathname);
+  const { pathname } = useRouter();
 
   if (pathname === '/[nickname]') {
     return null;
@@ -22,7 +20,7 @@ export const GoBackButton: React.FC<Props> = (iconProps) => {
       aria-label="Go Back"
       icon={<ArrowBendUpRightIcon size={20} />}
       size="md"
-      onClick={back}
+      onClick={() => (window.location.href = '/')}
       variant="solid"
       colorScheme="twitter"
     />
