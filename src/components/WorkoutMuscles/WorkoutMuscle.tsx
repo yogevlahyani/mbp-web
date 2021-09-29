@@ -48,7 +48,7 @@ export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
   return (
     <Box my={5}>
       {muscleName}
-      <Accordion allowMultiple={false} allowToggle={true}>
+      <Accordion allowMultiple={true} allowToggle={true}>
         <Flex flexDirection="column" my={5} gridGap={5}>
           {exercises}
         </Flex>

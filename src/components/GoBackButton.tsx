@@ -8,7 +8,7 @@ interface Props extends Omit<IconButtonProps, 'aria-label'> {}
 const ArrowBendUpRightIcon = chakra(ArrowBendUpRight);
 
 export const GoBackButton: React.FC<Props> = (iconProps) => {
-  const { back } = useRouter();
+  const { push } = useRouter();
 
   return (
     <IconButton
@@ -16,7 +16,7 @@ export const GoBackButton: React.FC<Props> = (iconProps) => {
       aria-label="Go Back"
       icon={<ArrowBendUpRightIcon size={20} />}
       size="md"
-      onClick={back}
+      onClick={() => push('/')}
       variant="solid"
       colorScheme="twitter"
     />
