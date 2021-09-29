@@ -3,7 +3,14 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0';
 import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
 import { NavBar } from '../src/components/NavBar/NavBar';
@@ -16,9 +23,21 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../styles/globals.css';
 
+const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (response) console.log(`[Response]: ${response}`);
+  if (operation) console.log(`[Operation]: ${operation}`);
+});
+
 const client = new ApolloClient({
-  uri: '/api/graphql',
   cache: new InMemoryCache(),
+  link: ApolloLink.from([errorLink, new HttpLink({ uri: '/api/graphql' })]),
 });
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
