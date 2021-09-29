@@ -24,7 +24,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../styles/globals.css';
 
-LogRocket.init('urfnar/mybodypro');
+if (config.isProduction) {
+  LogRocket.init('urfnar/mybodypro');
+}
 
 const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
   if (graphQLErrors)
