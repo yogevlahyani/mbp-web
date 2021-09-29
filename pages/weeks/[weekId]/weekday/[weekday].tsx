@@ -28,7 +28,7 @@ export default function Week() {
       minH="max-content"
       position="relative"
     >
-      <GoBackButton mb={5} size="sm" variant="solid" colorScheme="gray" />
+      <GoBackButton size="sm" variant="solid" colorScheme="gray" position="absolute" top={5} right={5} />
       {fittokMode ? (
         <Fittok weekId={String(weekId)} weekday={Number(weekday)} />
       ) : (

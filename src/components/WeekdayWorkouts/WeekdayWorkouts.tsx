@@ -37,9 +37,6 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
         alignItems={['center', 'flex-end']}
       >
         <Heading>{t('Week Number', { weekNumber })}</Heading>
-        <Text fontSize="md" py={[0, 1]}>
-          זמן משוער לאימון הוא 50:00 דק
-        </Text>
       </Flex>
       <Divider my={5} />
       {workouts}
