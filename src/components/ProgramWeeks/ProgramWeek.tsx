@@ -94,8 +94,6 @@ export const ProgramWeek: React.FC<Props> = ({
     return currentWeekTime.isoWeekday() + 1;
   }, [currentWeekTime, isUnlocked, isOngoing]);
 
-  console.log('progress', progress);
-
   const icon = useMemo(() => {
     if (isUnlocked) {
       return <AccordionIcon width={30} height={30} />;

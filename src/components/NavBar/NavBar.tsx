@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useUser } from '@auth0/nextjs-auth0';
 import { Skeleton, Spacer } from '@chakra-ui/react';
 import { Logo } from './Logo';
 import { NavBarContainer } from './NavBarContainer';
 import { LoggedOutNav } from './LoggedOutNav';
 import { LoggedInNav } from './LoggedInNav';
-import { LanguageSelector } from './LanguageSelector';
+import LogRocket from 'logrocket';
 
 export const NavBar = () => {
   const { user, isLoading } = useUser();
@@ -14,6 +14,18 @@ export const NavBar = () => {
     () => (user ? <LoggedInNav {...user} /> : <LoggedOutNav />),
     [user],
   );
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    LogRocket.identify(user.sub!, {
+      name: user.name!,
+      email: user.email!,
+      nickname: user.nickname!,
+    });
+  }, [user]);
 
   return (
     <NavBarContainer
