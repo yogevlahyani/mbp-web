@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { Box, Heading } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
-import { ContentHeader } from '../src/components/Home/ContentHeader';
-import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { getSession, useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
+import LogRocket from 'logrocket';
+import { ContentHeader } from '../src/components/Home/ContentHeader';
 
 export default function Home() {
+  const { user } = useUser();
   const { t } = useTranslation('common');
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    LogRocket.identify(user.sub!, {
+      name: user.name!,
+      email: user.email!,
+      nickname: user.nickname!,
+    });
+  }, [user]);
 
   return (
     <>

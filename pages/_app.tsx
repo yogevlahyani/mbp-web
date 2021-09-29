@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { UserProvider } from '@auth0/nextjs-auth0';
+import { getSession, UserProvider } from '@auth0/nextjs-auth0';
 import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import {
   ApolloClient,
@@ -13,6 +13,7 @@ import {
 import { onError } from '@apollo/client/link/error';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
+import LogRocket from 'logrocket';
 import { NavBar } from '../src/components/NavBar/NavBar';
 import { EnvBadge } from '../src/components/EnvBadge';
 import { Footer } from '../src/components/Footer/Footer';
@@ -22,6 +23,8 @@ import config from '../config';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../styles/globals.css';
+
+LogRocket.init('urfnar/mybodypro');
 
 const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
   if (graphQLErrors)
