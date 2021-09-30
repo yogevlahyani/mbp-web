@@ -59,6 +59,7 @@ export const ProgramWeeks: React.FC<Props> = (props) => {
         </Box>
       </Flex>
       <Accordion
+        allowToggle={true}
         as={Flex}
         flexDirection="column"
         gridGap={[3, 10]}

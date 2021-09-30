@@ -187,7 +187,11 @@ export const WorkoutExercise: React.FC<Props> = ({
           <Box p="21px" flex={[1, 3]}>
             <Heading size="lg">{name}</Heading>
             <Text fontSize="lg">{t('Sets Count', { count: sets })}</Text>
-            <Text fontSize="lg">{t('Repeats Count', { count: repeats })}</Text>
+            <Text fontSize="lg">
+              {max_repeats
+                ? `${t('Max')} ${t('Repeats')}`
+                : t('RepeatsCount', { count: Number(repeats) })}
+            </Text>
             <HStack
               justifyContent={['center', 'flex-end']}
               alignItems="center"
@@ -235,16 +239,16 @@ export const WorkoutExercise: React.FC<Props> = ({
           {repMode}
           <Flex flexDirection={['row', 'column']} justifyContent="space-between">
             <Text>{t('Sets')}</Text>
-            <Badge colorScheme="purple" variant="solid">
+            <Box>
               <Text>{t('Sets Count', { count: sets })}</Text>
-            </Badge>
+            </Box>
           </Flex>
           {weightMode}
           <Flex flexDirection={['row', 'column']} justifyContent="space-between">
             <Text>{t('Rest')}</Text>
-            <Badge colorScheme="blue" variant="solid">
+            <Box>
               <Text>{restTimeText}</Text>
-            </Badge>
+            </Box>
           </Flex>
         </Flex>
         {notes &&
