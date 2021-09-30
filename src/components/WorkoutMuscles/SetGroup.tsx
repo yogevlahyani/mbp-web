@@ -12,7 +12,6 @@ import {
 import { ArrowDown } from 'phosphor-react';
 import useTranslation from 'next-translate/useTranslation';
 import { chain } from 'lodash';
-import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
 import { WorkoutMuscle, WorkoutMuscleType } from './WorkoutMuscle';
 
 interface Muscle extends WorkoutMuscleType {
