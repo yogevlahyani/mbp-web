@@ -1,53 +1,78 @@
 import React, { useCallback, useMemo } from 'react';
-import { Box, chakra, Flex, Tooltip, Text } from '@chakra-ui/react';
-import { Link } from 'phosphor-react';
+import {
+  Box,
+  chakra,
+  Flex,
+  Tooltip,
+  Text,
+  Divider,
+  Center,
+  HStack,
+} from '@chakra-ui/react';
+import { ArrowDown } from 'phosphor-react';
 import useTranslation from 'next-translate/useTranslation';
+import { chain } from 'lodash';
 import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
+import { WorkoutMuscle, WorkoutMuscleType } from './WorkoutMuscle';
 
-interface Props {
-  workoutExercises: WorkoutExerciseType[];
+interface Muscle extends WorkoutMuscleType {
+  setGroupId?: string;
 }
 
-const LinkIcon = chakra(Link);
+interface Props {
+  muscles: Muscle[];
+}
 
-export const SetGroup: React.FC<Props> = ({ workoutExercises }) => {
+const ArrowDownIcon = chakra(ArrowDown);
+
+export const SetGroup: React.FC<Props> = ({ muscles }) => {
   const { t } = useTranslation('common');
+
+  const setGroupExercises = useMemo(
+    () =>
+      chain(muscles)
+        .map(({ exercises_muscles }) => exercises_muscles)
+        .flatten()
+        .value(),
+    [muscles],
+  );
 
   // More than 2 items linked
   const isProperSetGroup = useMemo(
-    () => workoutExercises[0].set_group && workoutExercises.length > 1,
-    [workoutExercises],
+    () => muscles[0].setGroupId && setGroupExercises.length > 1,
+    [muscles, setGroupExercises],
   );
 
   const renderLinkIcon = useCallback(
     (index: number, setGroupId?: string) => {
-      if (!isProperSetGroup || !setGroupId || index >= workoutExercises.length - 1) {
+      if (!isProperSetGroup || !setGroupId || index >= muscles.length - 1) {
         return null;
       }
 
       return (
-        <Flex my="-40px" zIndex={999}>
+        <Center
+          mt="-40px"
+          zIndex={999}
+          position="absolute"
+          left="50%"
+          bottom="-35%"
+          height="50%"
+          transform="translateX(-50%)"
+        >
           <Tooltip
-            label={`Super Set (${workoutExercises.length})`}
+            label={`Super Set (${muscles.length})`}
             placement="top"
             hasArrow
             background="black"
           >
-            <Box
-              height="48px"
-              background="black"
-              borderRadius="lg"
-              borderTopEndRadius={0}
-              borderBottomEndRadius={0}
-              px={5}
-            >
-              <LinkIcon size="48px" color="white" />
-            </Box>
+            <Flex height="100%" background="white" borderRadius="lg" px={5} alignItems="center">
+              <ArrowDownIcon size="48px" color="black" />
+            </Flex>
           </Tooltip>
-        </Flex>
+        </Center>
       );
     },
-    [isProperSetGroup, workoutExercises],
+    [isProperSetGroup, muscles],
   );
 
   const title = useMemo(() => {
@@ -55,22 +80,30 @@ export const SetGroup: React.FC<Props> = ({ workoutExercises }) => {
       return null;
     }
 
-    if (workoutExercises.length === 2) {
-      return t('Super Set');
+    let text = t('Round');
+
+    if (setGroupExercises.length === 2) {
+      text = t('Super Set');
     }
 
-    return t('Round');
-  }, [t, isProperSetGroup, workoutExercises]);
+    return (
+      <HStack>
+        <Text>{text}</Text>
+        <Text>({setGroupExercises.length})</Text>
+      </HStack>
+    );
+  }, [t, isProperSetGroup, setGroupExercises]);
 
   return (
-    <Flex flexDirection="column" gridGap={5}>
-      <Text>{title}</Text>
-      {workoutExercises.map((exercise, index) => (
-        <React.Fragment key={`${exercise.id}-${index}`}>
-          <WorkoutExercise {...exercise} />
-          {renderLinkIcon(index, exercise.set_group)}
-        </React.Fragment>
+    <Flex flexDirection="column" gridGap={5} mt={5}>
+      {title}
+      {muscles.map((muscle: WorkoutMuscleType, index: number) => (
+        <Box key={`${muscle.name}`} position="relative">
+          <WorkoutMuscle {...muscle} />
+          {renderLinkIcon(index, muscle.setGroupId)}
+        </Box>
       ))}
+      <Divider color="white" />
     </Flex>
   );
 };

@@ -7,7 +7,7 @@ import { LoggedOutNav } from './LoggedOutNav';
 import { LoggedInNav } from './LoggedInNav';
 import LogRocket from 'logrocket';
 
-export const NavBar = () => {
+export const Header = () => {
   const { user, isLoading } = useUser();
 
   const userNavigation = useMemo(
@@ -33,7 +33,7 @@ export const NavBar = () => {
       position="sticky"
       top={0}
       left={0}
-      background="transparent linear-gradient(180deg, #1A74E2 0%, #225EA8 100%) 0% 0% no-repeat padding-box"
+      background="rgba(0, 0, 0, 0.9)"
       color="white"
       zIndex={9999}
     >

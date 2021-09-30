@@ -1,32 +1,70 @@
-import { Accordion, Box, Flex, Heading } from '@chakra-ui/react';
-import { chain } from 'lodash';
-import useTranslation from 'next-translate/useTranslation';
-import React, { useMemo } from 'react';
-import { SetGroup } from './SetGroup';
-import { WorkoutExerciseType } from './WorkoutExercise';
+import React, { useCallback, useMemo } from 'react';
+import { Accordion, Box, Center, chakra, Flex, Heading, Tooltip } from '@chakra-ui/react';
+import { ArrowDown } from 'phosphor-react';
+import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
 
 export interface WorkoutMuscleType {
   name?: string;
   exercises_muscles: WorkoutExerciseType[];
+  setGroupId?: string;
 }
 
 interface Props extends WorkoutMuscleType {}
 
-export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
-  const setGroups: WorkoutExerciseType[][] = useMemo(
-    () => chain(exercises_muscles).groupBy('set_group').sortBy('order').value(),
-    [exercises_muscles],
+const ArrowDownIcon = chakra(ArrowDown);
+
+export const WorkoutMuscle: React.FC<Props> = ({
+  name,
+  exercises_muscles,
+  setGroupId,
+}) => {
+  // More than 2 items linked
+  const isProperSetGroup = Boolean(setGroupId && exercises_muscles.length > 1);
+
+  const renderLinkIcon = useCallback(
+    (index: number) => {
+      if (
+        !isProperSetGroup ||
+        !setGroupId ||
+        index >= exercises_muscles.length - 1
+      ) {
+        return null;
+      }
+
+      return (
+        <Center my="-40px" zIndex={999}>
+          <Tooltip
+            label={`Super Set (${exercises_muscles.length})`}
+            placement="top"
+            hasArrow
+            background="black"
+          >
+            <Box
+              height="48px"
+              background="white"
+              borderRadius="lg"
+              px={5}
+            >
+              <ArrowDownIcon size="48px" color="black" />
+            </Box>
+          </Tooltip>
+        </Center>
+      );
+    },
+    [isProperSetGroup, exercises_muscles, setGroupId],
   );
 
   const exercises = useMemo(
     () =>
-      setGroups.map((workoutExercises) => (
-        <SetGroup
-          key={workoutExercises[0].set_group}
-          workoutExercises={workoutExercises}
-        />
-      )),
-    [setGroups],
+      exercises_muscles.map(
+        (workoutExercise: WorkoutExerciseType, index: number) => (
+          <React.Fragment key={`${workoutExercise.id}-${index}`}>
+            <WorkoutExercise {...workoutExercise} />
+            {renderLinkIcon(index)}
+          </React.Fragment>
+        ),
+      ),
+    [exercises_muscles, renderLinkIcon],
   );
 
   const muscleName = useMemo(() => {
@@ -46,10 +84,10 @@ export const WorkoutMuscle: React.FC<Props> = ({ name, exercises_muscles }) => {
   }
 
   return (
-    <Box my={5}>
+    <Box>
       {muscleName}
       <Accordion allowMultiple={true} allowToggle={true}>
-        <Flex flexDirection="column" my={5} gridGap={5}>
+        <Flex flexDirection="column" gridGap={5}>
           {exercises}
         </Flex>
       </Accordion>

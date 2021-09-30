@@ -4,7 +4,8 @@ import { chain } from 'lodash';
 import Trans from 'next-translate/Trans';
 import React, { useMemo } from 'react';
 import { GET_WORKOUT } from '../../queries/workouts';
-import { WorkoutMuscle, WorkoutMuscleType } from '../WorkoutMuscles/WorkoutMuscle';
+import { SetGroup } from '../WorkoutMuscles/SetGroup';
+import { WorkoutMuscleType } from '../WorkoutMuscles/WorkoutMuscle';
 
 export interface WeekdayWorkoutType {
   id: string;
@@ -18,21 +19,34 @@ interface Props extends WeekdayWorkoutType {}
 export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
   const { data, loading } = useQuery(GET_WORKOUT, { variables: { workoutId: id } });
 
-  const muscles = useMemo(
+  const setGroups = useMemo(
     () =>
       chain(data?.workouts_by_pk?.workouts_exercises)
-        .groupBy('exercise.exercises_muscles.muscle.name')
-        .map((value, key) => ({ name: key !== 'undefined' ? key : undefined, exercises_muscles: value }))
+        .groupBy('set_group')
+        .sortBy('order')
+        .map((setGroup) =>
+          chain(setGroup)
+            .groupBy('exercise.exercises_muscles.muscle.name')
+            .map((value, key) => ({
+              name: key !== 'undefined' ? key : undefined,
+              exercises_muscles: value,
+              setGroupId: setGroup[0].set_group,
+            }))
+            .value(),
+        )
         .value(),
     [data],
   );
 
   const exercises = useMemo(
     () =>
-      muscles.map((muscle: WorkoutMuscleType) => (
-        <WorkoutMuscle key={`${muscle.name}`} {...muscle} />
+      setGroups.map((setGroupMuscles) => (
+        <SetGroup
+          key={`${setGroupMuscles[0].setGroupId}`}
+          muscles={setGroupMuscles}
+        />
       )),
-    [muscles],
+    [setGroups],
   );
 
   if (!exercises?.length) {

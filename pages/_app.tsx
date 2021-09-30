@@ -14,7 +14,7 @@ import { onError } from '@apollo/client/link/error';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
 import LogRocket from 'logrocket';
-import { NavBar } from '../src/components/NavBar/NavBar';
+import { Header } from '../src/components/NavBar/Header';
 import { EnvBadge } from '../src/components/EnvBadge';
 import { Footer } from '../src/components/Footer/Footer';
 import theme from '../src/theme/theme';
@@ -103,7 +103,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
               minH="100vh"
               background="#000000 linear-gradient(180deg, #1A74E266 0%, #00544800 100%) 0% 0% no-repeat padding-box"
             >
-              <NavBar />
+              <Header />
 
               <Container
                 maxW="full"
