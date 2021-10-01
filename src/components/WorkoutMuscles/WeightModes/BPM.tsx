@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Flex, FlexProps, Text } from '@chakra-ui/react';
+import { Box, Flex, FlexProps, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props extends FlexProps {
@@ -16,9 +16,9 @@ export const BPM: React.FC<Props> = ({ count = 0, ...flexProps }) => {
       justifyContent="space-between"
     >
       <Text>{t('BPM')}</Text>
-      <Badge colorScheme="teal" variant="solid" width={['auto', '100%']}>
+      <Box width={['auto', '100%']}>
         <Text textAlign="center">{`${count}`}</Text>
-      </Badge>
+      </Box>
     </Flex>
   );
 };

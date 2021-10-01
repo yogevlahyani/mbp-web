@@ -26,19 +26,25 @@
   "Repeats": "חזרות",
   "Rest": "מנוחה",
   "Sets Count": "{{count}} סטים",
-  "Repeats Count": {
+  "RepeatsCount": {
     "0": "ללא חזרות",
     "one": "חזרה אחת (1)",
+    "few": "{{count}} חזרות",
+    "many": "{{count}} חזרות",
     "other": "{{count}} חזרות"
   },
   "Seconds": {
     "0": "ללא מנוחה",
     "one": "שניה אחת",
+    "few": "{{count}} שניות",
+    "many": "{{count}} שניות",
     "other": "{{count}} שניות"
   },
   "Minutes": {
     "0": "ללא מנוחה",
     "one": "דקה אחת",
+    "few": "{{count}} דקות",
+    "many": "{{count}} דקות",
     "other": "{{count}} דקות"
   },
   "ABS": "בטן",
@@ -69,5 +75,6 @@
   "Instructions": "הוראות",
   "Max": "מקסימום",
   "Super Set": "סופר סט",
-  "Round": "סבב"
+  "Round": "סבב",
+  "Done": "סיימתי"
 }

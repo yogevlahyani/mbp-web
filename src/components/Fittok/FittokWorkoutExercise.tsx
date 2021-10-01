@@ -124,7 +124,7 @@ export const FittokWorkoutWorkout: React.FC<Props> = ({
           <Box>
             <Text>{t('Repeats')}</Text>
             <Badge colorScheme="green" variant="solid">
-              <Text>{t('Repeats Count', { count: sets })}</Text>
+              <Text>{t('RepeatsCount', { count: sets })}</Text>
             </Badge>
           </Box>
           <Box>

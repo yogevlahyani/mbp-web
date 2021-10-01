@@ -26,8 +26,8 @@ export const Controls: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     }
 
     const interval = setInterval(
-      () => setTimerCount(moment().diff(timer.startedAt, 'seconds')),
-      1000,
+      () => setTimerCount(moment().diff(timer.startedAt, 'milliseconds')),
+      0,
     );
 
     return () => clearInterval(interval);
@@ -46,7 +46,7 @@ export const Controls: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const startTimer = useCallback(
     () =>
       setTimer({
-        startedAt: moment().subtract(timerCount, 'seconds'),
+        startedAt: moment().subtract(timerCount, 'milliseconds'),
         isActive: true,
       }),
     [setTimer, timerCount],

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Badge, Flex, FlexProps, Text } from '@chakra-ui/react';
+import { Box, Flex, FlexProps, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
 
@@ -23,9 +23,9 @@ export const Time: React.FC<Props> = ({ seconds, ...flexProps }) => {
       justifyContent="space-between"
     >
       <Text>{t('Time')}</Text>
-      <Badge colorScheme="green" variant="solid" width={['auto', '100%']}>
+      <Box width={['auto', '100%']}>
         <Text textAlign="center">{duration}</Text>
-      </Badge>
+      </Box>
     </Flex>
   );
 };

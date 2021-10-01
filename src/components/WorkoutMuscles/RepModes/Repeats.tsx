@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Badge, Flex, FlexProps, Text } from '@chakra-ui/react';
+import { Box, Flex, FlexProps, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props extends FlexProps {
@@ -19,7 +19,7 @@ export const Repeats: React.FC<Props> = ({
       return `${t('Max')} ${t('Repeats')}`;
     }
 
-    return t('Repeats Count', { count });
+    return t('RepeatsCount', { count });
   }, [count, isMaxRepeats, t]);
 
   return (
@@ -29,9 +29,9 @@ export const Repeats: React.FC<Props> = ({
       justifyContent="space-between"
     >
       <Text>{t('Repeats')}</Text>
-      <Badge colorScheme="green" variant="solid" width={['auto', '100%']}>
+      <Box width={['auto', '100%']}>
         <Text textAlign="center">{repeats}</Text>
-      </Badge>
+      </Box>
     </Flex>
   );
 };

@@ -1,23 +1,21 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   Flex,
   Progress,
   Text,
 } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRecoilValue } from 'recoil';
-import { chain, sumBy, union, unionBy } from 'lodash';
+import { chain, sumBy } from 'lodash';
 import {
   currentWeekTimeSelector,
   isOngoingWeekSelector,
   isUnlockedSelector,
 } from './state';
-import { selectedProgramAtom } from '../UserPrograms/state';
 import { Weekday } from './Weekday';
 import { WeekdayWorkoutType } from '../WeekdayWorkouts/WeekdayWorkout';
 import { LockIcon } from '@chakra-ui/icons';

@@ -11,12 +11,29 @@ export const Timer: React.FC<{}> = ({}) => {
 
   const formattedTimer = useMemo(() => {
     if (!timer.isActive && !timer.startedAt) {
-      return '00:00:00';
+      return <Text fontSize="31px">00:00:00:00</Text>;
     }
 
-    const milliseconds = moment.duration(timerCount, 'seconds').asMilliseconds();
+    // So it'll be easy to change to seconds later
+    const milliseconds = moment
+      .duration(timerCount, 'milliseconds')
+      .asMilliseconds();
+    const hoursFormat = moment.utc(milliseconds).format('HH');
+    const minutesFormat = moment.utc(milliseconds).format('mm');
+    const secondsFormat = moment.utc(milliseconds).format('ss');
+    const millisecondsFormat = moment.utc(milliseconds).format('SS');
 
-    return moment.utc(milliseconds).format('HH:mm:ss');
+    return (
+      <HStack gridGap={0} justifyContent="center">
+        <Text fontSize="31px" m="0 !important" width="45px">{millisecondsFormat}</Text>
+        <Text fontSize="31px" m="0 !important">:</Text>
+        <Text fontSize="31px" m="0 !important" width="45px">{secondsFormat}</Text>
+        <Text fontSize="31px" m="0 !important">:</Text>
+        <Text fontSize="31px" m="0 !important" width="45px">{minutesFormat}</Text>
+        <Text fontSize="31px" m="0 !important">:</Text>
+        <Text fontSize="31px" m="0 !important" width="45px">{hoursFormat}</Text>
+      </HStack>
+    );
   }, [timerCount, timer]);
 
   return (
@@ -29,9 +46,7 @@ export const Timer: React.FC<{}> = ({}) => {
       py={4}
       zIndex={999}
     >
-      <Controls>
-        <Text fontSize="31px">{formattedTimer}</Text>
-      </Controls>
+      <Controls>{formattedTimer}</Controls>
     </Box>
   );
 };

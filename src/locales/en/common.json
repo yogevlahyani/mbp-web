@@ -28,21 +28,29 @@
   "Sets Count": {
     "0": "No Sets",
     "one": "One Set (1)",
+    "few": "{{count}} Sets",
+    "many": "{{count}} Sets",
     "other": "{{count}} Sets"
   },
-  "Repeats Count": {
+  "RepeatsCount": {
     "0": "No Repeatitions",
     "one": "One Repeatition (1)",
+    "few": "{{count}} Repeatitions",
+    "many": "{{count}} Repeatitions",
     "other": "{{count}} Repeatitions"
   },
   "Seconds": {
     "0": "No Rest",
     "one": "One Second",
+    "few": "{{count}} Seconds",
+    "many": "{{count}} Seconds",
     "other": "{{count}} Seconds"
   },
   "Minutes": {
     "0": "No Rest",
     "one": "One Minute (1)",
+    "few": "{{count}} Minutes",
+    "many": "{{count}} Minutes",
     "other": "{{count}} Minutes"
   },
   "ABS": "Abs",
@@ -56,5 +64,6 @@
   "50% BOTTOM PUSH UPS": "50% Bottom Push Ups",
   "CHEST PRESS MACHINE": "Chest Press Machine",
   "CHEST FLYS – MACHINE": "Chest Flys – Machine",
-  "PULLY STANDARD GRIP PULL DOWN": "Pully Standard Grip Pull Down"
+  "PULLY STANDARD GRIP PULL DOWN": "Pully Standard Grip Pull Down",
+  "Done": "Done"
 }
