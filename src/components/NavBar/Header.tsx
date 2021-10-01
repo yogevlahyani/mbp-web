@@ -6,6 +6,7 @@ import { NavBarContainer } from './NavBarContainer';
 import { LoggedOutNav } from './LoggedOutNav';
 import { LoggedInNav } from './LoggedInNav';
 import LogRocket from 'logrocket';
+import { GoBackButton } from '../GoBackButton';
 
 export const Header = () => {
   const { user, isLoading } = useUser();
@@ -37,11 +38,12 @@ export const Header = () => {
       color="white"
       zIndex={9999}
     >
+      <GoBackButton me={5} />
       <Logo width="150px" />
       <Spacer />
       {/* TODO: Enable when multi language */}
       {/* <LanguageSelector /> */}
-      <Skeleton isLoaded={!isLoading}>{userNavigation}</Skeleton>
+      <Skeleton isLoaded={!isLoading} width="min-content">{userNavigation}</Skeleton>
     </NavBarContainer>
   );
 };

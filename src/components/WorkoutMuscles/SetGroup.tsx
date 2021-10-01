@@ -55,7 +55,7 @@ export const SetGroup: React.FC<Props> = ({ muscles }) => {
           zIndex={999}
           position="absolute"
           left="50%"
-          bottom="-35%"
+          bottom="-30%"
           height="50%"
           transform="translateX(-50%)"
         >
@@ -65,7 +65,7 @@ export const SetGroup: React.FC<Props> = ({ muscles }) => {
             hasArrow
             background="black"
           >
-            <Flex height="100%" background="white" borderRadius="lg" px={5} alignItems="center">
+            <Flex height="70%" background="white" borderRadius="lg" px={5} alignItems="center">
               <ArrowDownIcon size="48px" color="black" />
             </Flex>
           </Tooltip>
