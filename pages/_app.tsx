@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import type { AppProps } from 'next/app';
+import type { AppProps, NextWebVitalsMetric } from 'next/app';
 import Head from 'next/head';
-import { getSession, UserProvider } from '@auth0/nextjs-auth0';
+import { UserProvider } from '@auth0/nextjs-auth0';
 import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import {
   ApolloClient,
@@ -127,4 +127,13 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
     </ApolloProvider>
   );
 }
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  const { isProduction } = config;
+
+  if (isProduction) {
+    console.log(metric);
+  }
+}
+
 export default MyBodyPro;

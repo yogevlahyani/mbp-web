@@ -30,11 +30,10 @@ export const Header = () => {
 
   return (
     <NavBarContainer
-      backgroundColor="white"
       position="sticky"
       top={0}
       left={0}
-      background="rgba(0, 0, 0, 0.9)"
+      bgGradient="linear(to-b, blackAlpha.900 0%, blackAlpha.700 25%, blackAlpha.500 50%, blackAlpha.300 75%, transparent 100%)"
       color="white"
       zIndex={9999}
     >

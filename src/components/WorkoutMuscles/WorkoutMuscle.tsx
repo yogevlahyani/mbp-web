@@ -39,14 +39,15 @@ export const WorkoutMuscle: React.FC<Props> = ({
             hasArrow
             background="black"
           >
-            <Box
+            <Flex
               height="48px"
               background="white"
               borderRadius="lg"
-              px={5}
+              justifyContent="center"
+              flexDir="column"
             >
-              <ArrowDownIcon size="48px" color="black" />
-            </Box>
+              <ArrowDownIcon size="32px" color="black" />
+            </Flex>
           </Tooltip>
         </Center>
       );

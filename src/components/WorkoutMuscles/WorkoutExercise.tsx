@@ -218,7 +218,7 @@ export const WorkoutExercise: React.FC<Props> = ({
           justifyContent="space-between"
         >
           {video && (
-            <Box height={270} width="100%">
+            <Box height={170} width="100%">
               <WeeklyVideo
                 hideDetails
                 name={name}
