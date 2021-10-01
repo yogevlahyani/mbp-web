@@ -43,13 +43,13 @@ export const WeeklyVideo: React.FC<Props> = ({
         .split('/view')[0];
 
       return (
-        <iframe
-          src={`/api/drive-proxy?id=${driveVideoId}`}
-          allowFullScreen={true}
-          style={{ height: '100%', width: '100%', margin: 'auto' }}
-          width="100%"
-          height="100%"
-        />
+        <video id="video" width="320" height="240" controls muted>
+          <source
+            src={`https://drive.google.com/uc?export=download&id=${driveVideoId}`}
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
       );
     }
 
