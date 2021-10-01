@@ -8,7 +8,7 @@ interface Props extends Omit<IconButtonProps, 'aria-label'> {}
 const ArrowBendUpRightIcon = chakra(ArrowBendUpRight);
 
 export const GoBackButton: React.FC<Props> = (iconProps) => {
-  const { pathname, back } = useRouter();
+  const { back, pathname } = useRouter();
 
   if (pathname === '/[nickname]') {
     return null;

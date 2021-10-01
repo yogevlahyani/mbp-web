@@ -3,9 +3,9 @@ import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Container } from '@chakra-ui/react';
 import { GetServerSidePropsContext } from 'next';
 import { UserRepresentation } from '../../src/components/UserRepresentation/UserRepresentation';
-import { WeeklyVideos } from '../../src/components/WeeklyVideos/WeeklyVideos';
 import { UserPrograms } from '../../src/components/UserPrograms/UserPrograms';
 import { ProgramWeeks } from '../../src/components/ProgramWeeks/ProgramWeeks';
+import moment from 'moment';
 
 export default function UserDashboard() {
   return (
@@ -21,6 +21,17 @@ export const getServerSideProps = withPageAuthRequired({
   returnTo: '/',
   getServerSideProps: async (ctx: GetServerSidePropsContext) => {
     const session = await getSession(ctx.req, ctx.res);
+
+    if (session?.accessTokenExpiresAt) {
+      if (moment.unix(session.accessTokenExpiresAt).isSameOrBefore(moment())) {
+        return {
+          redirect: {
+            statusCode: 302,
+            destination: '/sign-out',
+          },
+        };
+      }
+    }
 
     // TODO: Show Public Profile
     if (session?.user.nickname !== ctx.params?.nickname) {
