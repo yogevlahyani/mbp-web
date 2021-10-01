@@ -2,10 +2,10 @@ import React from 'react';
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Container } from '@chakra-ui/react';
 import { GetServerSidePropsContext } from 'next';
+import moment from 'moment';
 import { UserRepresentation } from '../../src/components/UserRepresentation/UserRepresentation';
 import { UserPrograms } from '../../src/components/UserPrograms/UserPrograms';
 import { ProgramWeeks } from '../../src/components/ProgramWeeks/ProgramWeeks';
-import moment from 'moment';
 
 export default function UserDashboard() {
   return (
