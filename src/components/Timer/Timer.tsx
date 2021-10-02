@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Box, HStack, Portal, Spacer, Text } from '@chakra-ui/react';
+import { Box, HStack, Text } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
 import { Controls } from './Controls';
@@ -11,27 +11,34 @@ export const Timer: React.FC<{}> = ({}) => {
 
   const formattedTimer = useMemo(() => {
     if (!timer.isActive && !timer.startedAt) {
-      return <Text fontSize="31px">00:00:00:00</Text>;
+      return <Text fontSize="31px">00:00:00</Text>;
     }
 
     // So it'll be easy to change to seconds later
     const milliseconds = moment
       .duration(timerCount, 'milliseconds')
       .asMilliseconds();
-    const hoursFormat = moment.utc(milliseconds).format('HH');
     const minutesFormat = moment.utc(milliseconds).format('mm');
     const secondsFormat = moment.utc(milliseconds).format('ss');
     const millisecondsFormat = moment.utc(milliseconds).format('SS');
 
     return (
       <HStack gridGap={0} justifyContent="center">
-        <Text fontSize="31px" m="0 !important" width="45px">{millisecondsFormat}</Text>
-        <Text fontSize="31px" m="0 !important">:</Text>
-        <Text fontSize="31px" m="0 !important" width="45px">{secondsFormat}</Text>
-        <Text fontSize="31px" m="0 !important">:</Text>
-        <Text fontSize="31px" m="0 !important" width="45px">{minutesFormat}</Text>
-        <Text fontSize="31px" m="0 !important">:</Text>
-        <Text fontSize="31px" m="0 !important" width="45px">{hoursFormat}</Text>
+        <Text fontSize="31px" m="0 !important" width="45px">
+          {millisecondsFormat}
+        </Text>
+        <Text fontSize="31px" m="0 !important">
+          :
+        </Text>
+        <Text fontSize="31px" m="0 !important" width="45px">
+          {secondsFormat}
+        </Text>
+        <Text fontSize="31px" m="0 !important">
+          :
+        </Text>
+        <Text fontSize="31px" m="0 !important" width="45px">
+          {minutesFormat}
+        </Text>
       </HStack>
     );
   }, [timerCount, timer]);

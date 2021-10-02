@@ -1,5 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
-import { Accordion, Box, Center, chakra, Flex, Heading, Tooltip } from '@chakra-ui/react';
+import {
+  Accordion,
+  Box,
+  Center,
+  chakra,
+  Flex,
+  Heading,
+  Tooltip,
+} from '@chakra-ui/react';
 import { ArrowDown } from 'phosphor-react';
 import { WorkoutExercise, WorkoutExerciseType } from './WorkoutExercise';
 

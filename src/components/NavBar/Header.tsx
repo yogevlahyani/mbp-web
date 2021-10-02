@@ -42,7 +42,9 @@ export const Header = () => {
       <Spacer />
       {/* TODO: Enable when multi language */}
       {/* <LanguageSelector /> */}
-      <Skeleton isLoaded={!isLoading} width="min-content">{userNavigation}</Skeleton>
+      <Skeleton isLoaded={!isLoading} width="min-content">
+        {userNavigation}
+      </Skeleton>
     </NavBarContainer>
   );
 };

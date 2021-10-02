@@ -211,25 +211,24 @@ export const WorkoutExercise: React.FC<Props> = ({
         </AccordionButton>
       </Flex>
       <AccordionPanel py={4}>
-        <Flex
-          my={5}
-          gridGap={10}
-          flexDirection={['column', 'row']}
-          justifyContent="space-between"
-        >
-          {video && (
-            <Box height={170} width="100%">
-              <WeeklyVideo
-                hideDetails
-                name={name}
-                url={video}
-                height="100%"
-                width="auto"
-                m="0"
-              />
-            </Box>
-          )}
-        </Flex>
+        {video && (
+          <Flex
+            my={5}
+            gridGap={10}
+            flexDirection={['column', 'row']}
+            justifyContent="center"
+          >
+            <WeeklyVideo
+              hideDetails
+              name={name}
+              url={video}
+              width="auto"
+              height={['170px', '270px']}
+              m="auto"
+            />
+          </Flex>
+        )}
+
         <Flex
           gridGap={5}
           my={5}

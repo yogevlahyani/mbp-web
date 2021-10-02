@@ -5,6 +5,9 @@ const config = {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
     },
+    youtube: {
+      apiKey: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
+    },
     netlifyCMS: {
       cms_manual_init: true,
       backend: {

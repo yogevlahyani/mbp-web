@@ -1,6 +1,14 @@
 import React, { useMemo } from 'react';
 import { useQuery } from '@apollo/client';
-import { Button, Center, Divider, Flex, Heading, Skeleton } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  Flex,
+  Heading,
+  Skeleton,
+} from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { GET_WEEKDAY_WORKOUTS } from '../../queries/workouts';
 import { WeekdayWorkout, WeekdayWorkoutType } from './WeekdayWorkout';
@@ -25,10 +33,12 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
     () =>
       data?.program_weeks_by_pk?.program_week_workouts?.map(
         ({ workout }: { workout: WeekdayWorkoutType }, index: number) => (
-          <WeekdayWorkout key={`${workout.id}-${index}`} {...workout} />
+          <Skeleton key={`${workout.id}-${index}`} isLoaded={!loading}>
+            <WeekdayWorkout {...workout} />
+          </Skeleton>
         ),
       ),
-    [data],
+    [data, loading],
   );
 
   const doneButton = useMemo(() => {
@@ -45,18 +55,24 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
     );
   }, [t, push, workouts]);
 
+  if (!workouts?.length) {
+    return null;
+  }
+
   return (
-    <Skeleton isLoaded={!loading}>
-      <Flex
-        gridGap={[0, 2]}
-        flexDirection={['column', 'row']}
-        alignItems={['center', 'flex-end']}
-      >
-        <Heading>{t('Week Number', { weekNumber })}</Heading>
-      </Flex>
+    <Box>
+      <Skeleton isLoaded={!!weekNumber}>
+        <Flex
+          gridGap={[0, 2]}
+          flexDirection={['column', 'row']}
+          alignItems={['center', 'flex-end']}
+        >
+          <Heading>{t('Week Number', { weekNumber })}</Heading>
+        </Flex>
+      </Skeleton>
       <Divider my={5} />
       {workouts}
       {doneButton}
-    </Skeleton>
+    </Box>
   );
 };
