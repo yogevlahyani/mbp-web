@@ -92,6 +92,8 @@ class Document extends NextDocument {
             sizes="640x1136"
             href="/splash/640x1136.png"
           />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1A74E2" />
+          <meta name="msapplication-TileColor" content="#1A74E2" />
           <meta name="theme-color" content="#1A74E2" />
         </Head>
         <body>
