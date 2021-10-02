@@ -48,6 +48,26 @@ const client = new ApolloClient({
 function MyBodyPro({ Component, pageProps }: AppProps) {
   const [showInstallMessage, setShowInstallMessage] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (config.isProduction) {
+      const OneSignal = (window as any).OneSignal || [];
+      OneSignal.push(function () {
+        OneSignal.init({
+          appId: '35ed11e2-14ba-4ef4-90f7-857be85ed662',
+          safari_web_id: 'web.onesignal.auto.0f5650bb-bc45-4dc5-a4b8-8665864d5e48',
+          notifyButton: {
+            enable: true,
+          },
+          allowLocalhostAsSecureOrigin: true,
+        });
+      });
+
+      return () => {
+        (window as any).OneSignal = undefined;
+      };
+    }
+  }, []); // <-- run this effect once on mount
+
   // Detects if device is on iOS
   const isIos = useMemo(() => {
     if (!process.browser) {
@@ -95,6 +115,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
                 content="The most convenient way to work out"
               />
               <link rel="icon" href="/favicon.ico" />
+              <script async src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" />
             </Head>
 
             <Flex
