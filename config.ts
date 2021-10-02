@@ -9,8 +9,11 @@ const config = {
       appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID,
       safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
       notifyButton: {
-        enable: true,
+        enable: false,
+        subdomainName: 'mybodypro.OS.TC',
       },
+      autoResubscribe: true,
+      autoRegister: true,
       allowLocalhostAsSecureOrigin: true,
     },
     netlifyCMS: {
