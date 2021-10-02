@@ -64,7 +64,12 @@ export const SetGroup: React.FC<Props> = ({ muscles }) => {
             hasArrow
             background="black"
           >
-            <Flex height="70%" background="white" borderRadius="lg" alignItems="center">
+            <Flex
+              height="70%"
+              background="white"
+              borderRadius="lg"
+              alignItems="center"
+            >
               <ArrowDownIcon size="32px" color="black" />
             </Flex>
           </Tooltip>

@@ -33,7 +33,7 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
   const weeklyVideos = useMemo(
     () =>
       videos.map((weeklyVideo: WeeklyVideoProps) => (
-        <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} />
+        <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} height="250px" />
       )),
     [videos],
   );
@@ -65,6 +65,7 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
         <Skeleton isLoaded={!loading}>
           <Slider
             slidesToShow={3}
+            swipeToSlide
             infinite={false}
             arrows={true}
             speed={500}
@@ -74,6 +75,7 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
                 settings: {
                   slidesToShow: 1,
                   centerPadding: '0px',
+                  swipeToSlide: true,
                 },
               },
             ]}

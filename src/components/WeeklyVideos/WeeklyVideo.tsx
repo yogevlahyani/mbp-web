@@ -1,5 +1,11 @@
-import React, { useMemo } from 'react';
-import { AspectRatio, Box, BoxProps, Flex, Spacer, Text } from '@chakra-ui/react';
+import React, { useMemo, useState } from 'react';
+import { Box, BoxProps, Flex, Spacer, Text } from '@chakra-ui/react';
+import ReactPlayer from 'react-player';
+import moment, { unitOfTime } from 'moment';
+
+export interface VideoMetadata {
+  durationMs: number;
+}
 
 export interface WeeklyVideoProps {
   id?: string;
@@ -17,60 +23,61 @@ export const WeeklyVideo: React.FC<Props> = ({
   hideDetails,
   ...boxProps
 }) => {
+  const [videoMetadata, setVideoMetadata] = useState<VideoMetadata>();
+
+  const onDuration = (
+    duration: number,
+    unit: unitOfTime.DurationConstructor = 'seconds',
+  ) =>
+    setVideoMetadata({
+      durationMs: moment.duration(duration, unit).asMilliseconds(),
+    });
+
   const video = useMemo(() => {
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-      const match = url.match(regExp);
-
-      if (match && match[2].length === 11) {
-        const youtubeId = match[2];
-
-        return (
-          <iframe
-            title={name}
-            src={`https://www.youtube.com/embed/${youtubeId}`}
-            width="100%"
-            height="100%"
-            allowFullScreen
-          />
-        );
-      }
-    }
+    let videoUrl = url;
 
     if (url.startsWith('https://drive.google.com/')) {
       const driveVideoId = url
         .split('https://drive.google.com/file/d/')[1]
         .split('/view')[0];
 
-      return (
-        <video id="video" width="320" height="240" controls muted>
-          <source
-            src={`https://drive.google.com/uc?export=download&id=${driveVideoId}`}
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      );
+      videoUrl = `https://drive.google.com/uc?export=download&id=${driveVideoId}`;
     }
 
     return (
-      <video controls playsInline muted style={{ height: '100%', margin: 'auto' }}>
-        <source src={url} />
-        Your browser does not support the video tag.
-      </video>
+      <ReactPlayer
+        id="video"
+        onDuration={onDuration}
+        url={videoUrl}
+        muted
+        controls
+        playsinline
+        width="100%"
+        height="100%"
+        config={{
+          file: {
+            attributes: {
+              id: 'video',
+              style: {
+                objectFit: 'cover',
+                height: '100%',
+              },
+            },
+          },
+        }}
+      />
     );
-  }, [url, name]);
+  }, [url]);
+
+  const duration = useMemo(
+    () => moment.utc(videoMetadata?.durationMs || 0).format('mm:ss'),
+    [videoMetadata],
+  );
 
   return (
     <Box px={5}>
-      <Box
-        borderRadius={10}
-        background="#97D7D7"
-        overflow="hidden"
-        color="#646464"
-        {...boxProps}
-      >
-        {video}
+      <Box borderRadius={10} background="#97D7D7" overflow="hidden" color="#646464">
+        <Box {...boxProps}>{video}</Box>
         {hideDetails ? null : (
           <Flex
             py="9px"
@@ -84,7 +91,7 @@ export const WeeklyVideo: React.FC<Props> = ({
             </Text>
             <Spacer />
             <Text fontSize="12px" color="#1A74E2">
-              12:00
+              {duration}
             </Text>
           </Flex>
         )}
