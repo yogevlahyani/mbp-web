@@ -38,7 +38,7 @@ export const Header = () => {
       zIndex={9999}
     >
       <GoBackButton me={5} />
-      <Logo width="150px" />
+      <Logo width="250px" />
       <Spacer />
       {/* TODO: Enable when multi language */}
       {/* <LanguageSelector /> */}

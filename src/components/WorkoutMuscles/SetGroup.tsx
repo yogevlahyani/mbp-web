@@ -93,7 +93,7 @@ export const SetGroup: React.FC<Props> = ({ muscles }) => {
     return (
       <HStack>
         <Text>{text}</Text>
-        <Text>({setGroupExercises.length})</Text>
+        <Text>({t('Exercises', { exercisesCount: setGroupExercises.length })})</Text>
       </HStack>
     );
   }, [t, isProperSetGroup, setGroupExercises]);

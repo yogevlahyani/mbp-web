@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, HTMLChakraProps, Heading } from '@chakra-ui/react';
+import Image from 'next/image';
+import { Box, HTMLChakraProps } from '@chakra-ui/react';
 
 interface Props extends HTMLChakraProps<'div'> {}
 
@@ -9,9 +10,7 @@ export const Logo = (props: Props) => {
     <Box {...props}>
       <Link href="/" passHref>
         <a>
-          <Heading as="h1" fontSize="lg" fontWeight="bold">
-            MyBodyPro
-          </Heading>
+          <Image src="/logo.svg" alt="MyBodyPro" height="260px" width="1657px" />
         </a>
       </Link>
     </Box>
