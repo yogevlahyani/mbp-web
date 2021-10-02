@@ -49,7 +49,6 @@ export const WeeklyVideo: React.FC<Props> = ({
         id="video"
         onDuration={onDuration}
         url={videoUrl}
-        muted
         controls
         playsinline
         width="100%"
