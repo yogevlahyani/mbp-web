@@ -54,17 +54,6 @@ export const WeeklyVideo: React.FC<Props> = ({
         playsinline
         width="100%"
         height="100%"
-        config={{
-          file: {
-            attributes: {
-              id: 'video',
-              style: {
-                objectFit: 'cover',
-                height: '100%',
-              },
-            },
-          },
-        }}
       />
     );
   }, [url]);
