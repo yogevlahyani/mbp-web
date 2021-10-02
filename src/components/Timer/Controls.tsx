@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { PropsWithChildren, useCallback, useEffect, useMemo } from 'react';
 import { Box, BoxProps, Flex, HStack, IconButton } from '@chakra-ui/react';
 import {
   ArrowsCounterClockwise,
@@ -10,7 +10,6 @@ import { useRecoilState, useResetRecoilState } from 'recoil';
 import moment from 'moment';
 import { AnimatePresence, motion } from 'framer-motion';
 import { timerAtom, timerCountAtom } from './state';
-import { PropsWithChildren } from 'hoist-non-react-statics/node_modules/@types/react';
 
 export const MotionBox = motion<BoxProps>(Box);
 
