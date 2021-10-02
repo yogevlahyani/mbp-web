@@ -5,6 +5,9 @@ const config = {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
     },
+    logRocket: {
+      appId: 'urfnar/mybodypro',
+    },
     oneSignal: {
       appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID,
       safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
@@ -16,23 +19,23 @@ const config = {
         slidedown: {
           prompts: [
             {
-              type: "push",
+              type: 'push',
               autoPrompt: true,
               text: {
                 /* limited to 90 characters */
-                actionMessage: "נשלח לך התראות לגבי זמני אימונים",
+                actionMessage: 'נשלח לך התראות לגבי זמני אימונים',
                 /* acceptButton limited to 15 characters */
-                acceptButton: "אפשר",
+                acceptButton: 'אפשר',
                 /* cancelButton limited to 15 characters */
-                cancelButton: "בטל"
+                cancelButton: 'בטל',
               },
               delay: {
                 pageViews: 1,
-                timeDelay: 20
-              }
-            }
-          ]
-        }
+                timeDelay: 20,
+              },
+            },
+          ],
+        },
       },
       autoResubscribe: true,
       allowLocalhostAsSecureOrigin: true,

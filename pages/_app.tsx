@@ -14,6 +14,7 @@ import { onError } from '@apollo/client/link/error';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
 import LogRocket from 'logrocket';
+import OneSignal from 'react-onesignal';
 import { Header } from '../src/components/NavBar/Header';
 import { EnvBadge } from '../src/components/EnvBadge';
 import { Footer } from '../src/components/Footer/Footer';
@@ -25,7 +26,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import '../styles/globals.css';
 
 if (config.isProduction) {
-  LogRocket.init('urfnar/mybodypro');
+  LogRocket.init(config.providers.logRocket.appId);
+  OneSignal.init(config.providers.oneSignal);
 }
 
 const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
@@ -47,20 +49,6 @@ const client = new ApolloClient({
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
   const [showInstallMessage, setShowInstallMessage] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (config.isProduction) {
-      const OneSignal = (window as any).OneSignal || [];
-
-      OneSignal.push(function () {
-        OneSignal.init(config.providers.oneSignal);
-      });
-
-      return () => {
-        (window as any).OneSignal = undefined;
-      };
-    }
-  }, []); // <-- run this effect once on mount
 
   // Detects if device is on iOS
   const isIos = useMemo(() => {

@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect } from 'react';
-import { Box, Button, Container, IconButton, Portal } from '@chakra-ui/react';
-import { UnlockIcon } from '@chakra-ui/icons';
+import React, { useEffect } from 'react';
+import { Container } from '@chakra-ui/react';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
+import OneSignal from 'react-onesignal';
 import { WeekdayWorkouts } from '../../../../src/components/WeekdayWorkouts/WeekdayWorkouts';
 import { fittokModeAtom } from '../../../../src/components/Fittok/state';
 import { Fittok } from '../../../../src/components/Fittok/Fittok';
 import { Timer } from '../../../../src/components/Timer/Timer';
-import { GoBackButton } from '../../../../src/components/GoBackButton';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default function Week() {
   const [fittokMode, setFittokMode] = useRecoilState(fittokModeAtom);
@@ -16,11 +15,7 @@ export default function Week() {
   const { weekId, weekday } = query;
 
   useEffect(() => {
-    const OneSignal = (window as any).OneSignal || [];
-
-    OneSignal.push(function () {
-      OneSignal.showSlidedownPrompt();
-    });
+    OneSignal.showSlidedownPrompt();
   }, []);
 
   // const toggleFittokMode = useCallback(() => {
