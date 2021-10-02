@@ -13,7 +13,6 @@ const config = {
         subdomainName: 'mybodypro.OS.TC',
       },
       autoResubscribe: true,
-      autoRegister: true,
       allowLocalhostAsSecureOrigin: true,
     },
     netlifyCMS: {

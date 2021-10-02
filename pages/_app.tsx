@@ -51,8 +51,13 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (config.isProduction) {
       const OneSignal = (window as any).OneSignal || [];
+
       OneSignal.push(function () {
         OneSignal.init(config.providers.oneSignal);
+      });
+
+      OneSignal.push(function () {
+        OneSignal.showNativePrompt();
       });
 
       return () => {
