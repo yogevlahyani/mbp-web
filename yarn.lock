@@ -8907,6 +8907,11 @@ use-subscription@1.5.1:
   dependencies:
     object-assign "^4.1.1"
 
+usehooks-ts@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-1.0.3.tgz#1d24035af7023f186652ea075ed54928e7d6051f"
+  integrity sha512-wpJNLLXHjFsDze+IwdNHx6QqHOyfZIoXC4QpcJoK6fmxt/JzJumLxHnT0Vit1lzN9erAt4m1WtxCEbeTKqtiJA==
+
 utf8-byte-length@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/utf8-byte-length/-/utf8-byte-length-1.0.4.tgz#f45f150c4c66eee968186505ab93fcbb8ad6bf61"

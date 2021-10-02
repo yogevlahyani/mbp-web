@@ -21,7 +21,7 @@
   "Day": "Day {{number}}",
   "Exercises": "{{exercisesCount}} exercises",
   "Will open in": "Will open in {{days}} days",
-  "Workout": "Workout <0>{{workoutName}}</0>",
+  "Workout Name": "Workout <0>{{workoutName}}</0>",
   "Sets": "Sets",
   "Repeats": "Repeatitions",
   "Rest": "Rest",
@@ -65,5 +65,9 @@
   "CHEST PRESS MACHINE": "Chest Press Machine",
   "CHEST FLYS – MACHINE": "Chest Flys – Machine",
   "PULLY STANDARD GRIP PULL DOWN": "Pully Standard Grip Pull Down",
-  "Done": "Done"
+  "Done": "Done",
+  "Start Workout": "Start Workout",
+  "Workout Summary": "Workout Summary",
+  "Workout Duration": "Workout Duration",
+  "Top Trainers": "Top Trainers"
 }

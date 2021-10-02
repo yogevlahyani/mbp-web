@@ -8,7 +8,7 @@ export const Footer = () => (
     color="white"
     justifyContent="center"
     flexDirection="row-reverse"
-    gridGap={3}
+    gridGap={1}
   >
     <Text fontSize="18px">Powered by</Text>
     <Logo width="150px" />

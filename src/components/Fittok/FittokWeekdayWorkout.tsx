@@ -34,7 +34,7 @@ export const FittokWeekdayWorkout: React.FC<Props> = ({ id, name, description })
       >
         <Heading size="lg">
           <Trans
-            i18nKey="common:Workout"
+            i18nKey="common:Workout Name"
             values={{ workoutName: name }}
             components={[
               <Text key="0" display="inline" background="blue.500" px={2} />,

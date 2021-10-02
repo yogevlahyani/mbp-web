@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import {
   Box,
@@ -13,6 +13,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { GET_WEEKDAY_WORKOUTS } from '../../queries/workouts';
 import { WeekdayWorkout, WeekdayWorkoutType } from './WeekdayWorkout';
 import { useRouter } from 'next/router';
+import { StartWorkoutButton } from './StartWorkoutButton';
+import { DoneWorkoutButton } from './DoneWorkoutButton';
 
 interface Props {
   weekId: string;
@@ -41,20 +43,6 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
     [data, loading],
   );
 
-  const doneButton = useMemo(() => {
-    if (!workouts?.length) {
-      return null;
-    }
-
-    return (
-      <Center>
-        <Button colorScheme="green" onClick={() => push('/')} my={5} mx="auto">
-          {t('Done')}
-        </Button>
-      </Center>
-    );
-  }, [t, push, workouts]);
-
   if (!workouts?.length) {
     return null;
   }
@@ -71,8 +59,9 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
         </Flex>
       </Skeleton>
       <Divider my={5} />
+      <StartWorkoutButton />
       {workouts}
-      {doneButton}
+      <DoneWorkoutButton />
     </Box>
   );
 };

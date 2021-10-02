@@ -38,8 +38,8 @@ export const Header = () => {
       zIndex={9999}
     >
       <GoBackButton me={5} />
-      <Logo width="250px" />
-      <Spacer />
+      <Logo width="250px" flex={1} justifyContent={['center', 'flex-start']} />
+      <Spacer display={['none', 'block']} />
       {/* TODO: Enable when multi language */}
       {/* <LanguageSelector /> */}
       <Skeleton isLoaded={!isLoading} width="min-content">

@@ -21,7 +21,7 @@
   "Day": "יום {{number}}",
   "Exercises": "{{exercisesCount}} תרגילים",
   "Will open in": "יפתח בעוד {{days}} ימים",
-  "Workout": "<0>{{workoutName}}</0>",
+  "Workout Name": "<0>{{workoutName}}</0>",
   "Sets": "סטים",
   "Repeats": "חזרות",
   "Rest": "מנוחה",
@@ -76,5 +76,11 @@
   "Max": "מקסימום",
   "Super Set": "סופר סט",
   "Round": "סבב",
-  "Done": "סיימתי"
+  "Done": "סיימתי",
+  "Start Workout": "התחלת אימון",
+  "Workout Summary": "סיכום אימון",
+  "Workout Duration": "משך זמן האימון",
+  "Top Trainers": "המתאמנים הטובים ביותר",
+  "Started At": "התחיל",
+  "Ended At": "הסתיים"
 }

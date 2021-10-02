@@ -1,18 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Box, HTMLChakraProps } from '@chakra-ui/react';
+import { Box, StackProps, Heading, HStack } from '@chakra-ui/react';
 
-interface Props extends HTMLChakraProps<'div'> {}
+interface Props extends StackProps {}
 
-export const Logo = (props: Props) => {
+export const Logo = (stackProps: Props) => {
   return (
-    <Box {...props}>
-      <Link href="/" passHref>
-        <a>
-          <Image src="/logo.svg" alt="MyBodyPro" height="260px" width="1657px" />
-        </a>
-      </Link>
-    </Box>
+    <Link href="/" passHref>
+      <HStack {...stackProps} as="a" gridGap={2} alignItems="center">
+        <Heading as="h1" fontSize="lg" fontWeight="bold" lineHeight="28px">
+          MyBodyPro
+        </Heading>
+        <Image src="/icon.png" alt="MyBodyPro" width="28px" height="28px" />
+      </HStack>
+    </Link>
   );
 };
