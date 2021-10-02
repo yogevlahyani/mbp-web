@@ -56,6 +56,10 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
         OneSignal.init(config.providers.oneSignal);
       });
 
+      OneSignal.push(function () {
+        OneSignal.showSlidedownPrompt();
+      });
+
       return () => {
         (window as any).OneSignal = undefined;
       };
@@ -147,7 +151,9 @@ export function reportWebVitals(metric: NextWebVitalsMetric) {
   const { isProduction } = config;
 
   if (isProduction) {
-    console.log(metric);
+    LogRocket.captureMessage('vitals', {
+      extra: metric,
+    });
   }
 }
 
