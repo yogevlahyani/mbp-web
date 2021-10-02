@@ -8,33 +8,11 @@ const config = {
     oneSignal: {
       appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID,
       safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
+      subdomainName: 'mybodypro.OS.TC',
       notifyButton: {
         enable: false,
-        subdomainName: 'mybodypro.OS.TC',
       },
       autoResubscribe: true,
-      promptOptions: {
-        slidedown: {
-          prompts: [
-            {
-              type: "push", // current types are "push" & "category"
-              autoPrompt: true,
-              text: {
-                /* limited to 90 characters */
-                actionMessage: "נשלח לך התראות לגבי זמני אימונים",
-                /* acceptButton limited to 15 characters */
-                acceptButton: "אפשר",
-                /* cancelButton limited to 15 characters */
-                cancelButton: "בטל"
-              },
-              delay: {
-                pageViews: 1,
-                timeDelay: 20
-              }
-            }
-          ]
-        }
-      },
       allowLocalhostAsSecureOrigin: true,
     },
     netlifyCMS: {

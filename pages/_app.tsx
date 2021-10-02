@@ -56,10 +56,6 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
         OneSignal.init(config.providers.oneSignal);
       });
 
-      OneSignal.push(function () {
-        OneSignal.showSlidedownPrompt();
-      });
-
       return () => {
         (window as any).OneSignal = undefined;
       };
