@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Box, Button, Container, IconButton, Portal } from '@chakra-ui/react';
 import { UnlockIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
@@ -14,6 +14,14 @@ export default function Week() {
   const [fittokMode, setFittokMode] = useRecoilState(fittokModeAtom);
   const { query } = useRouter();
   const { weekId, weekday } = query;
+
+  useEffect(() => {
+    const OneSignal = (window as any).OneSignal || [];
+
+    OneSignal.push(function () {
+      OneSignal.showSlidedownPrompt();
+    });
+  }, []);
 
   // const toggleFittokMode = useCallback(() => {
   //   setFittokMode(!fittokMode);
