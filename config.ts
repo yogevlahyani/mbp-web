@@ -12,6 +12,28 @@ const config = {
       notifyButton: {
         enable: false,
       },
+      promptOptions: {
+        slidedown: {
+          prompts: [
+            {
+              type: "push",
+              autoPrompt: true,
+              text: {
+                /* limited to 90 characters */
+                actionMessage: "נשלח לך התראות לגבי זמני אימונים",
+                /* acceptButton limited to 15 characters */
+                acceptButton: "אפשר",
+                /* cancelButton limited to 15 characters */
+                cancelButton: "בטל"
+              },
+              delay: {
+                pageViews: 1,
+                timeDelay: 20
+              }
+            }
+          ]
+        }
+      },
       autoResubscribe: true,
       allowLocalhostAsSecureOrigin: true,
     },
