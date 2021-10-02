@@ -98,7 +98,13 @@ export const WeeklyVideo: React.FC<Props> = ({
 
   return (
     <Box px={5}>
-      <Box borderRadius={10} background="blue.500" overflow="hidden" color="white">
+      <Box
+        borderRadius={10}
+        overflow="hidden"
+        background="blue.500"
+        color="white"
+        position="relative"
+      >
         <Box {...boxProps}>{video}</Box>
         {details}
       </Box>
