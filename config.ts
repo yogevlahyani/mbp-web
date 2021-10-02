@@ -5,8 +5,13 @@ const config = {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
     },
-    youtube: {
-      apiKey: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
+    oneSignal: {
+      appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID,
+      safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true,
     },
     netlifyCMS: {
       cms_manual_init: true,

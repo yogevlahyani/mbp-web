@@ -52,14 +52,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
     if (config.isProduction) {
       const OneSignal = (window as any).OneSignal || [];
       OneSignal.push(function () {
-        OneSignal.init({
-          appId: '35ed11e2-14ba-4ef4-90f7-857be85ed662',
-          safari_web_id: 'web.onesignal.auto.0f5650bb-bc45-4dc5-a4b8-8665864d5e48',
-          notifyButton: {
-            enable: true,
-          },
-          allowLocalhostAsSecureOrigin: true,
-        });
+        OneSignal.init(config.providers.oneSignal);
       });
 
       return () => {
