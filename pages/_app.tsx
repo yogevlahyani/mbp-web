@@ -27,7 +27,6 @@ import '../styles/globals.css';
 
 if (config.isProduction) {
   LogRocket.init(config.providers.logRocket.appId);
-  OneSignal.init(config.providers.oneSignal);
 }
 
 const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
@@ -49,6 +48,12 @@ const client = new ApolloClient({
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
   const [showInstallMessage, setShowInstallMessage] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (config.isProduction) {
+      OneSignal.init(config.providers.oneSignal);
+    }
+  }, []);
 
   // Detects if device is on iOS
   const isIos = useMemo(() => {
