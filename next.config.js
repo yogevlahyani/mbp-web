@@ -7,6 +7,7 @@ module.exports = withPWA({
     dest: 'public',
     register: true,
     disable: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production',
+    importScripts: ['/OneSignalSDKUpdaterWorker.js', '/OneSignalSDKWorker.js'],
   },
   ...nextTranslate({
     webpack: (cfg) => {
