@@ -117,6 +117,7 @@ export const ProgramWeek: React.FC<Props> = ({
         height={70}
         borderRadius="10px"
         overflow="hidden"
+        position="relative"
         p={0}
       >
         <Progress
