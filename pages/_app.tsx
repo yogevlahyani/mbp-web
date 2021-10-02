@@ -51,6 +51,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (config.isProduction) {
+      (window as any).OneSignal = (window as any).OneSignal || [];
       OneSignal.init(config.providers.oneSignal);
     }
   }, []);
