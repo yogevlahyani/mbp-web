@@ -193,7 +193,7 @@ export const WorkoutExercise: React.FC<Props> = ({
             />
           </Box>
           <Box p="21px" flex={[1, 3]}>
-            <Heading size="lg">{name}</Heading>
+            <Heading size="lg" textAlign="left">{name}</Heading>
             <Text fontSize="lg">
               {max_repeats
                 ? `${t('Max')} ${t('Repeats')}`
