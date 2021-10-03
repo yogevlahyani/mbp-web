@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { Container } from '@chakra-ui/react';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { Box, Button, Container } from '@chakra-ui/react';
+import { Play } from 'phosphor-react';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
@@ -18,9 +19,17 @@ export default function Week() {
     OneSignal.showSlidedownPrompt();
   }, []);
 
-  // const toggleFittokMode = useCallback(() => {
-  //   setFittokMode(!fittokMode);
-  // }, [fittokMode, setFittokMode]);
+  const toggleFittokMode = useCallback(() => {
+    setFittokMode(!fittokMode);
+  }, [fittokMode, setFittokMode]);
+
+  const mode = useMemo(() => {
+    if (fittokMode) {
+      return <Fittok weekId={String(weekId)} weekday={Number(weekday)} />;
+    }
+
+    return <WeekdayWorkouts weekId={String(weekId)} weekday={Number(weekday)} />;
+  }, [fittokMode, weekId, weekday]);
 
   return (
     <Container
@@ -31,18 +40,15 @@ export default function Week() {
       minH="max-content"
       position="relative"
     >
-      {/* <GoBackButton size="sm" variant="solid" colorScheme="gray" position="absolute" top={5} right={5} /> */}
-      {fittokMode ? (
-        <Fittok weekId={String(weekId)} weekday={Number(weekday)} />
-      ) : (
-        <WeekdayWorkouts weekId={String(weekId)} weekday={Number(weekday)} />
-      )}
-      {/* <Box display={['block', 'none']}>
+      {mode}
+      <Box display={['block', 'none']}>
         <Button
+          disabled={true}
+          display="none"
           variant="solid"
           position="absolute"
           top={5}
-          left={2}
+          left={5}
           minWidth="32px"
           width="32px"
           height="32px"
@@ -51,9 +57,9 @@ export default function Week() {
           colorScheme={fittokMode ? 'blue' : 'twitter'}
           onClick={toggleFittokMode}
         >
-          <UnlockIcon width="16px" height="16px" />
+          <Play width="16px" height="16px" />
         </Button>
-      </Box> */}
+      </Box>
       <Timer />
     </Container>
   );
