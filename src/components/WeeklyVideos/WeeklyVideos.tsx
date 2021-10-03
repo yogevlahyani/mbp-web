@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import {
   Box,
   BoxProps,
@@ -11,9 +11,9 @@ import {
 import { useQuery } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-slick';
+import { ArrowLeft, ArrowRight } from 'phosphor-react';
 import { GET_WEEKLY_VIDEOS } from '../../queries/workouts';
 import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo';
-import { ArrowLeft, ArrowRight } from 'phosphor-react';
 
 interface VideoHistoryType {
   offset: number;
