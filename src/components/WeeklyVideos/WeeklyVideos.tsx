@@ -1,10 +1,19 @@
-import React, { useMemo } from 'react';
-import { Box, BoxProps, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
+import React, { useCallback, useMemo, useRef } from 'react';
+import {
+  Box,
+  BoxProps,
+  chakra,
+  Flex,
+  Heading,
+  Skeleton,
+  Text,
+} from '@chakra-ui/react';
 import { useQuery } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-slick';
 import { GET_WEEKLY_VIDEOS } from '../../queries/workouts';
 import { WeeklyVideo, WeeklyVideoProps } from './WeeklyVideo';
+import { ArrowLeft, ArrowRight } from 'phosphor-react';
 
 interface VideoHistoryType {
   offset: number;
@@ -14,6 +23,22 @@ interface VideoHistoryType {
 interface Props extends BoxProps {
   weekId: string;
 }
+
+const arrowBaseStyle = {
+  baseStyle: {
+    color: 'white',
+    width: '48px',
+    height: '48px',
+    zIndex: 999,
+    mx: 5,
+    _hover: {
+      color: 'blue.500',
+    },
+  },
+};
+
+const ArrowLeftIcon = chakra(ArrowLeft, arrowBaseStyle);
+const ArrowRightIcon = chakra(ArrowRight, arrowBaseStyle);
 
 export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
   const { t } = useTranslation('common');
@@ -33,7 +58,7 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
   const weeklyVideos = useMemo(
     () =>
       videos.map((weeklyVideo: WeeklyVideoProps) => (
-        <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} />
+        <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} height="250px" />
       )),
     [videos],
   );
@@ -61,24 +86,27 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
           </Skeleton>
         </Box>
       </Flex>
-      <Box my={10} px={15} width="full">
+      <Box my={10} width="full">
         <Skeleton isLoaded={!loading}>
           <Slider
-            slidesToShow={3}
             swipeToSlide
+            focusOnSelect
+            arrows
+            slidesToShow={3}
             infinite={false}
-            arrows={true}
             speed={500}
             responsive={[
               {
                 breakpoint: 768,
                 settings: {
                   slidesToShow: 1,
-                  centerPadding: '0px',
                   swipeToSlide: true,
+                  focusOnSelect: true,
                 },
               },
             ]}
+            nextArrow={<ArrowLeftIcon />}
+            prevArrow={<ArrowRightIcon />}
           >
             {weeklyVideos}
           </Slider>

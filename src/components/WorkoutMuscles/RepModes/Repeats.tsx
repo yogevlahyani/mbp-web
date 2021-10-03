@@ -5,11 +5,13 @@ import useTranslation from 'next-translate/useTranslation';
 interface Props extends FlexProps {
   count: number;
   isMaxRepeats?: boolean;
+  eachSide?: boolean;
 }
 
 export const Repeats: React.FC<Props> = ({
   count,
   isMaxRepeats = false,
+  eachSide = false,
   ...flexProps
 }) => {
   const { t } = useTranslation('common');
@@ -30,7 +32,10 @@ export const Repeats: React.FC<Props> = ({
     >
       <Text>{t('Repeats')}</Text>
       <Box width={['auto', '100%']}>
-        <Text textAlign="center">{repeats}</Text>
+        <Text textAlign="center">
+          {repeats}
+          {eachSide && ` X ${t('Each Side')}`}
+        </Text>
       </Box>
     </Flex>
   );

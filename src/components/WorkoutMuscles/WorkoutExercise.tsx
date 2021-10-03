@@ -10,13 +10,10 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  Badge,
-  chakra,
   Collapse,
   Button,
 } from '@chakra-ui/react';
 import { TimeIcon } from '@chakra-ui/icons';
-import { Link, Note } from 'phosphor-react';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
 import { WeeklyVideo } from '../WeeklyVideos/WeeklyVideo';
@@ -71,6 +68,7 @@ export interface WorkoutExerciseType {
   set_group?: string;
   notes: string;
   max_repeats: boolean;
+  each_side: boolean;
 }
 
 interface Props extends WorkoutExerciseType {}
@@ -90,6 +88,7 @@ export const WorkoutExercise: React.FC<Props> = ({
   weight_in_kg,
   notes,
   max_repeats,
+  each_side,
   exercise: { id, name, instructions, image, video },
 }) => {
   const { t } = useTranslation('common');
@@ -111,7 +110,9 @@ export const WorkoutExercise: React.FC<Props> = ({
   const repMode = useMemo(() => {
     switch (rep_mode) {
       case RepMode.REPEATS:
-        return <Repeats count={repeats} isMaxRepeats={max_repeats} />;
+        return (
+          <Repeats count={repeats} isMaxRepeats={max_repeats} eachSide={each_side} />
+        );
       case RepMode.DISTANCE:
         return <Distance meters={distance_in_meters} />;
       case RepMode.TIME:
@@ -119,7 +120,14 @@ export const WorkoutExercise: React.FC<Props> = ({
       default:
         return null;
     }
-  }, [rep_mode, repeats, distance_in_meters, time_in_seconds, max_repeats]);
+  }, [
+    rep_mode,
+    repeats,
+    distance_in_meters,
+    time_in_seconds,
+    max_repeats,
+    each_side,
+  ]);
 
   const weightMode = useMemo(() => {
     switch (mode) {
@@ -186,12 +194,13 @@ export const WorkoutExercise: React.FC<Props> = ({
           </Box>
           <Box p="21px" flex={[1, 3]}>
             <Heading size="lg">{name}</Heading>
-            <Text fontSize="lg">{t('Sets Count', { count: sets })}</Text>
             <Text fontSize="lg">
               {max_repeats
                 ? `${t('Max')} ${t('Repeats')}`
                 : t('RepeatsCount', { count: Number(repeats) })}
+              {each_side && ` X ${t('Each Side')}`}
             </Text>
+            <Text fontSize="lg">{t('Sets Count', { count: sets })}</Text>
             <HStack
               justifyContent={['center', 'flex-end']}
               alignItems="center"
@@ -251,11 +260,11 @@ export const WorkoutExercise: React.FC<Props> = ({
           </Flex>
         </Flex>
         {notes &&
-          notes
-            .split('\n')
-            .map((note: string, index: number) => (
-              <Text key={`note-${index}`}>{note}</Text>
-            ))}
+          notes.split('\n').map((note: string, index: number) => (
+            <Text key={`note-${index}`} fontSize="md" textAlign="center" my={3}>
+              {note}
+            </Text>
+          ))}
         {instructions && (
           <Flex justifyContent="center" flexDirection="column">
             <Button size="sm" onClick={handleToggleInstructions} mx="auto" mt={10}>

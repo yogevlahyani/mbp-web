@@ -95,6 +95,7 @@ export const GET_WORKOUT = gql`
         distance_in_meters
         notes
         max_repeats
+        each_side
         exercise {
           id
           name
@@ -145,6 +146,7 @@ export const GET_WEEKDAY_WORKOUT_WITH_EXERCISES = gql`
             speed_percentage
             notes
             max_repeats
+            each_side
             exercise {
               name
               exercises_muscles {

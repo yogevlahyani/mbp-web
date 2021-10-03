@@ -70,32 +70,31 @@ export const WeeklyVideo: React.FC<Props> = ({
     return (
       <Flex
         py="9px"
-        px="10px"
         gridGap={1}
         alignItems="center"
         flexDirection="row-reverse"
+        px={3}
       >
-        <Text isTruncated fontWeight="bold" fontSize="12px">
+        <Text isTruncated fontWeight="bold" fontSize="16px">
           {name}
         </Text>
         <Spacer />
-        <Text fontSize="12px">{duration}</Text>
+        <Text fontSize="16px">{duration}</Text>
       </Flex>
     );
   }, [hideDetails, name, duration]);
 
   return (
-    <Box px={5}>
-      <Box
-        borderRadius={10}
-        overflow="hidden"
-        background="blue.500"
-        color="white"
-        position="relative"
-      >
-        <Box {...boxProps}>{video}</Box>
-        {details}
-      </Box>
+    <Box
+      mx={5}
+      borderRadius={10}
+      overflow="hidden"
+      background="blue.500"
+      color="white"
+      position="relative"
+    >
+      <Box {...boxProps}>{video}</Box>
+      {details}
     </Box>
   );
 };
