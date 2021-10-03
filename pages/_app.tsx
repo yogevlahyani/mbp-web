@@ -18,6 +18,7 @@ import OneSignal from 'react-onesignal';
 import { Header } from '../src/components/NavBar/Header';
 import { EnvBadge } from '../src/components/EnvBadge';
 import { Footer } from '../src/components/Footer/Footer';
+import { InstallationInstructions } from '../src/components/InstallationInstructions';
 import theme from '../src/theme/theme';
 import config from '../config';
 
@@ -47,40 +48,12 @@ const client = new ApolloClient({
 });
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
-  const [showInstallMessage, setShowInstallMessage] = useState<boolean>(false);
-
   useEffect(() => {
     if (config.isProduction) {
       (window as any).OneSignal = (window as any).OneSignal || [];
       OneSignal.init(config.providers.oneSignal);
     }
   }, []);
-
-  // Detects if device is on iOS
-  const isIos = useMemo(() => {
-    if (!process.browser) {
-      return;
-    }
-
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test(userAgent);
-  }, []);
-
-  // Detects if device is in standalone mode
-  const isInStandaloneMode = useMemo(() => {
-    if (!process.browser) {
-      return;
-    }
-
-    return 'standalone' in window.navigator && (window.navigator as any).standalone;
-  }, []);
-
-  useEffect(() => {
-    // Checks if should display install popup notification:
-    if (isIos && !isInStandaloneMode) {
-      setShowInstallMessage(true);
-    }
-  }, [isIos, isInStandaloneMode]);
 
   const title = useMemo(() => 'MyBodyPro | The most convenient way to work out', []);
   const description = useMemo(() => 'The most convenient way to work out', []);
@@ -130,6 +103,7 @@ function MyBodyPro({ Component, pageProps }: AppProps) {
               <Footer />
             </Flex>
             <EnvBadge />
+            <InstallationInstructions />
           </ChakraProvider>
         </RecoilRoot>
       </UserProvider>

@@ -24,7 +24,7 @@ import {
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { workoutStartTimeAtom, workoutTimerMsSelector } from './state';
+import { workoutStartTimeAtom } from './state';
 import moment, { Moment } from 'moment';
 
 interface Props {}
@@ -44,9 +44,9 @@ export const DoneWorkoutButton: React.FC<Props> = () => {
   }, [setWorkoutEndTime, onOpen]);
 
   const onDoneClick = useCallback(() => {
+    push('/');
     resetWorkoutStartTime();
     setWorkoutEndTime(null);
-    push('/');
     onClose();
   }, [onClose, resetWorkoutStartTime, setWorkoutEndTime, push]);
 
@@ -87,7 +87,7 @@ export const DoneWorkoutButton: React.FC<Props> = () => {
                 <Text color="black">{workoutEndTime?.format('HH:mm:ss')}</Text>
               </HStack>
             </Box>
-            <Table size="sm" mt={10}>
+            {/* <Table size="sm" mt={10}>
               <Thead>
                 <Tr>
                   <Th>{t('Top Trainers')}</Th>
@@ -114,7 +114,7 @@ export const DoneWorkoutButton: React.FC<Props> = () => {
                   <Th>{t('Top Trainers')}</Th>
                 </Tr>
               </Tfoot>
-            </Table>
+            </Table> */}
           </ModalBody>
 
           <ModalFooter>
