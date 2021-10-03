@@ -53,6 +53,19 @@ export const WeeklyVideo: React.FC<Props> = ({
         playsinline
         width="100%"
         height="100%"
+        config={{
+          youtube: {
+            playerVars: { controls: 0, disablekb: 1 },
+          },
+          file: {
+            attributes: {
+              style: {
+                height: '100%',
+                objectFit: 'cover',
+              },
+            },
+          }
+        }}
       />
     );
   }, [url]);
