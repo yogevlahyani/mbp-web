@@ -58,7 +58,7 @@ export const WeeklyVideos: React.FC<Props> = ({ weekId, ...boxProps }) => {
   const weeklyVideos = useMemo(
     () =>
       videos.map((weeklyVideo: WeeklyVideoProps) => (
-        <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} height="250px" />
+        <WeeklyVideo key={weeklyVideo.id} {...weeklyVideo} />
       )),
     [videos],
   );

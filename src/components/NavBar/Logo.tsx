@@ -12,7 +12,6 @@ export const Logo = (stackProps: Props) => {
         <Heading as="h1" fontSize="lg" fontWeight="bold" lineHeight="28px">
           MyBodyPro
         </Heading>
-        <Image src="/icon.png" alt="MyBodyPro" width="28px" height="28px" />
       </HStack>
     </Link>
   );

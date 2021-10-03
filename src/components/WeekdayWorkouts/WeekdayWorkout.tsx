@@ -66,7 +66,7 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
             i18nKey="common:Workout Name"
             values={{ workoutName: name }}
             components={[
-              <Text key="0" display="inline" background="blue.500" px={2} />,
+              <Text key="0" />,
             ]}
           />
         </Heading>

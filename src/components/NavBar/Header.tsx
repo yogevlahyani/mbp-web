@@ -37,7 +37,7 @@ export const Header = () => {
       color="white"
       zIndex={9999}
     >
-      <GoBackButton me={5} />
+      <GoBackButton width="32px" height="32px" minWidth={0} />
       <Logo width="250px" flex={1} justifyContent={['center', 'flex-start']} />
       <Spacer display={['none', 'block']} />
       {/* TODO: Enable when multi language */}
