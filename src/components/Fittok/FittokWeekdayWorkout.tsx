@@ -1,7 +1,8 @@
+import React, { useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, Text, Heading, Flex } from '@chakra-ui/react';
 import Trans from 'next-translate/Trans';
-import React, { useMemo } from 'react';
+import { chain } from 'lodash';
 import { GET_WORKOUT } from '../../queries/workouts';
 import { WeekdayWorkoutType } from '../WeekdayWorkouts/WeekdayWorkout';
 import { WorkoutMuscle, WorkoutMuscleType } from '../WorkoutMuscles/WorkoutMuscle';
@@ -11,12 +12,19 @@ interface Props extends WeekdayWorkoutType {}
 export const FittokWeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
   const { data, loading } = useQuery(GET_WORKOUT, { variables: { workoutId: id } });
 
+  const muscles = useMemo(
+    () => chain(data?.workouts_by_pk.workouts_exercises || []).value(),
+    [data],
+  );
+
+  console.log('muscles', muscles);
+
   const exercises = useMemo(
     () =>
-      data?.muscles.map((muscle: WorkoutMuscleType) => (
+      muscles.map((muscle: WorkoutMuscleType) => (
         <WorkoutMuscle key={muscle.name} {...muscle} />
       )),
-    [data],
+    [muscles],
   );
 
   if (!exercises?.length) {

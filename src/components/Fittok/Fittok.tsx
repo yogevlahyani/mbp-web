@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, Flex, Heading, Progress, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,6 +7,7 @@ import { GET_WEEKDAY_WORKOUT_WITH_EXERCISES } from '../../queries/workouts';
 import { FittokWeekdayWorkout } from './FittokWeekdayWorkout';
 import { chain } from 'lodash';
 import { FittokWorkoutWorkout } from './FittokWorkoutExercise';
+import { StartWorkoutButton } from '../WeekdayWorkouts/StartWorkoutButton';
 
 interface Props {
   weekId: string;
@@ -15,6 +16,7 @@ interface Props {
 
 export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
   const { t } = useTranslation('common');
+  const sliderRef = useRef<any>(null);
   const [slideIndex, setSlideIndex] = useState(0);
 
   const { data, loading } = useQuery(GET_WEEKDAY_WORKOUT_WITH_EXERCISES, {
@@ -23,7 +25,7 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
 
   const slides = useMemo(
     () =>
-      chain(data?.program_weeks_by_pk.program_week_workouts)
+      chain(data?.program_weeks_by_pk.program_week_workouts || [])
         .map(({ workout }) => [workout, ...workout.workouts_exercises])
         .flatMap()
         .map(({ exercise, __typename, ...rest }) =>
@@ -49,14 +51,16 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
     [data],
   );
 
+  console.log('slides', slides);
+
   const weekNumber = useMemo(() => data?.program_weeks_by_pk.week_number, [data]);
 
   const workouts = useMemo(
     () =>
-      slides.map((slide, index: number) => {
+      slides?.map((slide, index: number) => {
         switch (slide.__typename) {
-          case 'workouts':
-            return <FittokWeekdayWorkout {...slide} />;
+          // case 'workouts':
+          //   return <FittokWeekdayWorkout {...slide} />;
           case 'muscles':
             return (
               <Flex
@@ -80,6 +84,8 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
       }),
     [slides, t],
   );
+
+  const onStart = () => setTimeout(() => sliderRef.current?.slickGoTo(1), 1500);
 
   if (loading) {
     return null;
@@ -110,6 +116,7 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
         width="100%"
       >
         <Slider
+          ref={sliderRef}
           vertical
           verticalSwiping
           swipeToSlide
@@ -133,6 +140,7 @@ export const Fittok: React.FC<Props> = ({ weekId, weekday }) => {
             <Text fontSize="md" py={[0, 1]}>
               זמן משוער לאימון הוא 50:00 דק
             </Text>
+            <StartWorkoutButton onStart={onStart} />
           </Flex>
           {workouts}
         </Slider>

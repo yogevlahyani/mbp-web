@@ -11,9 +11,11 @@ import {
 import { useInterval } from 'usehooks-ts';
 import { workoutStartTimeAtom, workoutTimerMsSelector } from './state';
 
-interface Props {}
+interface Props {
+  onStart?: () => void;
+}
 
-export const StartWorkoutButton: React.FC<Props> = () => {
+export const StartWorkoutButton: React.FC<Props> = ({ onStart }) => {
   const { t } = useTranslation('common');
   const setWorkoutStartTime = useSetRecoilState(workoutStartTimeAtom);
   const workoutTimerMs = useRecoilValue(workoutTimerMsSelector);
@@ -27,10 +29,11 @@ export const StartWorkoutButton: React.FC<Props> = () => {
     isOngoingWorkout ? 1000 : null,
   );
 
-  const startWorkout = useCallback(() => {
-    setWorkoutStartTime(moment());
-    resetWorkoutTimerMs();
-  }, [setWorkoutStartTime, resetWorkoutTimerMs]);
+  const startWorkout = useCallback(async () => {
+    await setWorkoutStartTime(moment());
+    await resetWorkoutTimerMs();
+    onStart && onStart();
+  }, [setWorkoutStartTime, resetWorkoutTimerMs, onStart]);
 
   const timer = useMemo(() => {
     if (!workoutTimerMs) {
