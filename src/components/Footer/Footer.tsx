@@ -11,6 +11,6 @@ export const Footer = () => (
     gridGap={1}
   >
     <Text fontSize="18px">Powered by</Text>
-    <Logo width="150px" />
+    <Logo />
   </HStack>
 );
