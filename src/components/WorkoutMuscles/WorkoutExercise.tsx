@@ -227,7 +227,7 @@ export const WorkoutExercise: React.FC<Props> = ({
             />
           </Box>
           <Box p="21px" flex={[1, 3]}>
-            <Heading size="lg" textAlign="left">
+            <Heading size="lg" textAlign="left" dir="ltr">
               {name}
             </Heading>
             <Text fontSize="lg">
