@@ -1,6 +1,8 @@
 const config = {
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV || 'local',
   isProduction: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
+  title: 'MyBodyPro | The most convenient way to work out',
+  description: 'The most convenient way to work out',
   providers: {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,

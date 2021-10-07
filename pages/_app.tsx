@@ -48,15 +48,14 @@ const client = new ApolloClient({
 });
 
 function MyBodyPro({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    if (config.isProduction) {
-      (window as any).OneSignal = (window as any).OneSignal || [];
-      OneSignal.init(config.providers.oneSignal);
-    }
-  }, []);
+  const { isProduction, providers, title, description } = config;
 
-  const title = useMemo(() => 'MyBodyPro | The most convenient way to work out', []);
-  const description = useMemo(() => 'The most convenient way to work out', []);
+  useEffect(() => {
+    if (isProduction) {
+      (window as any).OneSignal = (window as any).OneSignal || [];
+      OneSignal.init(providers.oneSignal);
+    }
+  }, [isProduction, providers.oneSignal]);
 
   return (
     <ApolloProvider client={client}>
