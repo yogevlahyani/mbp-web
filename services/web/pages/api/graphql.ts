@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession, handleLogout } from '@auth0/nextjs-auth0';
+import { getSession } from '@auth0/nextjs-auth0';
 import httpProxyMiddleware from 'next-http-proxy-middleware';
 import configuration from '../../config';
 

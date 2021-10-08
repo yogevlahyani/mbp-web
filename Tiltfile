@@ -6,6 +6,7 @@ docker_build(
   dockerfile='services/web/Dockerfile',
   target='dev',
   live_update=[
-    sync('./services/web', '/app')
+    sync('./services/web', '/app'),
+    restart_container()
   ]
 )

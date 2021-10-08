@@ -11,6 +11,28 @@ http:
           - main: "mbp-traefik.localhost"
             sans:
               - "*.mbp-traefik.localhost"
+    hasura:
+      rule: "Host(`mbp-hasura.localhost`)"
+      service: "hasura"
+      tls:
+        domains:
+          - main: "localhost"
+            sans:
+              - "*.localhost"
+          - main: "mbp-hasura.localhost"
+            sans:
+              - "*.mbp-hasura.localhost"
+    web:
+      rule: "Host(`mbp-web.localhost`)"
+      service: "web"
+      tls:
+        domains:
+          - main: "localhost"
+            sans:
+              - "*.localhost"
+          - main: "mbp-web.localhost"
+            sans:
+              - "*.mbp-web.localhost"
 
 tls:
   certificates:

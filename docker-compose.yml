@@ -49,17 +49,16 @@ services:
   hasura:
     container_name: "mbp-hasura"
     image: hasura/graphql-engine:latest
-    ports:
-    - "8081:8080"
-    depends_on:
-    - "postgres"
     restart: always
+    ports:
+      - "8081:8080"
     environment:
       HASURA_GRAPHQL_DATABASE_URL: "postgres://root:secret@postgres:5432/postgres"
       HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: "true"
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "public"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ADMIN_SECRET: "myadminsecretkey"
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512","key":"-----BEGIN CERTIFICATE-----\nMIIDDzCCAfegAwIBAgIJUibia9xypy1WMA0GCSqGSIb3DQEBCwUAMCUxIzAhBgNV\nBAMTGnlvZ2V2LWxhaHlhbmkudXMuYXV0aDAuY29tMB4XDTIxMDczMTAwMzU1NFoX\nDTM1MDQwOTAwMzU1NFowJTEjMCEGA1UEAxMaeW9nZXYtbGFoeWFuaS51cy5hdXRo\nMC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDM4nqLS+3XCXzT\nJWXBChTeJe5sZxK0IDyFfExxv4WvKbGRpW6RVKtiPp2in0/NOHis3G49BE53IXOi\n8R1zZI+0Rkz7iDlIV34LIJGGK2+ZjdMkUehudCq8i0FylqO35Tn3GXkC5UgaLSRo\n1j6ifBI7LUP88o8BVtni6HJZQtGFPObSR6UD//eU2gp1LO1EBulvZ0xmxVrsyLbZ\nWjT+2blh2ONDmoJ638dLURGs1M4SYMv9+Uu+RIIDAugH9twy+WcE06PKtU5IiTO9\nwPgJBAOrH0S/s3eV0/vPZ1SgQ4mgLXg5SB+rUfhdfhz+OIt9KuYsZjM8/HUjEJMJ\nhKUPQy19AgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFBT+PYQ0\ncAKoCIc1n4tVeKEZ24tFMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOC\nAQEAX59UX9ZWX7/jhrtqP+ZA7PdAHGmRo/DrM9GOSmdXAqtv2E9u8lPwtTPpQVl2\nS3G02WSt62bE86teTAPG5FP2dig7XN9BwVJj2bISf3xjuhVgIPqLRaHslmbS6UQP\nQt+MW63rk1S+JVMfWtHuLQejbAj+8P+4p/uVRfDA7ZuEvgMNThFkB2++UskX6SIV\nSMjb6S0VRIe/Ovy3bHMVgXuqQQt/FugdA63erniO4gsEYYO5tZeq32FV67su4+w7\nW+l4eREV6N9oyeg/DjgNN7k1W07VgqMSx32XhTu1giMcvxW5IdAZxU14SKInfHbl\n35WMsyxUqo/ts5WfoDbhFjox9A==\n-----END CERTIFICATE-----"}'
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hasura.rule=Host(`mbp-hasura.localhost`)"
@@ -69,6 +68,8 @@ services:
       - "traefik.http.services.hasura.loadbalancer.server.port=8080"
     networks:
       - proxy
+    depends_on:
+      - "postgres"
 
   web:
     container_name: "mbp-web"
@@ -76,8 +77,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      AUTH0_BASE_URL: "https://mbp-web.localhost"
-      HASURA_GRAPHQL_URL: "mbp-hasura.localhost/v1/graphql"
+      AUTH0_BASE_URL: "mbp-web.localhost"
+      HASURA_GRAPHQL_URL: "https://mbp-hasura.localhost/v1/graphql"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`mbp-web.localhost`)"
@@ -90,6 +91,8 @@ services:
     volumes:
       - .:/src:delegated
       - /src/node_modules
+    depends_on:
+      - "hasura"
 
 networks:
   proxy:
