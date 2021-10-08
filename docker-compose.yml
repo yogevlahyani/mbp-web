@@ -78,7 +78,7 @@ services:
       - "3000:3000"
     environment:
       AUTH0_BASE_URL: "mbp-web.localhost"
-      HASURA_GRAPHQL_URL: "https://mbp-hasura.localhost/v1/graphql"
+      HASURA_GRAPHQL_URL: "http://hasura:8080/v1/graphql"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`mbp-web.localhost`)"
