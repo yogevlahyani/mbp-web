@@ -42,6 +42,6 @@ module.exports = withPWA({
     };
   },
   images: {
-    domains: ['unpkg.com'],
+    domains: ['unpkg.com', 'drive.google.com'],
   },
 });

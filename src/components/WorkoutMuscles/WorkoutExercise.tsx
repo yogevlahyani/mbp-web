@@ -16,6 +16,7 @@ import {
 import { TimeIcon } from '@chakra-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
+import { isMobileSafari } from 'react-device-detect';
 import { WeeklyVideo } from '../WeeklyVideos/WeeklyVideo';
 import { Repeats } from './RepModes/Repeats';
 import { Distance } from './RepModes/Distance';
@@ -148,6 +149,39 @@ export const WorkoutExercise: React.FC<Props> = ({
     }
   }, [mode, bpm, rpe, speed_percentage, tempo, weight_in_kg]);
 
+  const exerciseVideo = useMemo(() => {
+    if (!video) {
+      return null;
+    }
+
+    if (isMobileSafari && video.startsWith('https://drive.google.com/file/d/')) {
+      const driveVideoId = video
+        .split('https://drive.google.com/file/d/')[1]
+        .split('/view')[0];
+
+      return (
+        <Image
+          src={`https://drive.google.com/uc?export=view&id=${driveVideoId}`}
+          width="100%"
+          height="170px"
+          allow="autoplay"
+          alt={name}
+        />
+      );
+    }
+
+    return (
+      <WeeklyVideo
+        hideDetails
+        name={name}
+        url={video}
+        width="auto"
+        height={['170px', '270px']}
+        m="auto"
+      />
+    );
+  }, [video, name]);
+
   return (
     <AccordionItem border="none">
       <Flex
@@ -193,7 +227,9 @@ export const WorkoutExercise: React.FC<Props> = ({
             />
           </Box>
           <Box p="21px" flex={[1, 3]}>
-            <Heading size="lg" textAlign="left">{name}</Heading>
+            <Heading size="lg" textAlign="left" dir="ltr">
+              {name}
+            </Heading>
             <Text fontSize="lg">
               {max_repeats
                 ? `${t('Max')} ${t('Repeats')}`
@@ -220,24 +256,16 @@ export const WorkoutExercise: React.FC<Props> = ({
         </AccordionButton>
       </Flex>
       <AccordionPanel py={4}>
-        {video && (
+        {exerciseVideo && (
           <Flex
             my={5}
             gridGap={10}
             flexDirection={['column', 'row']}
             justifyContent="center"
           >
-            <WeeklyVideo
-              hideDetails
-              name={name}
-              url={video}
-              width="auto"
-              height={['170px', '270px']}
-              m="auto"
-            />
+            {exerciseVideo}
           </Flex>
         )}
-
         <Flex
           gridGap={5}
           my={5}
