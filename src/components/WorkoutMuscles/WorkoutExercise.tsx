@@ -16,7 +16,7 @@ import {
 import { TimeIcon } from '@chakra-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import moment from 'moment';
-import NextImage from 'next/image';
+import { isMobileSafari } from 'react-device-detect';
 import { WeeklyVideo } from '../WeeklyVideos/WeeklyVideo';
 import { Repeats } from './RepModes/Repeats';
 import { Distance } from './RepModes/Distance';
@@ -151,19 +151,19 @@ export const WorkoutExercise: React.FC<Props> = ({
 
   const exerciseVideo = useMemo(() => {
     if (!video) {
-      return;
+      return null;
     }
 
-    if (video.startsWith('https://drive.google.com/')) {
+    if (isMobileSafari && video.startsWith('https://drive.google.com/file/d/')) {
       const driveVideoId = video
         .split('https://drive.google.com/file/d/')[1]
         .split('/view')[0];
 
       return (
         <Image
-          src={`https://drive.google.com/uc?export=view&id=${driveVideoId} `}
-          width="auto"
-          height={['170px', '270px']}
+          src={`https://drive.google.com/uc?export=view&id=${driveVideoId}`}
+          width="100%"
+          height="170px"
           allow="autoplay"
           alt={name}
         />
