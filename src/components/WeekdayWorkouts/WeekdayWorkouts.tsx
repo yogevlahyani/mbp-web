@@ -2,8 +2,6 @@ import React, { useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import {
   Box,
-  Button,
-  Center,
   Divider,
   Flex,
   Heading,
@@ -12,7 +10,6 @@ import {
 import useTranslation from 'next-translate/useTranslation';
 import { GET_WEEKDAY_WORKOUTS } from '../../queries/workouts';
 import { WeekdayWorkout, WeekdayWorkoutType } from './WeekdayWorkout';
-import { useRouter } from 'next/router';
 import { StartWorkoutButton } from './StartWorkoutButton';
 import { DoneWorkoutButton } from './DoneWorkoutButton';
 
@@ -23,7 +20,6 @@ interface Props {
 
 export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
   const { t } = useTranslation('common');
-  const { push } = useRouter();
 
   const { data, loading } = useQuery(GET_WEEKDAY_WORKOUTS, {
     variables: { weekId, weekday },

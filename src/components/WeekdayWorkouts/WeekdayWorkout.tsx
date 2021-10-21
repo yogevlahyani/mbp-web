@@ -57,17 +57,15 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
     <Box>
       <Flex
         gridGap={[0, 2]}
-        flexDirection={['column', 'row']}
-        alignItems={['center', 'flex-end']}
-        justifyContent={['center', 'flex-start']}
+        flexDirection={['column', 'column', 'row']}
+        alignItems={['center', 'center', 'flex-end']}
+        justifyContent={['center', 'center', 'flex-start']}
       >
         <Heading size="lg">
           <Trans
             i18nKey="common:Workout Name"
             values={{ workoutName: name }}
-            components={[
-              <Text key="0" />,
-            ]}
+            components={[<Text key="0" textAlign="center" />]}
           />
         </Heading>
         <Text fontSize="sm">זמן משוער לאימון הוא 50:00 דק</Text>
