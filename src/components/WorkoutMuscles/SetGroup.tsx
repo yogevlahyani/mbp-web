@@ -104,10 +104,12 @@ export const SetGroup: React.FC<Props> = ({ muscles }) => {
       {muscles.map((muscle: WorkoutMuscleType, index: number) => (
         <Box key={`${muscle.name}`} position="relative">
           <WorkoutMuscle {...muscle} />
-          {renderLinkIcon(index, muscle.setGroupId)}
+          {/* {renderLinkIcon(index, muscle.setGroupId)} */}
         </Box>
       ))}
-      <Divider color="white" />
+      <Box bgColor="white" p={1} borderRadius={10}>
+        <Text color="blue.500" textAlign="center">{t('Round Finish')}</Text>
+      </Box>
     </Flex>
   );
 };

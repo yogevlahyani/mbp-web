@@ -69,11 +69,11 @@ export const WorkoutMuscle: React.FC<Props> = ({
         (workoutExercise: WorkoutExerciseType, index: number) => (
           <React.Fragment key={`${workoutExercise.id}-${index}`}>
             <WorkoutExercise {...workoutExercise} />
-            {renderLinkIcon(index)}
+            {/* {renderLinkIcon(index)} */}
           </React.Fragment>
         ),
       ),
-    [exercises_muscles, renderLinkIcon],
+    [exercises_muscles],
   );
 
   const muscleName = useMemo(() => {
