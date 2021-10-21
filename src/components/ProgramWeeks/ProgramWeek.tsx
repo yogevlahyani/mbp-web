@@ -127,7 +127,7 @@ export const ProgramWeek: React.FC<Props> = ({
           position="relative"
           hasStripe={isOngoing}
           isAnimated={isOngoing}
-          colorScheme={isOngoing ? 'blue' : 'green'}
+          colorScheme={isOngoing ? 'blue' : 'blue'}
           max={7}
           min={0}
         >

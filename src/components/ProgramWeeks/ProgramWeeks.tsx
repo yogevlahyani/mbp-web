@@ -45,7 +45,7 @@ export const ProgramWeeks: React.FC<Props> = (props) => {
           {t('My Workouts')}
         </Heading>
         <Box
-          backgroundColor={isCompleted ? 'green.500' : 'blue.500'}
+          backgroundColor={isCompleted ? 'blue.500' : 'blue.500'}
           borderRadius="20px"
           py={1}
           px={3}

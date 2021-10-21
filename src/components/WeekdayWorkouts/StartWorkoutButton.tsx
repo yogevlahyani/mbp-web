@@ -46,7 +46,7 @@ export const StartWorkoutButton: React.FC<Props> = ({ onStart }) => {
   return (
     <Center>
       <Button
-        colorScheme="green"
+        colorScheme="blue"
         onClick={startWorkout}
         my={5}
         mx="auto"

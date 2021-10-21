@@ -57,7 +57,7 @@ export const UserProgram: React.FC<Props> = ({ id, program, starts_at }) => {
   const backgroundColor = useMemo(() => {
     // Should be only one
     if (isActive) {
-      return 'green.500';
+      return 'blue.700';
     }
 
     // Should be multiple

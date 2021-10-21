@@ -39,7 +39,7 @@ export const Weekday: React.FC<Props> = ({
   return (
     <Button
       onClick={onClick}
-      colorScheme={isActive ? 'green' : 'gray'}
+      colorScheme={isActive ? 'blue' : 'gray'}
       py="15px"
       px="45px"
       height="auto"
