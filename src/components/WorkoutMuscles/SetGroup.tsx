@@ -108,7 +108,7 @@ export const SetGroup: React.FC<Props> = ({ muscles }) => {
         </Box>
       ))}
       <Box bgColor="white" p={1} borderRadius={10}>
-        <Text color="blue.500" textAlign="center">{t('Round Finish')}</Text>
+        <Text color="blue.500" textAlign="center">{t('End of Round')}</Text>
       </Box>
     </Flex>
   );
