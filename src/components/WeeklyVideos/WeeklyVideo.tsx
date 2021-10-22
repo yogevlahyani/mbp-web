@@ -55,7 +55,7 @@ export const WeeklyVideo: React.FC<Props> = ({
         height="100%"
         config={{
           youtube: {
-            playerVars: { controls: 0, disablekb: 1 },
+            playerVars: { controls: 1, disablekb: 1 },
           },
           file: {
             attributes: {

@@ -6,6 +6,8 @@ import React, { useMemo } from 'react';
 import { GET_WORKOUT } from '../../queries/workouts';
 import { SetGroup } from '../WorkoutMuscles/SetGroup';
 import { WorkoutMuscleType } from '../WorkoutMuscles/WorkoutMuscle';
+import { DoneWorkoutButton } from './DoneWorkoutButton';
+import { StartWorkoutButton } from './StartWorkoutButton';
 
 export interface WeekdayWorkoutType {
   id: string;
@@ -70,10 +72,12 @@ export const WeekdayWorkout: React.FC<Props> = ({ id, name, description }) => {
         </Heading>
         <Text fontSize="sm">זמן משוער לאימון הוא 50:00 דק</Text>
       </Flex>
+      <StartWorkoutButton mt={10} />
       <Text size="sm">{description}</Text>
       <Flex flexDirection="column">
         <Skeleton isLoaded={!loading}>{exercises}</Skeleton>
       </Flex>
+      <DoneWorkoutButton />
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Button, Center } from '@chakra-ui/react';
+import { Button, Center, CenterProps } from '@chakra-ui/react';
 import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -11,11 +11,11 @@ import {
 import { useInterval } from 'usehooks-ts';
 import { workoutStartTimeAtom, workoutTimerMsSelector } from './state';
 
-interface Props {
+interface Props extends CenterProps {
   onStart?: () => void;
 }
 
-export const StartWorkoutButton: React.FC<Props> = ({ onStart }) => {
+export const StartWorkoutButton: React.FC<Props> = ({ onStart, ...centerProps }) => {
   const { t } = useTranslation('common');
   const setWorkoutStartTime = useSetRecoilState(workoutStartTimeAtom);
   const workoutTimerMs = useRecoilValue(workoutTimerMsSelector);
@@ -44,11 +44,10 @@ export const StartWorkoutButton: React.FC<Props> = ({ onStart }) => {
   }, [workoutTimerMs]);
 
   return (
-    <Center>
+    <Center {...centerProps}>
       <Button
         colorScheme="blue"
         onClick={startWorkout}
-        my={5}
         mx="auto"
         isDisabled={isOngoingWorkout}
       >

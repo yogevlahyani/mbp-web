@@ -55,9 +55,7 @@ export const WeekdayWorkouts: React.FC<Props> = ({ weekId, weekday }) => {
         </Flex>
       </Skeleton>
       <Divider my={5} />
-      <StartWorkoutButton />
       {workouts}
-      <DoneWorkoutButton />
     </Box>
   );
 };
