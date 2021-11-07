@@ -14,8 +14,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 interface UserProfile {
-  nickname: string;
-  picture: string;
+  nickname?: string | null;
+  picture?: string | null;
 }
 
 interface Props extends UserProfile {}
