@@ -18,11 +18,10 @@ type CallbackType<
   client: ApolloClient<NormalizedCacheObject>,
 ) => Promise<GetServerSidePropsResult<P>>;
 
-export const withApollo =
-  (callback: CallbackType) => async (ctx: GetServerSidePropsContext) => {
-    const { token } = await getSession(ctx.req, ctx.res);
+export const withApollo = (callback: CallbackType) => async (ctx: any) => {
+  const { token } = await getSession(ctx.req, ctx.res);
 
-    const client = getApolloClient({ token });
+  const client = getApolloClient({ token });
 
-    return callback(ctx, client);
-  };
+  return callback(ctx, client);
+};
