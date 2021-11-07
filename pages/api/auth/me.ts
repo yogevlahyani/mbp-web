@@ -6,6 +6,8 @@ import { getSession } from '../../../lib/session';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession(req, res);
 
+  console.log('session', session);
+
   if (!session.user) {
     const client = getApolloClient({ token: session.token });
 

@@ -9,6 +9,7 @@ export default withIronSessionApiRoute(async function (
   req: RequestWithSession,
   res: NextApiResponse,
 ) {
+  console.log('req.query', req.query);
   const { access_token } = req.query;
   if (!access_token) {
     res.redirect('/sign-in');
