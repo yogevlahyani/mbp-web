@@ -20,7 +20,7 @@ export default function UserDashboard() {
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: '/',
-  getServerSideProps: async (ctx: GetServerSidePropsContext) => {
+  getServerSideProps: async (ctx: any) => {
     const session = await getSession(ctx.req, ctx.res);
 
     // TODO: Show Public Profile

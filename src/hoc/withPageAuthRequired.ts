@@ -11,7 +11,7 @@ export function withPageAuthRequired({
   getServerSideProps,
   returnTo,
 }: WithPageAuthRequiredOptions) {
-  return async (ctx: GetServerSidePropsContext) => {
+  return async (ctx: any) => {
     const { token, user } = await getSession(ctx.req, ctx.res);
 
     if (!token || !user) {

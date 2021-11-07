@@ -45,7 +45,7 @@ export default function Home() {
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: '/sign-in',
-  getServerSideProps: async (ctx: GetServerSidePropsContext) => {
+  getServerSideProps: async (ctx: any) => {
     const session = await getSession(ctx.req, ctx.res);
 
     // TODO: Show Public Profile
