@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import { Avatar, Tooltip, Text, Box, Flex, Button } from '@chakra-ui/react';
-import { UserProfile } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import { useRecoilState } from 'recoil';
@@ -12,7 +11,8 @@ export interface ProgramType {
   name: string;
   description?: string;
   image?: string;
-  author: UserProfile;
+  // TODO: Add UserProfile interface
+  author: any;
   program_weeks: ProgramWeekType[];
   created_at: string;
   updated_at?: string;
@@ -39,8 +39,8 @@ export const UserProgram: React.FC<Props> = ({ id, program, starts_at }) => {
   );
 
   const onAuthorClick = useCallback(
-    () => push(`/${program.author.nickname}`),
-    [push, program.author.nickname],
+    () => push(`/${program.author?.nickname}`),
+    [push, program.author?.nickname],
   );
 
   const isOpen = useMemo(() => {

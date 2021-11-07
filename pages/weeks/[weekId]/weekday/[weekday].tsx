@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Box, Button, Container } from '@chakra-ui/react';
 import { Play } from 'phosphor-react';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import OneSignal from 'react-onesignal';
@@ -9,6 +8,7 @@ import { WeekdayWorkouts } from '../../../../src/components/WeekdayWorkouts/Week
 import { fittokModeAtom } from '../../../../src/components/Fittok/state';
 import { Fittok } from '../../../../src/components/Fittok/Fittok';
 import { Timer } from '../../../../src/components/Timer/Timer';
+import { withPageAuthRequired } from '../../../../src/hoc/withPageAuthRequired';
 
 export default function Week() {
   const [fittokMode, setFittokMode] = useRecoilState(fittokModeAtom);

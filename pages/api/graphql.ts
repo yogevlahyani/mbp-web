@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession, handleLogout } from '@auth0/nextjs-auth0';
 import httpProxyMiddleware from 'next-http-proxy-middleware';
+import { getSession } from '../../lib/session';
 import configuration from '../../config';
 
 export const config = {
@@ -19,9 +19,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     'x-hasura-role': 'public',
   };
 
-  if (session?.accessToken) {
+  if (session?.token) {
     headers['x-hasura-role'] = 'user';
-    headers.authorization = `Bearer ${session?.accessToken}`;
+    headers.authorization = `Bearer ${session?.token}`;
   }
 
   return httpProxyMiddleware(req, res, {

@@ -1,9 +1,16 @@
 const config = {
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV || 'local',
   isProduction: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
+  session: {
+    cookieName: 'mybodypro',
+    password: process.env.COOKIE_PASSWORD as string,
+  },
   providers: {
     hasura: {
       graphqlUrl: process.env.HASURA_GRAPHQL_URL,
+    },
+    auth: {
+      baseUrl: process.env.NEXT_PUBLIC_BASE_AUTH_URL,
     },
     logRocket: {
       appId: 'urfnar/mybodypro',

@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import { UserProfile } from '@auth0/nextjs-auth0';
+import React from 'react';
 import {
   Avatar,
   Box,
@@ -13,6 +12,11 @@ import {
 } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+
+interface UserProfile {
+  nickname: string;
+  picture: string;
+}
 
 interface Props extends UserProfile {}
 
@@ -48,7 +52,7 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
           {t('My Programs')}
         </MenuItem>
         <MenuItem
-          onClick={() => push('/sign-out')}
+          onClick={() => push('/api/auth/logout')}
           fontSize="md"
           textTransform="uppercase"
           color="black"

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
 import { Skeleton, Spacer } from '@chakra-ui/react';
+import { useUser } from '@auth0/nextjs-auth0';
 import { Logo } from './Logo';
 import { NavBarContainer } from './NavBarContainer';
 import { LoggedOutNav } from './LoggedOutNav';

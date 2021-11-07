@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
 import { useQuery } from '@apollo/client';
 import {
   Avatar,
@@ -14,6 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { CalendarIcon, CheckIcon, StarIcon } from '@chakra-ui/icons';
+import { useUser } from '@auth0/nextjs-auth0';
 import useTranslation from 'next-translate/useTranslation';
 import { GET_USER_POINTS } from '../../queries/user';
 import Trans from 'next-translate/Trans';

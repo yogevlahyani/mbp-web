@@ -1,52 +1,36 @@
 import React from 'react';
-import NextLink from 'next/link';
-import {
-  Flex,
-  Heading,
-  Stack,
-  Text,
-  Link,
-  useColorModeValue,
-  Box,
-} from '@chakra-ui/react';
-import { SignInForm } from './SignInForm';
+import { Flex, Stack, useColorModeValue, Box, Button } from '@chakra-ui/react';
 import { Logo } from '../NavBar/Logo';
+import useTranslation from 'next-translate/useTranslation';
+import { GoogleLogo } from 'phosphor-react';
+import config from '../../../config';
 
 export const SignInComponent = () => {
+  const { t } = useTranslation('common');
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'}>
+      <Stack spacing={8} mx={'auto'} width="container.sm">
         <Stack align={'center'}>
           <Logo />
-          <Heading fontSize={'4xl'}>Nice to have you back!</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
-          </Text>
+          {/* <Heading fontSize={'4xl'}>Nice to have you back!</Heading> */}
         </Stack>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}
+          justifyContent="center"
+          textAlign="center"
         >
-          <Stack spacing={5} w="100%">
-            <SignInForm onFormSubmit={() => console.log('Sign in')} />
-            <Link
-              textAlign="center"
-              fontSize="xs"
-              letterSpacing={0.5}
-              textTransform="uppercase"
-              href="/forgot-password"
-            >
-              Forgot Password
-            </Link>
-            <Text textAlign="center" fontSize="xs">
-              Don’t have a account?{' '}
-              <Link letterSpacing={0.5} href="/sign-up">
-                Sign Up
-              </Link>
-            </Text>
-          </Stack>
+          <Button
+            as="a"
+            href={`${config.providers.auth.baseUrl}/auth/google`}
+            leftIcon={<GoogleLogo />}
+            variant="outline"
+            colorScheme="blue"
+          >
+            {t('Sign in with Google')}
+          </Button>
         </Box>
       </Stack>
     </Flex>

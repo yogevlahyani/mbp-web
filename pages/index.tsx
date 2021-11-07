@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { Box, Heading } from '@chakra-ui/react';
+import { useUser } from '@auth0/nextjs-auth0';
 import useTranslation from 'next-translate/useTranslation';
-import { getSession, useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
 import LogRocket from 'logrocket';
 import { ContentHeader } from '../src/components/Home/ContentHeader';
+import { withPageAuthRequired } from '../src/hoc/withPageAuthRequired';
+import { getSession } from '../lib/session';
 
 export default function Home() {
   const { user } = useUser();
@@ -42,7 +44,7 @@ export default function Home() {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/',
+  returnTo: '/sign-in',
   getServerSideProps: async (ctx: GetServerSidePropsContext) => {
     const session = await getSession(ctx.req, ctx.res);
 
