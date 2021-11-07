@@ -1,5 +1,4 @@
 import React from 'react';
-import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { Box } from '@chakra-ui/react';
 import { SignInComponent } from '../src/components/Authentication/SignInComponent';
@@ -21,7 +20,7 @@ export default function SignIn() {
   );
 }
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+export async function getServerSideProps(ctx: any) {
   const session = await getSession(ctx.req, ctx.res);
 
   if (session.user && session.token) {
