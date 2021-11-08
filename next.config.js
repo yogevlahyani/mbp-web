@@ -8,6 +8,19 @@ module.exports = withPWA({
     register: true,
     disable: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production',
     importScripts: ['/OneSignalSDKUpdaterWorker.js', '/OneSignalSDKWorker.js'],
+    runtimeCaching: [
+      {
+        urlPattern: /.*/i,
+        handler: 'NetworkFirst',
+        options: {
+          cacheName: 'others',
+          expiration: {
+            maxEntries: 16,
+            maxAgeSeconds: 24 * 60 * 60,
+          },
+        },
+      },
+    ],
   },
   ...nextTranslate({
     webpack: (cfg) => {
