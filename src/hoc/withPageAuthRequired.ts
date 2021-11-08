@@ -33,7 +33,3 @@ export function withPageAuthRequired({
     };
   };
 }
-
-// withPageAuthRequired({
-//     returnTo: '/',
-//     getServerSideProps: async (ctx: GetServerSidePropsContext) => {

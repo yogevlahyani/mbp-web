@@ -3,8 +3,19 @@ import Head from 'next/head';
 import { Box } from '@chakra-ui/react';
 import { SignInComponent } from '../src/components/Authentication/SignInComponent';
 import { getSession } from '../lib/session';
+import { useRouter } from 'next/router';
 
-export default function SignIn() {
+interface Props {
+  loggedIn?: boolean;
+}
+
+export default function SignIn({ loggedIn }: Props) {
+  const { replace } = useRouter();
+
+  if (loggedIn) {
+    return replace('/');
+  }
+
   return (
     <>
       <Head>
@@ -25,7 +36,9 @@ export async function getServerSideProps(ctx: any) {
 
   if (session.user && session.token) {
     return {
-      props: {},
+      props: {
+        loggedIn: true,
+      },
       redirect: {
         permanent: false,
         destination: '/',
@@ -34,6 +47,8 @@ export async function getServerSideProps(ctx: any) {
   }
 
   return {
-    props: {},
+    props: {
+      loggedIn: false,
+    },
   };
 }
