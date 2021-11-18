@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Box } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import { SignInComponent } from '../src/components/Authentication/SignInComponent';
 import { getSession } from '../lib/session';
 
@@ -13,9 +13,9 @@ export default function SignIn() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box my={100}>
+      <Container my={100} maxWidth="container.md">
         <SignInComponent />
-      </Box>
+      </Container>
     </>
   );
 }

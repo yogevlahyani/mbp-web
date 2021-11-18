@@ -52,7 +52,7 @@ export const LoggedInNav = ({ nickname, picture }: Props) => {
           {t('My Programs')}
         </MenuItem>
         <MenuItem
-          onClick={() => push('/api/auth/logout')}
+          onClick={() => push('/auth/logout')}
           fontSize="md"
           textTransform="uppercase"
           color="black"

@@ -1,4 +1,5 @@
 const config = {
+  origin: process.env.NEXT_PUBLIC_ORIGIN,
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV || 'local',
   isProduction: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
   session: {

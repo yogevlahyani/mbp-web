@@ -1,12 +1,13 @@
 import React from 'react';
 import { Flex, Stack, useColorModeValue, Box, Button } from '@chakra-ui/react';
-import { Logo } from '../NavBar/Logo';
 import useTranslation from 'next-translate/useTranslation';
 import { GoogleLogo } from 'phosphor-react';
+import { Logo } from '../NavBar/Logo';
 import config from '../../../config';
 
-export const SignInComponent = () => {
+export const SignInComponent: React.FC<{}> = () => {
   const { t } = useTranslation('common');
+
   return (
     <Flex align={'center'} justify={'center'}>
       <Stack spacing={8} mx={'auto'} width="container.sm">
@@ -24,7 +25,7 @@ export const SignInComponent = () => {
         >
           <Button
             as="a"
-            href={`${config.providers.auth.baseUrl}/auth/google`}
+            href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
             leftIcon={<GoogleLogo />}
             variant="outline"
             colorScheme="blue"
