@@ -17,11 +17,12 @@ export const Header = () => {
   );
 
   useEffect(() => {
+    console.log('user', user);
     if (!user) {
       return;
     }
 
-    LogRocket.identify(user.sub!, {
+    LogRocket.identify((user as any).id!, {
       name: user.name!,
       email: user.email!,
       nickname: user.nickname!,
