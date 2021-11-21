@@ -17,7 +17,6 @@ export const Header = () => {
   );
 
   useEffect(() => {
-    console.log('user', user);
     if (!user) {
       return;
     }
