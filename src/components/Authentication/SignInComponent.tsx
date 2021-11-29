@@ -15,7 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
-import { GoogleLogo } from 'phosphor-react';
+import { FcGoogle } from 'react-icons/fc';
 import { Logo } from '../NavBar/Logo';
 import config from '../../../config';
 import axios from 'axios';
@@ -79,7 +79,7 @@ export const SignInComponent: React.FC<{}> = () => {
               <Button
                 as="a"
                 href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
-                leftIcon={<GoogleLogo />}
+                leftIcon={<FcGoogle />}
                 variant="outline"
                 colorScheme="blue"
               >

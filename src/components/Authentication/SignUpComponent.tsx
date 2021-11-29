@@ -19,7 +19,7 @@ import { isEmpty } from 'lodash';
 import axios from 'axios';
 import useTranslation from 'next-translate/useTranslation';
 import { Logo } from '../NavBar/Logo';
-import { GoogleLogo } from 'phosphor-react';
+import { FcGoogle } from 'react-icons/fc';
 import config from '../../../config';
 
 export const SignUpComponent = () => {
@@ -85,7 +85,7 @@ export const SignUpComponent = () => {
           <Button
             as="a"
             href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
-            leftIcon={<GoogleLogo />}
+            leftIcon={<FcGoogle />}
             variant="outline"
             colorScheme="blue"
           >
