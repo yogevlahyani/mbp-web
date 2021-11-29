@@ -12,6 +12,8 @@ import {
   Input,
   useToast,
   Button,
+  Divider,
+  HStack,
 } from '@chakra-ui/react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
@@ -80,6 +82,20 @@ export const SignUpComponent = () => {
           justifyContent="center"
           textAlign="center"
         >
+          <Button
+            as="a"
+            href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
+            leftIcon={<GoogleLogo />}
+            variant="outline"
+            colorScheme="blue"
+          >
+            {t('Sign up with Google')}
+          </Button>
+          <HStack my={5}>
+            <Divider />
+            <Text color="blue.500">{t('Or')}</Text>
+            <Divider />
+          </HStack>
           <Stack spacing={4}>
             <FormControl id="firstName">
               <FormLabel color="blue.500">{t('firstName')}</FormLabel>
@@ -131,15 +147,6 @@ export const SignUpComponent = () => {
                 onClick={onSignUp}
               >
                 {t('Sign up')}
-              </Button>
-              <Button
-                as="a"
-                href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
-                leftIcon={<GoogleLogo />}
-                variant="outline"
-                colorScheme="blue"
-              >
-                {t('Sign up with Google')}
               </Button>
             </Stack>
           </Stack>

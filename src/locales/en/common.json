@@ -84,5 +84,6 @@
   "firstName": "First Name",
   "lastName": "Last Name",
   "Nickname": "Nickname",
-  "All fields are required": "All fields are required"
+  "All fields are required": "All fields are required",
+  "Or": "Or"
 }
