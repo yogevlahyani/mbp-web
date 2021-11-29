@@ -13,6 +13,8 @@ import {
   Input,
   Checkbox,
   useToast,
+  HStack,
+  Divider,
 } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { FcGoogle } from 'react-icons/fc';
@@ -43,7 +45,7 @@ export const SignInComponent: React.FC<{}> = () => {
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} width={["container.xs", "container.sm"]}>
+      <Stack spacing={8} mx={'auto'} width={['container.xs', 'container.sm']}>
         <Stack align={'center'}>
           <Logo />
           <Heading fontSize={'4xl'}>{t('Sign in to your account')}</Heading>
@@ -56,14 +58,36 @@ export const SignInComponent: React.FC<{}> = () => {
           justifyContent="center"
           textAlign="center"
         >
+          <Button
+            as="a"
+            href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
+            leftIcon={<FcGoogle />}
+            variant="outline"
+            colorScheme="blue"
+          >
+            {t('Sign in with Google')}
+          </Button>
+          <HStack my={5}>
+            <Divider />
+            <Text color="blue.500">{t('Or')}</Text>
+            <Divider />
+          </HStack>
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel color="blue.500">{t('Email Address')}</FormLabel>
-              <Input type="email" color="blue.500" onChange={(e) => setUsername(e.target.value)} />
+              <Input
+                type="email"
+                color="blue.500"
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </FormControl>
             <FormControl id="password">
               <FormLabel color="blue.500">{t('Password')}</FormLabel>
-              <Input type="password" color="blue.500" onChange={(e) => setPassword(e.target.value)} />
+              <Input
+                type="password"
+                color="blue.500"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormControl>
             <Stack>
               <Button
@@ -75,15 +99,6 @@ export const SignInComponent: React.FC<{}> = () => {
                 onClick={onSignIn}
               >
                 {t('Sign in')}
-              </Button>
-              <Button
-                as="a"
-                href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
-                leftIcon={<FcGoogle />}
-                variant="outline"
-                colorScheme="blue"
-              >
-                {t('Sign in with Google')}
               </Button>
             </Stack>
           </Stack>

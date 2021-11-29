@@ -114,7 +114,12 @@ export const SignUpComponent = () => {
               />
             </FormControl>
             <FormControl id="nickname">
-              <FormLabel color="blue.500">{t('Nickname')}</FormLabel>
+              <FormLabel>
+                <HStack alignItems="baseline">
+                  <Text color="blue.500" fontSize="md">{t('Nickname')}</Text>
+                  <Text color="blue.500" fontSize="xx-small">לא חובה</Text>
+                </HStack>
+              </FormLabel>
               <Input
                 type="text"
                 color="blue.500"
