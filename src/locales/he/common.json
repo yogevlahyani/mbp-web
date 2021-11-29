@@ -3,7 +3,7 @@
   "he": "עברית",
   "This is gonna be a killer home page!": "עמוד הבית המטורף של מיי בודי פרו!",
   "Sign In": "התחברות",
-  "Sign Up": "הרשמה",
+  "Sign Up": "הצטרפות",
   "Sign out": "התנתקות",
   "Welcome Back": "ברוך שובך, <0>{{name}}</0>",
   "No Programs yet": "אין תוכניות",
@@ -90,10 +90,12 @@
   "Password": "סיסמא",
   "Sign in": "התחברות",
   "Sign in with Google": "התחברות באמצעות גוגל",
+  "Sign up with Google": "הצטרפות באמצעות גוגל",
   "Error": "שגיאה",
   "Invalid username or password": "שם משתמש או סיסמא שגויים",
-  "Sign up": "הרשמה",
+  "Sign up": "הצטרפות",
   "firstName": "שם פרטי",
   "lastName": "שם משפחה",
+  "Nickname": "כינוי",
   "All fields are required": "כל השדות נדרשים"
 }

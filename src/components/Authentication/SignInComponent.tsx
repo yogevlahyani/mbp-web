@@ -43,7 +43,7 @@ export const SignInComponent: React.FC<{}> = () => {
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} width="container.sm">
+      <Stack spacing={8} mx={'auto'} width={["container.xs", "container.sm"]}>
         <Stack align={'center'}>
           <Logo />
           <Heading fontSize={'4xl'}>{t('Sign in to your account')}</Heading>

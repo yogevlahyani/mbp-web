@@ -77,10 +77,12 @@
   "Password": "Password",
   "Sign in": "Sign in",
   "Sign in with Google": "Sign in with Google",
+  "Sign up with Google": "Sign up with Google",
   "Error": "Error",
   "Invalid username or password": "Invalid username or password",
   "Sign up": "Sign up",
   "firstName": "First Name",
   "lastName": "Last Name",
+  "Nickname": "Nickname",
   "All fields are required": "All fields are required"
 }

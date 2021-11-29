@@ -17,6 +17,8 @@ import { isEmpty } from 'lodash';
 import axios from 'axios';
 import useTranslation from 'next-translate/useTranslation';
 import { Logo } from '../NavBar/Logo';
+import { GoogleLogo } from 'phosphor-react';
+import config from '../../../config';
 
 export const SignUpComponent = () => {
   const { t } = useTranslation('common');
@@ -25,6 +27,7 @@ export const SignUpComponent = () => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [nickname, setNickname] = useState('');
 
   const onSignUp = useCallback(async () => {
     if (
@@ -43,13 +46,12 @@ export const SignUpComponent = () => {
     }
 
     try {
-      const nickname = email.split('@')[0];
       const { data } = await axios.post(`/auth/register`, {
         email,
         password,
         firstName,
         lastName,
-        nickname,
+        nickname: isEmpty(nickname) ? email.split('@')[0] : nickname,
       });
       window.location.href = `/auth/callback?access_token=${data.accessToken}`;
     } catch (error) {
@@ -61,11 +63,11 @@ export const SignUpComponent = () => {
         position: 'bottom',
       });
     }
-  }, [email, password, toast, t, firstName, lastName]);
+  }, [email, password, toast, t, firstName, lastName, nickname]);
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} width="container.sm">
+      <Stack spacing={8} mx={'auto'} width={['container.xs', 'container.sm']}>
         <Stack align={'center'}>
           <Logo />
           <Heading fontSize={'4xl'}>{t('Sign up')}</Heading>
@@ -95,6 +97,14 @@ export const SignUpComponent = () => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </FormControl>
+            <FormControl id="nickname">
+              <FormLabel color="blue.500">{t('Nickname')}</FormLabel>
+              <Input
+                type="text"
+                color="blue.500"
+                onChange={(e) => setNickname(e.target.value)}
+              />
+            </FormControl>
             <FormControl id="email">
               <FormLabel color="blue.500">{t('Email Address')}</FormLabel>
               <Input
@@ -121,6 +131,15 @@ export const SignUpComponent = () => {
                 onClick={onSignUp}
               >
                 {t('Sign up')}
+              </Button>
+              <Button
+                as="a"
+                href={`${config.providers.auth.baseUrl}/auth/google?returnTo=${config.origin}/auth/callback`}
+                leftIcon={<GoogleLogo />}
+                variant="outline"
+                colorScheme="blue"
+              >
+                {t('Sign up with Google')}
               </Button>
             </Stack>
           </Stack>
