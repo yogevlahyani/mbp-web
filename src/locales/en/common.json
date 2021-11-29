@@ -72,5 +72,15 @@
   "Top Trainers": "Top Trainers",
   "Each Side": "Each Side",
   "End of Round": "End of Round",
-  "Sign in with Google": "Sign in with Google"
+  "Sign in to your account": "Sign in to your account",
+  "Email Address": "Email Address",
+  "Password": "Password",
+  "Sign in": "Sign in",
+  "Sign in with Google": "Sign in with Google",
+  "Error": "Error",
+  "Invalid username or password": "Invalid username or password",
+  "Sign up": "Sign up",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "All fields are required": "All fields are required"
 }

@@ -85,5 +85,15 @@
   "Ended At": "הסתיים",
   "Each Side": "כל צד",
   "End of Round": "סוף סבב",
-  "Sign in with Google": "התחברות באמצעות גוגל"
+  "Sign in to your account": "התחברות לחשבון שלך",
+  "Email Address": "כתובת אימייל",
+  "Password": "סיסמא",
+  "Sign in": "התחברות",
+  "Sign in with Google": "התחברות באמצעות גוגל",
+  "Error": "שגיאה",
+  "Invalid username or password": "שם משתמש או סיסמא שגויים",
+  "Sign up": "הרשמה",
+  "firstName": "שם פרטי",
+  "lastName": "שם משפחה",
+  "All fields are required": "כל השדות נדרשים"
 }

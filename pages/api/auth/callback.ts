@@ -17,8 +17,6 @@ export default withIronSessionApiRoute(async function (
     return;
   }
 
-  console.log('access_token', access_token);
-
   const client = getApolloClient({ token: access_token.toString() });
 
   const { data, error } = await client.query({
