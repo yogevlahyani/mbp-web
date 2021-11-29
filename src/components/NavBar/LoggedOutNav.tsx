@@ -28,6 +28,17 @@ export const LoggedOutNav = () => {
       >
         {t('Sign Up')}
       </Button>
+      <Button
+        as="a"
+        textTransform="uppercase"
+        bg="blue.500"
+        color="white"
+        mx={3}
+        size="sm"
+        href="https://dashboard.mybodypro.fit"
+      >
+        {t('Start Coaching')}
+      </Button>
     </Flex>
   );
 };
